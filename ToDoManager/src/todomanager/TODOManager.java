@@ -45,6 +45,7 @@ public class TODOManager {
         JMenu file = new JMenu("File");
         menu.add(file);
         JMenuItem quit = new JMenuItem("Quit");
+        file.add(quit);
         
         JMenu edit = new JMenu("Edit");
         menu.add(edit);
