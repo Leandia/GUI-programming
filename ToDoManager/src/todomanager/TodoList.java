@@ -6,6 +6,8 @@ package todomanager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import mockClasses.item;
 /**
  *
  * @author vita, daniel
@@ -21,6 +23,12 @@ public class TodoList extends JPanel{
         top.add(new JLabel("MAKE YOUR CLASS EXTEND JPANEL!"));
         
         tasksPanel middle = new tasksPanel();
+        ArrayList<item> items = new ArrayList();
+        
+        items.add(new item("test1"));
+        items.add(new item("test2"));
+        items.add(new item("test2"));
+        middle.updatePanel(items);
         
         JPanel bottom = new JPanel();
         bottom.setBackground(Color.GRAY);
