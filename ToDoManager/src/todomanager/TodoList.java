@@ -20,9 +20,7 @@ public class TodoList extends JPanel{
         top.setPreferredSize(new Dimension(100, 100));
         top.add(new JLabel("MAKE YOUR CLASS EXTEND JPANEL!"));
         
-        JPanel middle = new JPanel();
-        middle.setBackground(Color.BLUE);
-        middle.add(new JLabel("MAKE YOUR CLASS EXTEND JPANEL!"));
+        tasksPanel middle = new tasksPanel();
         
         JPanel bottom = new JPanel();
         bottom.setBackground(Color.GRAY);

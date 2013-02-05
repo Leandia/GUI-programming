@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import mockClasses.item;
+import mockClasses.*;
 /**
  *
  * @author Kristian Johansson and Kristoffer Wass
