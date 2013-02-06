@@ -9,11 +9,11 @@ import javax.swing.JPanel;
  *
  * @author Kristian Johansson and Kristoffer Wass
  */
-class TasksPanel extends JPanel {
+class TasksPanelDelta extends JPanel {
 
     private ArrayList<ToDoItem> items = new ArrayList<>();
 
-    public TasksPanel() {
+    public TasksPanelDelta() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
@@ -36,13 +36,13 @@ class TasksPanel extends JPanel {
     }
 
     /**
-     * Create an ItemPanel using the input item and adds this panel to the
-     * TasksPanel
+     * Create an ItemPanelDelta using the input item and adds this panel to the
+     * TasksPanelDelta
      *
      * @param item
      */
     private void add(ToDoItem item) {
-        ItemPanel itemPanel = new ItemPanel(item.getTitle());
+        ItemPanelDelta itemPanel = new ItemPanelDelta(item.getTitle());
         itemPanel.setBackground(Color.red);
         itemPanel.setAlignmentX(0);
         this.add(itemPanel);

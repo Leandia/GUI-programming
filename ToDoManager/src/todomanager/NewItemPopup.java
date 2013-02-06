@@ -1,16 +1,17 @@
 package todomanager;
 
 import java.awt.GridLayout;
-import javax.swing.JDialog; 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ToDoItemPopup extends JDialog implements ActionListener {
+public class NewItemPopup extends JDialog implements ActionListener {
+
     private JPanel myPanel = null;
     private JButton yesButton = null;
     private JButton noButton = null;
@@ -20,23 +21,22 @@ public class ToDoItemPopup extends JDialog implements ActionListener {
     private JTextField descriptionTextField = null;
     private String title;
     private String description;
-    
-    public String getTitle(){
-        return title; 
+
+    public String getTitle() {
+        return title;
     }
-    
-    public String getDescription(){
-        return description; 
+
+    public String getDescription() {
+        return description;
     }
-    
-    
-    public ToDoItemPopup(JFrame frame, boolean modal) {
+
+    public NewItemPopup(JFrame frame, boolean modal) {
         //JFrame frame = new JFrame();
-        super(frame,modal);
+        super(frame, modal);
         myPanel = new JPanel();
-        myPanel.setLayout(new GridLayout(3,2));  
+        myPanel.setLayout(new GridLayout(3, 2));
         getContentPane().add(myPanel);
-        
+
         titleLabel = new JLabel("Title:");
         myPanel.add(titleLabel);
         titleTextField = new JTextField(10);
@@ -47,33 +47,31 @@ public class ToDoItemPopup extends JDialog implements ActionListener {
         myPanel.add(descriptionTextField);
         yesButton = new JButton("Add");
         yesButton.addActionListener(this);
-        myPanel.add(yesButton); 
+        myPanel.add(yesButton);
         noButton = new JButton("Cancel");
         noButton.addActionListener(this);
-        myPanel.add(noButton); 
-        
+        myPanel.add(noButton);
+
         //Display the window.
         pack();
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(yesButton == e.getSource()) {
+        if (yesButton == e.getSource()) {
             //System.err.println("User chose yes.");
-            if(!titleTextField.getText().equals("")){
+            if (!titleTextField.getText().equals("")) {
                 title = titleTextField.getText();
             }
-            if(!descriptionTextField.getText().equals("")){
+            if (!descriptionTextField.getText().equals("")) {
                 description = descriptionTextField.getText();
             }
             setVisible(false);
-        }
-        else if(noButton == e.getSource()) {
+        } else if (noButton == e.getSource()) {
             //System.err.println("User chose no.");
             title = null;
             description = null;
             setVisible(false);
         }
     }
-    
 }
