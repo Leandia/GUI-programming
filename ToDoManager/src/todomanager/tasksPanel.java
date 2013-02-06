@@ -16,7 +16,7 @@ class tasksPanel extends JPanel{
     }
     
     
-    public void add(ToDoItem item) {
+    public void addItem(ToDoItem item) {
         this.items.add(item);
         updatePanel();
     }
@@ -27,8 +27,9 @@ class tasksPanel extends JPanel{
     private void updatePanel(){
         this.removeAll();
         for(int i=0;i<items.size();i++){
-            addItems(this.items.get(i));
+            add(this.items.get(i));
         }
+        this.updateUI();
     }
     
     /**
@@ -36,7 +37,7 @@ class tasksPanel extends JPanel{
      * the tasksPanel
      * @param item 
      */
-    private void addItems(ToDoItem item){
+    private void add(ToDoItem item){
         itemPanel itemPanel = new itemPanel(item.getTitle());
         itemPanel.setBackground(Color.red);
         itemPanel.setAlignmentX(0);

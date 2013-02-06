@@ -12,9 +12,9 @@ public class TodoList extends JPanel{
     JPanel bottom;
     
     public TodoList() {
-        this.middle.add(new ToDoItem("test1", "text1"));
-        this.middle.add(new ToDoItem("test2", "text2"));
-        this.middle.add(new ToDoItem("test3", "text3"));
+        this.middle.addItem(new ToDoItem("test1", "text1"));
+        this.middle.addItem(new ToDoItem("test2", "text2"));
+        this.middle.addItem(new ToDoItem("test3", "text3"));
         
         top = new AddToDoItemPanel(middle);
         

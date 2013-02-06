@@ -5,7 +5,6 @@ package todomanager;
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class AddToDoItemPanel extends JPanel {
@@ -41,12 +40,11 @@ public class AddToDoItemPanel extends JPanel {
                         String title = opt.getTitle();
                         String description = opt.getDescription();
                         ToDoItem tdi = new ToDoItem(title, description);
-                        middle.add(tdi);
+                        middle.addItem(tdi);
                     }
                 }
             }
         });
-        this.middle.add(new ToDoItem("111", "hj"));
         this.add(addButton);
     }
 }
