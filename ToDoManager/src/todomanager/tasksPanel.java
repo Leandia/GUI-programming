@@ -1,29 +1,33 @@
 package todomanager;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import mockClasses.*;
 /**
  *
  * @author Kristian Johansson and Kristoffer Wass
  */
 class tasksPanel extends JPanel{
-    
-    private itemPanel itemPanel;
+    private ArrayList<ToDoItem> items = new ArrayList<>();
     
     public tasksPanel(){
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
     
+    
+    public void add(ToDoItem item) {
+        this.items.add(item);
+        updatePanel();
+    }
     /**
      * Method that updates the GUI, takes a list of items as argument
      * @param items 
      */
-    public void updatePanel(ArrayList<item> items){
+    private void updatePanel(){
+        this.removeAll();
         for(int i=0;i<items.size();i++){
-            addItems(items.get(i));
+            addItems(this.items.get(i));
         }
     }
     
@@ -32,8 +36,8 @@ class tasksPanel extends JPanel{
      * the tasksPanel
      * @param item 
      */
-    private void addItems(item item){
-        itemPanel = new itemPanel(item.getName());
+    private void addItems(ToDoItem item){
+        itemPanel itemPanel = new itemPanel(item.getTitle());
         itemPanel.setBackground(Color.red);
         itemPanel.setAlignmentX(0);
         this.add(itemPanel);

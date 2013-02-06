@@ -1,36 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package todomanager;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import mockClasses.item;
+import javax.swing.*;
 /**
  *
  * @author vita, daniel
  */
 public class TodoList extends JPanel{
+    AddToDoItemPanel top;
+    tasksPanel middle = new tasksPanel();
+    JPanel bottom;
+    
     public TodoList() {
-        this.setBackground(Color.GREEN);
+        this.middle.add(new ToDoItem("test1", "text1"));
+        this.middle.add(new ToDoItem("test2", "text2"));
+        this.middle.add(new ToDoItem("test3", "text3"));
         
+        top = new AddToDoItemPanel(middle);
         
-        JPanel top = new JPanel();
-        top.setBackground(Color.yellow);
-        top.setPreferredSize(new Dimension(100, 100));
-        top.add(new JLabel("MAKE YOUR CLASS EXTEND JPANEL!"));
-        
-        tasksPanel middle = new tasksPanel();
-        ArrayList<item> items = new ArrayList();
-        
-        items.add(new item("test1"));
-        items.add(new item("test2"));
-        items.add(new item("test2"));
-        middle.updatePanel(items);
-        
-        JPanel bottom = new JPanel();
+        bottom = new JPanel();
         bottom.setBackground(Color.GRAY);
         bottom.setPreferredSize(new Dimension(100, 100));
         bottom.add(new JLabel("MAKE YOUR CLASS EXTEND JPANEL!"));
