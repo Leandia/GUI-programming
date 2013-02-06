@@ -10,7 +10,7 @@ import javax.swing.*;
 public class TodoList extends JPanel {
 
     ButtonsPanel top;
-    TasksPanelDelta middle = new TasksPanelDelta();
+    TasksPanel middle = new TasksPanel();
     JPanel bottom;
 
     public TodoList() {
