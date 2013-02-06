@@ -10,13 +10,13 @@ import javax.swing.border.BevelBorder;
  *
  * @author Kristian Johansson and Kristoffer Wass
  */
-public class ItemPanel extends JPanel {
+public class ItemsPanel extends JPanel {
 
     private String headline;
     private final int width = 600;
     private final int height = 50;
 
-    public ItemPanel(String headline) {
+    public ItemsPanel(String headline) {
         this.headline = headline;
         setMaximumSize(new Dimension(width, height));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));

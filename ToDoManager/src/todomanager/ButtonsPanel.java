@@ -13,14 +13,14 @@ public class ButtonsPanel extends JPanel {
      * Create the GUI and show it. For thread safety, this method should be
      * invoked from the event-dispatching thread.
      */
-    private TasksPanel middle;
+    private TaskPanel middle;
 
     /**
      *
      * @param list
      * @param middle
      */
-    public ButtonsPanel(TasksPanel middle) {
+    public ButtonsPanel(TaskPanel middle) {
         this.middle = middle;
         createAndShowGUI();
     }
