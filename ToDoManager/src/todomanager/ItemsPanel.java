@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 /**
- *
+ * Simple temPanel class that is the visual representation of a todoitem.
  * @author Kristian Johansson and Kristoffer Wass
  */
 public class ItemsPanel extends JPanel {
@@ -23,6 +23,9 @@ public class ItemsPanel extends JPanel {
         updateItemPanel();
     }
 
+    /**
+     * Updates the panel with current data
+     */
     public void updateItemPanel() {
         this.add(new JLabel(this.headline));
     }
@@ -41,6 +44,10 @@ public class ItemsPanel extends JPanel {
         return this.headline;
     }
 
+    /**
+     * Set a new headline for the itempanel.
+     * @param newHeadline 
+     */
     private void setHeadline(String newHeadline) {
         this.headline = newHeadline;
     }
