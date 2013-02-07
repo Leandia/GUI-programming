@@ -1,29 +1,34 @@
 package todomanager;
 
 import java.awt.Color;
-import java.util.*;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
- *
+ * TaskPanel class, extends JPanel and holds all currently viewed ToDoItems.
  * @author Kristian Johansson and Kristoffer Wass
  */
 class TaskPanel extends JPanel {
-
+    
     private ArrayList<ToDoItem> items = new ArrayList<>();
 
     public TaskPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
+    /**
+     * Adds an item to the GUI by placing it on the TaskPanel. Takes a
+     * Todoitem as only parameter.
+     * @param item 
+     */
     public void addItem(ToDoItem item) {
         this.items.add(item);
         updatePanel();
     }
 
     /**
-     * Method that updates the GUI, takes a list of items as argument
+     * Method that updates the GUI
      *
      * @param items
      */
