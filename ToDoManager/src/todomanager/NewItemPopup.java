@@ -70,10 +70,6 @@ public class NewItemPopup extends JDialog implements ActionListener {
         return description;
     }
 
-/**
- * Binds the text in the title and description textfield to the strings title and
- * description
- */
     public void actionPerformed(ActionEvent e) {
         if (yesButton == e.getSource()) {
             //System.err.println("User chose yes.");
