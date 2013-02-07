@@ -21,15 +21,12 @@ public class NewItemPopup extends JDialog implements ActionListener {
     private JTextField descriptionTextField = null;
     private String title;
     private String description;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
+/**
+ * Constructor for NewItemPopup
+ * @param frame the frame the NewItemPopup appears in
+ * @param modal a boolean which decides if the NewItemPopup will be a modal or not 
+ */
+    
     public NewItemPopup(JFrame frame, boolean modal) {
         //JFrame frame = new JFrame();
         super(frame, modal);
@@ -56,7 +53,27 @@ public class NewItemPopup extends JDialog implements ActionListener {
         pack();
         setVisible(true);
     }
+    
+/**
+ * Getter method to get the text from the title textfield
+ * @return title a string containing the title from the title text field
+ */
+    public String getTitle() {
+        return title;
+    }
 
+/**
+ * Getter method to get the text from the description textfield
+ * @return title a string containing the description from the title text field
+ */
+    public String getDescription() {
+        return description;
+    }
+
+/**
+ * Binds the text in the title and description textfield to the strings title and
+ * description
+ */
     public void actionPerformed(ActionEvent e) {
         if (yesButton == e.getSource()) {
             //System.err.println("User chose yes.");
