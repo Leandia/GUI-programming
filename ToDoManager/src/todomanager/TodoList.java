@@ -13,6 +13,12 @@ public class TodoList extends JPanel {
     TaskPanel middle = new TaskPanel();
     JPanel bottom;
 
+    /**
+     * Constructor setsup the right side of the mainwindow where the todoItems
+     * will be presented. Divides this side into three for the top to be a
+     * panel with buttons, the middle to be the panel where the items are shown
+     * and the bottom a panel showing number of items.
+     */
     public TodoList() {
         top = new ButtonsPanel(middle);
 
