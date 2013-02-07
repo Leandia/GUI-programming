@@ -11,6 +11,10 @@ public class TODOManager {
 
     JFrame mainWindow;
 
+    /**
+     * Constructor divides the mainwindow in two sides, left and right, and 
+     * inserts categories to left and todoList to the right.
+     */
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
 
