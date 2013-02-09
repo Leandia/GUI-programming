@@ -1,5 +1,6 @@
 package todomanager;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -13,11 +14,13 @@ import javax.swing.border.BevelBorder;
 public class ItemsPanel extends JPanel {
 
     private String headline;
+    private String description;
     private final int width = 6000;
     private final int height = 50;
 
-    public ItemsPanel(String headline) {
-        this.headline = headline;
+    public ItemsPanel(String hl, String des) {
+        this.headline = hl;
+        this.description = des;
         setMaximumSize(new Dimension(width, height));
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         updateItemPanel();
@@ -27,6 +30,7 @@ public class ItemsPanel extends JPanel {
      * Updates the panel with current data
      */
     public void updateItemPanel() {
+        this.setBackgroundColor();
         this.add(new JLabel(this.headline));
     }
 
@@ -34,6 +38,7 @@ public class ItemsPanel extends JPanel {
      * Sets the color of the item as function of priority
      */
     private void setBackgroundColor() {
+        this.setBackground(Color.RED);
     }
 
     /**

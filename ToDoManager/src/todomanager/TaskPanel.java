@@ -48,8 +48,7 @@ class TaskPanel extends JPanel {
      * @param item
      */
     private void add(ToDoItem item) {
-        ItemsPanel itemPanel = new ItemsPanel(item.getTitle());
-        itemPanel.setBackground(Color.red);
+        ItemsPanel itemPanel = new ItemsPanel(item.getTitle(),item.getDescription());
         itemPanel.setAlignmentX(0);
         this.add(itemPanel);
     }
