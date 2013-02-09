@@ -12,7 +12,7 @@ public class TODOManager {
     JFrame mainWindow;
 
     /**
-     * Constructor divides the mainwindow in two sides, left and right, and 
+     * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
      */
     public TODOManager() {
@@ -29,16 +29,9 @@ public class TODOManager {
     /**
      * Setup of the mainwindow, does not pack or make it visible.
      */
-    private void windowSetup() {
+    private void windowSetup() {        
         mainWindow.setLayout(new GridBagLayout());
-
-        /**We should probably just add the individual panels directly 
-         * to the frames contentpane. So did some changes below aswell. /Kristian         
-        */
-        //JPanel mainPanel = new JPanel(new GridBagLayout());        
-        //this.mainWindow.add(mainPanel);
-        //mainPanel.setPreferredSize(new Dimension(700, 500));
-
+        
         Category category = new Category();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
         categoryConstraints.fill = GridBagConstraints.BOTH;
@@ -53,8 +46,11 @@ public class TODOManager {
         todoListConstraints.gridx = 1;
         todoListConstraints.gridy = 0;
         todoListConstraints.weighty = 1.0;
-        todoListConstraints.weightx = 1.0;
+        todoListConstraints.weightx = 1.0;        
         this.mainWindow.getContentPane().add(todoList, todoListConstraints);
+
+        //mainPanel.add(todoList, todoListConstraints);
+        //this.mainWindow.add(mainPanel);
     }
 
     /**
