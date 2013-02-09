@@ -12,7 +12,7 @@ public class TODOManager {
     JFrame mainWindow;
 
     /**
-     * Constructor divides the mainwindow in two sides, left and right, and 
+     * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
      */
     public TODOManager() {
@@ -21,6 +21,7 @@ public class TODOManager {
         windowSetup();
         addMenu();
 
+        this.mainWindow.setPreferredSize(new Dimension(700, 500));
         this.mainWindow.pack();
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,14 +31,7 @@ public class TODOManager {
      * Setup of the mainwindow, does not pack or make it visible.
      */
     private void windowSetup() {
-        mainWindow.setLayout(new GridBagLayout());
-
         JPanel mainPanel = new JPanel(new GridBagLayout());
-
-
-        this.mainWindow.add(mainPanel);
-
-        mainPanel.setPreferredSize(new Dimension(700, 500));
 
         Category category = new Category();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
@@ -55,6 +49,8 @@ public class TODOManager {
         todoListConstraints.weighty = 1.0;
         todoListConstraints.weightx = 1.0;
         mainPanel.add(todoList, todoListConstraints);
+
+        this.mainWindow.add(mainPanel);
     }
 
     /**

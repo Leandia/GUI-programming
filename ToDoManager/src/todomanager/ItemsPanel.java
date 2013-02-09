@@ -13,7 +13,7 @@ import javax.swing.border.BevelBorder;
 public class ItemsPanel extends JPanel {
 
     private String headline;
-    private final int width = 600;
+    private final int width = 6000;
     private final int height = 50;
 
     public ItemsPanel(String headline) {
