@@ -17,7 +17,7 @@ public class TODOManager {
      */
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
-
+        this.mainWindow.setPreferredSize(new Dimension(700,500));
         windowSetup();
         addMenu();
 
@@ -32,12 +32,12 @@ public class TODOManager {
     private void windowSetup() {
         mainWindow.setLayout(new GridBagLayout());
 
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-
-
-        this.mainWindow.add(mainPanel);
-
-        mainPanel.setPreferredSize(new Dimension(700, 500));
+        /**We should probably just add the individual panels directly 
+         * to the frames contentpane. So did some changes below aswell. /Kristian         
+        */
+        //JPanel mainPanel = new JPanel(new GridBagLayout());        
+        //this.mainWindow.add(mainPanel);
+        //mainPanel.setPreferredSize(new Dimension(700, 500));
 
         Category category = new Category();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
@@ -45,7 +45,7 @@ public class TODOManager {
         categoryConstraints.gridx = 0;
         categoryConstraints.gridy = 0;
         categoryConstraints.weighty = 1.0;
-        mainPanel.add(category, categoryConstraints);
+        this.mainWindow.getContentPane().add(category, categoryConstraints);
 
         TodoList todoList = new TodoList();
         GridBagConstraints todoListConstraints = new GridBagConstraints();
@@ -54,7 +54,7 @@ public class TODOManager {
         todoListConstraints.gridy = 0;
         todoListConstraints.weighty = 1.0;
         todoListConstraints.weightx = 1.0;
-        mainPanel.add(todoList, todoListConstraints);
+        this.mainWindow.getContentPane().add(todoList, todoListConstraints);
     }
 
     /**
