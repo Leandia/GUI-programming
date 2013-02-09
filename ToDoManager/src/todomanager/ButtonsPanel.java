@@ -37,9 +37,9 @@ public class ButtonsPanel extends JPanel {
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     NewItemPopup opt = new NewItemPopup(frame, true);
                     if ((opt.getTitle() != null) && (opt.getDescription() != null)) {
-                        String title = opt.getTitle();
-                        String description = opt.getDescription();
-                        ToDoItem tdi = new ToDoItem(title, description);
+                        ToDoItem tdi = new ToDoItem(opt.getTitle(), 
+                                opt.getDescription(), opt.getCategory(), 
+                                opt.getPriority(), opt.getDate());
                         middle.addItem(tdi);
                     }
                 }
