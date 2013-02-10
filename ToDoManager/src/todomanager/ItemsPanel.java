@@ -10,7 +10,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
-import values.Priority;
 
 /**
  * Simple temPanel class that is the visual representation of a todoitem.
@@ -56,13 +55,7 @@ public class ItemsPanel extends JPanel {
         JPanel priorityPanel = new JPanel();
         priorityPanel.setOpaque(false);
         JLabel priority = new JLabel("ERROR");
-        if (this.item.getPrio() == Priority.LOW) {
-            priority.setText("LOW");
-        } else if (this.item.getPrio() == Priority.MEDIUM) {
-            priority.setText("MEDIUM");
-        } else if (this.item.getPrio() == Priority.HIGH) {
-            priority.setText("HIGH");
-        }
+        priority.setText(this.item.getPrio().toString());
         priorityPanel.setPreferredSize(new Dimension(50, 50));
         priorityPanel.add(priority);
         GridBagConstraints prioConstraints = new GridBagConstraints();
@@ -76,7 +69,7 @@ public class ItemsPanel extends JPanel {
         GridBagConstraints titleConstraints = new GridBagConstraints();
         titleConstraints.gridx = 0;
         titleConstraints.gridy = 0;
-        titleConstraints.gridwidth = 2;
+        titleConstraints.gridwidth = 2;        
         // Get title.
         JLabel title = new JLabel(this.item.getTitle());
         titlePanel.add(title, titleConstraints);
