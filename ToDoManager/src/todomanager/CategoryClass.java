@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CategoryClass {
     
   private String categoryTitle;
+  private int id;
   private ArrayList<ToDoItem> toDoItems = new ArrayList<>();
   
   public CategoryClass(String title){
@@ -21,8 +22,20 @@ public class CategoryClass {
       this.toDoItems = null;
   }
   
+  public void setCategoryTitle(String title){
+      this.categoryTitle = title;
+  }
+  
+  public void addToDoItem(ToDoItem item){
+      toDoItems.add(item);
+  }
+  
   public String getCategoryTitle(){
       return this.categoryTitle;
+  }
+  
+  public int getId(){
+      return this.id;
   }
   
   public ArrayList getToDoItems(){
