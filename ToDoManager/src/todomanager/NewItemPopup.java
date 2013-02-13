@@ -35,6 +35,9 @@ public class NewItemPopup extends JDialog implements ActionListener {
     private JTextField yearTextField = null;
     private JTextField monthTextField = null;
     private JTextField dayTextField = null;
+    private JLabel timeLabel = null;
+    private JTextField hourTextField = null;
+    private JTextField minutesTextField = null;
     private JLabel priorityLabel = null;
     private JComboBox priorityMenu = null;
     private Priority[] prioList = {Priority.LOW,
@@ -104,26 +107,48 @@ public class NewItemPopup extends JDialog implements ActionListener {
         datesConstraints.gridx = 2;
         dayTextField = new JTextField("" + d.get(Calendar.DATE), 2);
         dates.add(dayTextField, datesConstraints);
-
         constraints.gridx = 1;
         myPanel.add(dates, constraints);
-        //5,1
-        priorityLabel = new JLabel("Priority: ");
+        
+        //5.1
+        timeLabel = new JLabel("Time (XX:XX): ");
         constraints.gridx = 0;
         constraints.gridy = 4;
+        myPanel.add(timeLabel, constraints);
+        
+        //5.2
+        JPanel time = new JPanel(new GridBagLayout());
+        GridBagConstraints timeConstraints = new GridBagConstraints();
+        timeConstraints.weightx = 1;
+        timeConstraints.weighty = 1;
+        timeConstraints.gridx = 0;
+        timeConstraints.gridy = 0;
+        hourTextField = new JTextField(2);
+        time.add(hourTextField, timeConstraints);
+        timeConstraints.gridx = 1;
+        minutesTextField = new JTextField(2);
+        time.add(minutesTextField, timeConstraints);
+        timeConstraints.gridx = 2;
+        constraints.gridx = 1;
+        myPanel.add(time, constraints);
+        
+         //6,1
+        priorityLabel = new JLabel("Priority: ");
+        constraints.gridx = 0;
+        constraints.gridy = 5;
         myPanel.add(priorityLabel, constraints);
-        //5,2
+        //6,2
         priorityMenu = new JComboBox(prioList);
         priorityMenu.setSelectedIndex(0);
         constraints.gridx = 1;
         myPanel.add(priorityMenu, constraints);
-        //6,1
+        //7,1
         yesButton = new JButton("Add");
         yesButton.addActionListener(this);
         constraints.gridx = 0;
-        constraints.gridy = 5;
+        constraints.gridy = 6;
         myPanel.add(yesButton, constraints);
-        //6,2
+        //7,2
         noButton = new JButton("Cancel");
         noButton.addActionListener(this);
         constraints.gridx = 1;
