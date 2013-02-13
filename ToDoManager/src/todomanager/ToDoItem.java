@@ -1,5 +1,8 @@
 package todomanager;
 
+import java.util.GregorianCalendar;
+import values.Priority;
+
 /**
 
  * @author Emil Björling
@@ -10,16 +13,16 @@ public class ToDoItem {
     private String title;
 /** a ToDoItem's description **/    
     private String description;
+    private String category;
+    private GregorianCalendar date;
+    private Priority prio;
 
-/**
- * Constructor for a ToDoItem
- * @param titl the wanted title of a ToDoItem 
- * @param desc the wanted description a ToDoItem 
- */    
-    
-    public ToDoItem(String tit, String desc) {
-        title = tit;
-        description = desc;
+    public ToDoItem(String titl, String desc, String cat, Priority prio, GregorianCalendar cal) {
+        this.title = titl;
+        this.description = desc;
+        this.category = cat;
+        this.prio = prio;
+        this.date = cal;
     }
 
 /**
@@ -38,5 +41,17 @@ public class ToDoItem {
  */          
     public String getDescription() {
         return description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public GregorianCalendar getDate() {
+        return date;
+    }
+
+    public Priority getPrio() {
+        return prio;
     }
 }

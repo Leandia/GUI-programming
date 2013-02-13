@@ -1,13 +1,13 @@
 package todomanager;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
  * TaskPanel class, extends JPanel and holds all currently viewed ToDoItems.
- * @author Kristian Johansson and Kristoffer Wass
+ * @author Kristian Johansson 
+ * @author Kristoffer Wass
  */
 class TaskPanel extends JPanel {
     
@@ -47,8 +47,7 @@ class TaskPanel extends JPanel {
      * @param item
      */
     private void add(ToDoItem item) {
-        ItemsPanel itemPanel = new ItemsPanel(item.getTitle());
-        itemPanel.setBackground(Color.red);
+        ItemsPanel itemPanel = new ItemsPanel(item);
         itemPanel.setAlignmentX(0);
         this.add(itemPanel);
     }
