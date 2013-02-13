@@ -180,15 +180,6 @@ public class NewItemPopup extends JDialog implements ActionListener {
         }
     }
 
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getCategory() {
         return category;
     }
