@@ -9,8 +9,9 @@ import javax.swing.*;
  */
 public class TODOManager {
 
+    static LanguageManager manager = new LanguageManager();
     JFrame mainWindow;
-
+    Category category;
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
@@ -32,7 +33,7 @@ public class TODOManager {
     private void windowSetup() {        
         mainWindow.setLayout(new GridBagLayout());
         
-        Category category = new Category();
+        category = new Category();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
         categoryConstraints.fill = GridBagConstraints.BOTH;
         categoryConstraints.gridx = 0;
@@ -60,15 +61,15 @@ public class TODOManager {
         //addMenu();
         JMenuBar menu = new JMenuBar();
 
-        JMenu file = new JMenu("File");
+        JMenu file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
-        JMenuItem quit = new JMenuItem("Quit");
+        JMenuItem quit = new JMenuItem(manager.getBundle().getString("quit"));
         file.add(quit);
 
-        JMenu edit = new JMenu("Edit");
+        JMenu edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
 
-        JMenu help = new JMenu("Help");
+        JMenu help = new JMenu(manager.getBundle().getString("help"));
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);

@@ -24,7 +24,9 @@ public class ItemsPanel extends JPanel {
     private final int height = 50;
     private final ToDoItem item;
     private JCheckBox doneButton;
-
+    private JPanel donePanel;
+    private JLabel priority;
+    
     public ItemsPanel(ToDoItem item) {
         this.item = item;
         this.setMaximumSize(new Dimension(width, height));
@@ -40,9 +42,9 @@ public class ItemsPanel extends JPanel {
         this.setLayout(new GridBagLayout());
 
         // The done button.
-        JPanel donePanel = new JPanel();
+        donePanel = new JPanel();
         donePanel.setOpaque(false);
-        doneButton = new JCheckBox("Done");
+        doneButton = new JCheckBox(TODOManager.manager.getBundle().getString("done"));
         doneButton.setOpaque(false);
         donePanel.add(doneButton);
         donePanel.setPreferredSize(new Dimension(50, 50));
@@ -54,7 +56,7 @@ public class ItemsPanel extends JPanel {
         // Display priority with text.
         JPanel priorityPanel = new JPanel();
         priorityPanel.setOpaque(false);
-        JLabel priority = new JLabel("ERROR");
+        priority = new JLabel(TODOManager.manager.getBundle().getString("error"));
         priority.setText(this.item.getPrio().toString());
         priorityPanel.setPreferredSize(new Dimension(50, 50));
         priorityPanel.add(priority);

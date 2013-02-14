@@ -2,7 +2,9 @@ package todomanager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  *
  * @author Emil
@@ -14,7 +16,7 @@ public class ButtonsPanel extends JPanel {
      * invoked from the event-dispatching thread.
      */
     private TaskPanel middle;
-
+    private JButton addButton;
     /**
      *
      * @param list
@@ -26,7 +28,7 @@ public class ButtonsPanel extends JPanel {
     }
 
     private void createAndShowGUI() {
-        final JButton addButton = new JButton("Add new ToDo");
+        addButton = new JButton(TODOManager.manager.getBundle().getString("buttontext"));
         addButton.setActionCommand("button");
 
         addButton.addActionListener(new ActionListener() {

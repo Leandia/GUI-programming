@@ -60,7 +60,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.weighty = 1;
 
         //1,1
-        titleLabel = new JLabel("Title:");
+        titleLabel = new JLabel(TODOManager.manager.getBundle().getString("title"));
         constraints.gridx = 0;
         constraints.gridy = 0;
         myPanel.add(titleLabel, constraints);
@@ -69,7 +69,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.gridx = 1;
         myPanel.add(titleTextField, constraints);
         //2,1
-        descriptionLabel = new JLabel("Description: ");
+        descriptionLabel = new JLabel(TODOManager.manager.getBundle().getString("description"));
         constraints.gridx = 0;
         constraints.gridy = 1;
         myPanel.add(descriptionLabel, constraints);
@@ -78,7 +78,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.gridx = 1;
         myPanel.add(descriptionTextField, constraints);
         //3,1
-        categoryLabel = new JLabel("Category: ");
+        categoryLabel = new JLabel(TODOManager.manager.getBundle().getString("category"));
         constraints.gridx = 0;
         constraints.gridy = 2;
         myPanel.add(categoryLabel, constraints);
@@ -87,7 +87,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.gridx = 1;
         myPanel.add(categoryTextField, constraints);
         //4,1
-        dateLabel = new JLabel("Date (YYMMDD): ");
+        dateLabel = new JLabel(TODOManager.manager.getBundle().getString("date"));
         constraints.gridx = 0;
         constraints.gridy = 3;
         myPanel.add(dateLabel, constraints);
@@ -111,7 +111,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         myPanel.add(dates, constraints);
         
         //5.1
-        timeLabel = new JLabel("Time (XX:XX): ");
+        timeLabel = new JLabel(TODOManager.manager.getBundle().getString("time"));
         constraints.gridx = 0;
         constraints.gridy = 4;
         myPanel.add(timeLabel, constraints);
@@ -133,7 +133,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
         myPanel.add(time, constraints);
         
          //6,1
-        priorityLabel = new JLabel("Priority: ");
+        priorityLabel = new JLabel(TODOManager.manager.getBundle().getString("priority"));
         constraints.gridx = 0;
         constraints.gridy = 5;
         myPanel.add(priorityLabel, constraints);
@@ -143,13 +143,13 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.gridx = 1;
         myPanel.add(priorityMenu, constraints);
         //7,1
-        yesButton = new JButton("Add");
+        yesButton = new JButton(TODOManager.manager.getBundle().getString("add"));
         yesButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 6;
         myPanel.add(yesButton, constraints);
         //7,2
-        noButton = new JButton("Cancel");
+        noButton = new JButton(TODOManager.manager.getBundle().getString("cancel"));
         noButton.addActionListener(this);
         constraints.gridx = 1;
         myPanel.add(noButton, constraints);
