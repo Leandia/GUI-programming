@@ -11,6 +11,10 @@ public class TODOManager {
 
     static LanguageManager manager = new LanguageManager();
     JFrame mainWindow;
+    JMenu file;
+    JMenuItem quit;
+    JMenu edit;
+    JMenu help;
     Category category;
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
@@ -61,21 +65,42 @@ public class TODOManager {
         //addMenu();
         JMenuBar menu = new JMenuBar();
 
-        JMenu file = new JMenu(manager.getBundle().getString("file"));
+        file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
-        JMenuItem quit = new JMenuItem(manager.getBundle().getString("quit"));
+        quit = new JMenuItem(manager.getBundle().getString("quit"));
         file.add(quit);
 
-        JMenu edit = new JMenu(manager.getBundle().getString("edit"));
+        edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
 
-        JMenu help = new JMenu(manager.getBundle().getString("help"));
+        help = new JMenu(manager.getBundle().getString("help"));
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
     }
+    
+    /**
+     * Function that updates the language of the GUI components during runtime. 
+     */
+    public void setLanguage(){
+        this.category.setLabels();
+        this.setLabels();
+    }
 
     public static void main(String[] args) {
         TODOManager main = new TODOManager();
+        TODOManager.manager.setTODOManager(main);
+        
+    }
+
+    /**
+     * Functions that updates the the menu headlines when the 
+     * selected language is changed. 
+     */
+    private void setLabels() {
+        this.file.setText(manager.getBundle().getString("file"));
+        this.quit.setText(manager.getBundle().getString("quit"));
+        this.edit.setText(manager.getBundle().getString("edit"));
+        this.help.setText(manager.getBundle().getString("help"));
     }
 }

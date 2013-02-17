@@ -18,16 +18,21 @@ public class LanguageManager {
     private final String fileName = "buttonlabel";
     private ArrayList<Locale> locales = new ArrayList();
     private ResourceBundle bundle;
-    private final String defaultLanguage = "Swedish";
+    private String defaultLanguage = "English";
+    private TODOManager manager;
     
     public LanguageManager(){
         locales.add(new Locale.Builder().setLanguage("en").setRegion("US").build());
         locales.add(new Locale.Builder().setLanguage("se").setRegion("se").build());
-        setLanguage(defaultLanguage);
+        initLanguage(defaultLanguage);
+    }
+    
+    public void setTODOManager(TODOManager mngr){
+        this.manager = mngr;
     }
     
     
-    private void setLanguage(String language){
+    private void initLanguage(String language){
         switch(language){
             case "English":
                 bundle = ResourceBundle.getBundle(fileName, locales.get(0));
@@ -35,6 +40,18 @@ public class LanguageManager {
             case "Swedish":
                 bundle = ResourceBundle.getBundle(fileName, locales.get(1));
         }
+    }
+    
+    public void UpdateLanguage(String language){
+       switch(language){
+            case "English":
+                bundle = ResourceBundle.getBundle(fileName, locales.get(0));
+                this.manager.setLanguage();
+                break;
+            case "Swedish":
+                bundle = ResourceBundle.getBundle(fileName, locales.get(1));
+                this.manager.setLanguage();
+        } 
     }
     
     public ResourceBundle getBundle(){

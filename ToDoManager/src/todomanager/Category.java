@@ -40,17 +40,21 @@ public class Category extends JPanel {
         selectLanguage.addItem("Swedish");
         selectLanguage.setEditable(false);
         selectLanguage.addActionListener(new ActionListener() {
+        
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            
+                TODOManager.manager.UpdateLanguage(selectLanguage.getSelectedItem().toString());
             }
         });
         
         
     }
     
-    private void setLabels(){
+  /**
+   * Updates the language of the category component. 
+   */
+  public void setLabels(){
             this.categories.setText(TODOManager.manager.getBundle().getString("categories"));
     }
     
