@@ -2,8 +2,6 @@ package todomanager;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,15 +37,7 @@ public class Category extends JPanel {
             selectLanguage.addItem(TODOManager.manager.getLanguages()[i]);
         }        
         selectLanguage.setEditable(false);
-        selectLanguage.addActionListener(new ActionListener() {
-        
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TODOManager.manager.UpdateLanguage(selectLanguage.getSelectedItem().toString());
-            }
-        });
-        
+        selectLanguage.setAction(new SelectLanguageAction(this.selectLanguage,selectLanguage.getSelectedItem().toString()));   
         
     }    
 }

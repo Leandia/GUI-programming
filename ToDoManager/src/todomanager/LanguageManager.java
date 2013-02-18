@@ -52,7 +52,7 @@ public class LanguageManager {
      * This should set the language stored on file to the input parameter
      **/
     public void UpdateLanguage(String language){
-        throw new UnsupportedOperationException("Not yet implemented");
+        System.out.println(language);
     }
     
     public ResourceBundle getBundle(){
