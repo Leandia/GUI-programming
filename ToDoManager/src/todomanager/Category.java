@@ -24,8 +24,7 @@ public class Category extends JPanel {
     public Category() {
         this.setBackground(Color.red);
         this.setPreferredSize(new Dimension(200, 200));
-        categories = new JLabel();
-        setLabels();
+        categories = new JLabel(TODOManager.manager.getBundle().getString("categories"));
         addLanguageSelection();
         this.add(this.selectLanguage);
         this.add(categories);
@@ -36,8 +35,9 @@ public class Category extends JPanel {
      */
     private void addLanguageSelection() {
         selectLanguage = new JComboBox();
-        selectLanguage.addItem("English");
-        selectLanguage.addItem("Swedish");
+        for (int i=0;i<TODOManager.manager.getLanguages().length;i++){
+            selectLanguage.addItem(TODOManager.manager.getLanguages()[i]);
+        }        
         selectLanguage.setEditable(false);
         selectLanguage.addActionListener(new ActionListener() {
         
@@ -49,13 +49,5 @@ public class Category extends JPanel {
         });
         
         
-    }
-    
-  /**
-   * Updates the language of the category component. 
-   */
-  public void setLabels(){
-            this.categories.setText(TODOManager.manager.getBundle().getString("categories"));
-    }
-    
+    }    
 }

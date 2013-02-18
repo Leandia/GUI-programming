@@ -18,19 +18,21 @@ public class LanguageManager {
     private final String fileName = "buttonlabel";
     private ArrayList<Locale> locales = new ArrayList();
     private ResourceBundle bundle;
-    private String defaultLanguage = "English";
-    private TODOManager manager;
+    private final String[] languages = {"English","Swedish"};
     
     public LanguageManager(){
         locales.add(new Locale.Builder().setLanguage("en").setRegion("US").build());
         locales.add(new Locale.Builder().setLanguage("se").setRegion("se").build());
-        initLanguage(defaultLanguage);
-    }
+        initLanguage(getSelectedLanguage());
+    }   
     
-    public void setTODOManager(TODOManager mngr){
-        this.manager = mngr;
+    /**
+     * This function should retrieve correct string value from a file
+     * @return 
+     */
+    private String getSelectedLanguage(){
+        return "English";
     }
-    
     
     private void initLanguage(String language){
         switch(language){
@@ -42,16 +44,15 @@ public class LanguageManager {
         }
     }
     
+    public String[] getLanguages(){
+        return this.languages;
+    }
+    
+    /**
+     * This should set the language stored on file to the input parameter
+     **/
     public void UpdateLanguage(String language){
-       switch(language){
-            case "English":
-                bundle = ResourceBundle.getBundle(fileName, locales.get(0));
-                this.manager.setLanguage();
-                break;
-            case "Swedish":
-                bundle = ResourceBundle.getBundle(fileName, locales.get(1));
-                this.manager.setLanguage();
-        } 
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
     public ResourceBundle getBundle(){

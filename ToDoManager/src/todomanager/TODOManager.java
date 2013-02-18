@@ -79,28 +79,7 @@ public class TODOManager {
         this.mainWindow.setJMenuBar(menu);
     }
     
-    /**
-     * Function that updates the language of the GUI components during runtime. 
-     */
-    public void setLanguage(){
-        this.category.setLabels();
-        this.setLabels();
-    }
-
     public static void main(String[] args) {
-        TODOManager main = new TODOManager();
-        TODOManager.manager.setTODOManager(main);
-        
-    }
-
-    /**
-     * Functions that updates the the menu headlines when the 
-     * selected language is changed. 
-     */
-    private void setLabels() {
-        this.file.setText(manager.getBundle().getString("file"));
-        this.quit.setText(manager.getBundle().getString("quit"));
-        this.edit.setText(manager.getBundle().getString("edit"));
-        this.help.setText(manager.getBundle().getString("help"));
+        TODOManager main = new TODOManager();       
     }
 }
