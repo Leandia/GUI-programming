@@ -15,17 +15,23 @@ public class State {
     
     private String selectedLanguage;
     private Properties pro = new Properties();
+    
+    
     public State(){
-        this.selectedLanguage = "";
     }
     
     public String getLanguage(){
         return this.selectedLanguage;
     }
+    
     public void setSelectedLanguage(String language){
         this.selectedLanguage = language;
     }
     
+    /**
+     * Saves each parameter of a state, which represents different settings
+     * for the application, into a properties file
+     */
     public void saveState(){
         try{
             pro.setProperty("lan", selectedLanguage);
@@ -41,6 +47,11 @@ public class State {
         }
     }
     
+    /**
+     * Loads each parameter of a state, which represents different settings
+     * for the application, from a properties files and save them into
+     * the state class variables
+     */
     public void loadState(){
         try {
                try{
