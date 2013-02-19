@@ -18,6 +18,7 @@ public class LanguageManager {
     private final String fileName = "buttonlabel";
     private ArrayList<Locale> locales = new ArrayList();
     private ResourceBundle bundle;
+    private String defaultLanguage = "English";
     private final String[] languages = {"English","Swedish"};
     
     public LanguageManager(){
@@ -31,7 +32,20 @@ public class LanguageManager {
      * @return 
      */
     private String getSelectedLanguage(){
-        return "English";
+        /**if(TODOManager.savedSettings.getLanguage().isEmpty(){
+            return defaultLanguage;
+        }
+        else{
+            return TODOManager.savedSettings.getLanguage();
+        }
+        **/
+        try{
+            System.out.println(TODOManager.savedSettings.getLanguage());
+            return TODOManager.savedSettings.getLanguage();
+        }
+        catch(NullPointerException e){
+            return this.defaultLanguage;
+        }
     }
     
     private void initLanguage(String language){

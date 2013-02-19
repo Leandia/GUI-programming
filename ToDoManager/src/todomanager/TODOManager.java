@@ -11,11 +11,16 @@ import javax.swing.*;
  */
 public class TODOManager {
 
-    static LanguageManager manager = new LanguageManager();
+    static State savedSettings;
+    static LanguageManager manager;
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
     JMenu edit;
+    JMenu settings;
+    JMenu language;
+    JMenuItem eng;
+    JMenuItem swe;
     JMenu help;
     CategoryPanel category;
     /**
@@ -77,12 +82,19 @@ public class TODOManager {
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
 
+        settings = new JMenu("settings");
+        language = new JMenu("language");
+        
+        language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
+        language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
+        settings.add(language);
+        menu.add(settings);
+        
         help = new JMenu(manager.getBundle().getString("help"));
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
     }
-    
     
      public class LeftAction extends AbstractAction {
         public LeftAction(String text,String desc) {
@@ -90,14 +102,47 @@ public class TODOManager {
             putValue(SHORT_DESCRIPTION, desc);
             }
         public void actionPerformed(ActionEvent e) {
+            TODOManager.savedSettings.saveState();
             System.err.println("Quit!");
             System.exit(0);
         }
     }
+     
+     public class SelectEnglishAsLanguageAction extends AbstractAction{
+         
+         private final String eng = "English";
+         
+         public SelectEnglishAsLanguageAction(String text){
+             super(text);
+         }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            TODOManager.savedSettings.setSelectedLanguage(eng);
+        }
+     }
+     
+     public class SelectSwedishAsLanguageAction extends AbstractAction{
+         
+         private final String swe = "Swedish";
+         
+         public SelectSwedishAsLanguageAction(String text){
+             super(text);
+         }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            TODOManager.savedSettings.setSelectedLanguage(swe);
+        }
+     }
     
+     
     
     
     public static void main(String[] args) {
+        savedSettings = new State();
+        savedSettings.loadState();
+        manager = new LanguageManager();
         TODOManager main = new TODOManager();       
     }
 }
