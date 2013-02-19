@@ -1,6 +1,8 @@
 package todomanager;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
@@ -68,7 +70,9 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        file.add(quit);
+        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the left button.");
+        file.add(leftAction);
+        //file.add(quit);
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
@@ -78,6 +82,20 @@ public class TODOManager {
 
         this.mainWindow.setJMenuBar(menu);
     }
+    
+    
+     public class LeftAction extends AbstractAction {
+        public LeftAction(String text,String desc) {
+            super(text);
+            putValue(SHORT_DESCRIPTION, desc);
+            }
+        public void actionPerformed(ActionEvent e) {
+            System.err.println("Quit!");
+            System.exit(0);
+        }
+    }
+    
+    
     
     public static void main(String[] args) {
         TODOManager main = new TODOManager();       
