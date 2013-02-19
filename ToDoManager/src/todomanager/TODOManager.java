@@ -1,6 +1,8 @@
 package todomanager;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
@@ -15,7 +17,7 @@ public class TODOManager {
     JMenuItem quit;
     JMenu edit;
     JMenu help;
-    Category category;
+    CategoryPanel category;
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
@@ -37,7 +39,7 @@ public class TODOManager {
     private void windowSetup() {        
         mainWindow.setLayout(new GridBagLayout());
         
-        category = new Category();
+        category = new CategoryPanel();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
         categoryConstraints.fill = GridBagConstraints.BOTH;
         categoryConstraints.gridx = 0;
@@ -68,7 +70,9 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        file.add(quit);
+        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the quit button.");
+        file.add(leftAction);
+        //file.add(quit);
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
@@ -78,6 +82,20 @@ public class TODOManager {
 
         this.mainWindow.setJMenuBar(menu);
     }
+    
+    
+     public class LeftAction extends AbstractAction {
+        public LeftAction(String text,String desc) {
+            super(text);
+            putValue(SHORT_DESCRIPTION, desc);
+            }
+        public void actionPerformed(ActionEvent e) {
+            System.err.println("Quit!");
+            System.exit(0);
+        }
+    }
+    
+    
     
     public static void main(String[] args) {
         TODOManager main = new TODOManager();       
