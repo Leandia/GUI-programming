@@ -14,6 +14,7 @@ import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import todomanager.Category;
 import todomanager.ToDoItem;
 import values.Priority;
 
@@ -27,9 +28,9 @@ public class Database {
     private SAXBuilder builder = new SAXBuilder();
     private Document doc;
     private Element root;
-    private List list;
+    private Element data;
+    private Element category;
     private String file;
-    private String category = "";
 
     /**
      * Constructor using the default filename as name for the database.
@@ -64,6 +65,8 @@ public class Database {
             //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.root = this.doc.getRootElement();
+        this.data = this.root.getChild("data");
+        this.category = this.root.getChild("category");
 
         try {
             fileInputStream.close();
@@ -93,7 +96,7 @@ public class Database {
         addItem.setAttribute("day", Integer.toString(cal.get(Calendar.DATE)));
         addItem.setAttribute("hour", Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
         addItem.setAttribute("minute", Integer.toString(cal.get(Calendar.MINUTE)));
-        this.root.addContent(addItem);
+        this.data.addContent(addItem);
     }
 
     /**
@@ -112,7 +115,7 @@ public class Database {
      * @param item The item to be deleted from the database.
      */
     public void deleteItem(ToDoItem item) {
-        this.root.removeChild("_" + Integer.toString(item.getNumber()));
+        this.data.removeChild("_" + Integer.toString(item.getNumber()));
     }
 
     /**
@@ -133,12 +136,10 @@ public class Database {
      * @return An ArrayList of all the ToDoItems in the database.
      */
     public ArrayList<ToDoItem> getAllItems() {
-        this.category = "";
         return getItems("");
     }
 
     public ArrayList<ToDoItem> getItemsByCategory(String category) {
-        this.category = category;
         return getItems(category);
     }
 
@@ -148,9 +149,9 @@ public class Database {
      * whose category is the same as the supplied category.
      */
     private ArrayList<ToDoItem> getItems(String cat) {
-        this.list = root.getChildren();
+        List list = data.getChildren();
         ArrayList<ToDoItem> listOfItems = new ArrayList<>();
-        Iterator iter = this.list.iterator();
+        Iterator iter = list.iterator();
         while (iter.hasNext()) {
             Element e = (Element) iter.next();
             if (cat.equals("") || cat.equals(e.getAttributeValue("category"))) {
@@ -184,10 +185,59 @@ public class Database {
     }
 
     /**
+     * Add a category to the database.
+     * @param cat The category to add to the database.
+     */
+    public void addCategory(Category cat) {
+        deleteCategory(cat);
+        Element newCategory = new Element("_" + Integer.toString(cat.getId()));
+        newCategory.setAttribute("name", cat.getCategoryTitle());
+        this.category.addContent(newCategory);
+    }
+    
+    /**
+     * Delete a category from the database.
+     * @param cat The Category to be deleted from the database.
+     */
+    public void deleteCategory(Category cat) {
+        this.category.removeChild("_" + Integer.toString(cat.getId()));
+    }
+    
+    /**
+     * Edit a category in the database.
+     * @param cat The category in it's edited form.
+     */
+    public void editCategory(Category cat) {
+        addCategory(cat);
+    }
+    
+    /**
+     * Get all categories from the database in an ArrayList<Category>.
+     * @return An ArrayList<Category> of all categories in the database.
+     */
+    public ArrayList<Category> getCategories() {
+        ArrayList<Category> result = new ArrayList<>();
+        List list = this.category.getChildren();
+        Iterator iter = list.iterator();
+        while (iter.hasNext()) {
+            Element e = (Element) iter.next();
+            int number = Integer.parseInt(e.getName().substring(1));
+            String name = e.getAttributeValue("name");
+            Category cat = new Category(number, name, getItemsByCategory(name));
+            result.add(cat);
+        }
+        return result;
+    }
+    
+    /**
      * Private class to setup the database if it doesn't exist.
      */
     private void setupDB() {
         Element tempRoot = new Element("todoManager");
+        Element tempCategory = new Element("category");
+        Element tempData = new Element("data");
+        tempRoot.addContent(tempCategory);
+        tempRoot.addContent(tempData);
         XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
         try {
             out.output(new Document(tempRoot), new FileOutputStream(this.file));
