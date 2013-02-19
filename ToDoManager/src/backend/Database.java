@@ -24,7 +24,6 @@ import values.Priority;
  */
 public class Database {
 
-    private ArrayList<ToDoItem> listOfItems = new ArrayList<>();
     private SAXBuilder builder = new SAXBuilder();
     private Document doc;
     private Element root;
@@ -81,11 +80,6 @@ public class Database {
      * @param item A ToDoItem to be added to the database.
      */
     public void addItem(ToDoItem item) {
-        // Add item to the list of items known to the outside.
-        if (item.getCategory().equals(this.category) || this.category.equals("")) {
-            this.listOfItems.add(item);
-        }
-
         // Add item to the root so it'll be written to file.
         deleteItem(item);
         Element addItem = new Element("_" + Integer.toString(item.getNumber()));
@@ -140,14 +134,12 @@ public class Database {
      */
     public ArrayList<ToDoItem> getAllItems() {
         this.category = "";
-        getItems("");
-        return this.listOfItems;
+        return getItems("");
     }
 
     public ArrayList<ToDoItem> getItemsByCategory(String category) {
         this.category = category;
-        getItems(category);
-        return this.listOfItems;
+        return getItems(category);
     }
 
     /**
@@ -155,9 +147,9 @@ public class Database {
      * @param cat If category is null all items are added, otherwise only items 
      * whose category is the same as the supplied category.
      */
-    private void getItems(String cat) {
+    private ArrayList<ToDoItem> getItems(String cat) {
         this.list = root.getChildren();
-        this.listOfItems.clear();
+        ArrayList<ToDoItem> listOfItems = new ArrayList<>();
         Iterator iter = this.list.iterator();
         while (iter.hasNext()) {
             Element e = (Element) iter.next();
@@ -185,9 +177,10 @@ public class Database {
                 ToDoItem item = new ToDoItem(number, e.getAttributeValue("title"),
                         e.getAttributeValue("description"),
                         e.getAttributeValue("category"), prio, cal);
-                this.listOfItems.add(item);
+                listOfItems.add(item);
             }
         }
+        return listOfItems;
     }
 
     /**
