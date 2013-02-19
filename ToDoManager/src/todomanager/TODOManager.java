@@ -17,7 +17,7 @@ public class TODOManager {
     JMenuItem quit;
     JMenu edit;
     JMenu help;
-    Category category;
+    CategoryPanel category;
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
@@ -39,7 +39,7 @@ public class TODOManager {
     private void windowSetup() {        
         mainWindow.setLayout(new GridBagLayout());
         
-        category = new Category();
+        category = new CategoryPanel();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
         categoryConstraints.fill = GridBagConstraints.BOTH;
         categoryConstraints.gridx = 0;
@@ -70,7 +70,7 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the left button.");
+        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the quit button.");
         file.add(leftAction);
         //file.add(quit);
 
