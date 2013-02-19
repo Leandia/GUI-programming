@@ -102,7 +102,6 @@ public class TODOManager {
             putValue(SHORT_DESCRIPTION, desc);
             }
         public void actionPerformed(ActionEvent e) {
-            TODOManager.savedSettings.saveState();
             System.err.println("Quit!");
             System.exit(0);
         }
@@ -134,12 +133,21 @@ public class TODOManager {
         public void actionPerformed(ActionEvent ae) {
             TODOManager.savedSettings.setSelectedLanguage(swe);
         }
-     }
-    
-     
+     }  
+         
     
     
     public static void main(String[] args) {
+        
+        /**
+         * Saves settings on program exit
+         */
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                TODOManager.savedSettings.saveState();            
+            }
+        }));
+        
         savedSettings = new State();
         savedSettings.loadState();
         manager = new LanguageManager();
