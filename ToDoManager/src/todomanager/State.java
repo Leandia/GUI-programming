@@ -38,14 +38,11 @@ public class State {
             }
         }
         catch(IOException e){
-            System.out.println("Fuck you");
         }
     }
     
     public void loadState(){
-        Properties prop = new Properties();
- 
-    	try {
+        try {
                try{
                    //load a properties file
                     pro.load(new FileInputStream("config.properties"));

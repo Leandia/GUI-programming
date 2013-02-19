@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package todomanager;
 
 import java.util.ArrayList;
@@ -19,7 +15,6 @@ public class LanguageManager {
     private ArrayList<Locale> locales = new ArrayList();
     private ResourceBundle bundle;
     private String defaultLanguage = "English";
-    private final String[] languages = {"English","Swedish"};
     
     public LanguageManager(){
         locales.add(new Locale.Builder().setLanguage("en").setRegion("US").build());
@@ -32,13 +27,6 @@ public class LanguageManager {
      * @return 
      */
     private String getSelectedLanguage(){
-        /**if(TODOManager.savedSettings.getLanguage().isEmpty(){
-            return defaultLanguage;
-        }
-        else{
-            return TODOManager.savedSettings.getLanguage();
-        }
-        **/
         try{
             System.out.println(TODOManager.savedSettings.getLanguage());
             return TODOManager.savedSettings.getLanguage();
@@ -56,10 +44,6 @@ public class LanguageManager {
             case "Swedish":
                 bundle = ResourceBundle.getBundle(fileName, locales.get(1));
         }
-    }
-    
-    public String[] getLanguages(){
-        return this.languages;
     }
     
     /**
