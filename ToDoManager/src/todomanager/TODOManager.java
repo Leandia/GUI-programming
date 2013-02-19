@@ -1,8 +1,9 @@
 package todomanager;
 
+import Actions.LeftAction;
+import Actions.SelectEnglishAsLanguageAction;
+import Actions.SelectSwedishAsLanguageAction;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
@@ -82,8 +83,8 @@ public class TODOManager {
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
 
-        settings = new JMenu("settings");
-        language = new JMenu("language");
+        settings = new JMenu(manager.getBundle().getString("settings"));
+        language = new JMenu(manager.getBundle().getString("language"));
         
         language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
         language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
@@ -94,48 +95,11 @@ public class TODOManager {
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
+    }  
+         
+    public static State getState(){
+        return savedSettings;
     }
-    
-     public class LeftAction extends AbstractAction {
-        public LeftAction(String text,String desc) {
-            super(text);
-            putValue(SHORT_DESCRIPTION, desc);
-            }
-        public void actionPerformed(ActionEvent e) {
-            System.err.println("Quit!");
-            System.exit(0);
-        }
-    }
-     
-     public class SelectEnglishAsLanguageAction extends AbstractAction{
-         
-         private final String eng = "English";
-         
-         public SelectEnglishAsLanguageAction(String text){
-             super(text);
-         }
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            TODOManager.savedSettings.setSelectedLanguage(eng);
-        }
-     }
-     
-     public class SelectSwedishAsLanguageAction extends AbstractAction{
-         
-         private final String swe = "Swedish";
-         
-         public SelectSwedishAsLanguageAction(String text){
-             super(text);
-         }
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            TODOManager.savedSettings.setSelectedLanguage(swe);
-        }
-     }  
-         
-    
     
     public static void main(String[] args) {
         
@@ -144,7 +108,7 @@ public class TODOManager {
          */
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-                TODOManager.savedSettings.saveState();            
+                TODOManager.savedSettings.saveState();
             }
         }));
         
