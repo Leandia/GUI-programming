@@ -70,7 +70,7 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the left button.");
+        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the quit button.");
         file.add(leftAction);
         //file.add(quit);
 
