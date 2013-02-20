@@ -25,7 +25,7 @@ public class TODOManager {
     JMenuItem swe;
     JMenu help;
     CategoryPanel category;
-    static final BackendAPI backend = new BackendAPI();
+    public static final BackendAPI backend = new BackendAPI();
     
     /**
      * Constructor divides the mainwindow in two sides, left and right, and

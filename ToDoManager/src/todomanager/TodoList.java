@@ -20,7 +20,7 @@ public class TodoList extends JPanel {
      * and the bottom a panel showing number of items.
      */
     public TodoList() {
-        top = new ButtonsPanel(middle);
+        top = new ButtonsPanel();
 
         bottom = new JPanel();
         bottom.setBackground(Color.GRAY);
