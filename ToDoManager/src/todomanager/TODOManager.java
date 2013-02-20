@@ -3,6 +3,7 @@ package todomanager;
 import Actions.LeftAction;
 import Actions.SelectEnglishAsLanguageAction;
 import Actions.SelectSwedishAsLanguageAction;
+import backend.BackendAPI;
 import java.awt.*;
 import javax.swing.*;
 
@@ -24,6 +25,8 @@ public class TODOManager {
     JMenuItem swe;
     JMenu help;
     CategoryPanel category;
+    static final BackendAPI backend = new BackendAPI();
+    
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
@@ -115,7 +118,8 @@ public class TODOManager {
         savedSettings = new State();
         savedSettings.loadState();
         manager = new LanguageManager();
-        TODOManager main = new TODOManager();       
+        TODOManager main = new TODOManager();
+        
     }
     
     public static LanguageManager getManager() {

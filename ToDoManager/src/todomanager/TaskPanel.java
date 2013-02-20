@@ -1,20 +1,36 @@
 package todomanager;
 
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 /**
  * TaskPanel class, extends JPanel and holds all currently viewed ToDoItems.
  * @author Kristian Johansson 
  * @author Kristoffer Wass
  */
-public class TaskPanel extends JPanel {
+public class TaskPanel extends JPanel{
     
-    private ArrayList<ToDoItem> items = new ArrayList<>();
+    private final JList list;
+    private JScrollPane scrollPane = new JScrollPane();
     
     public TaskPanel() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        super(new GridBagLayout());
+        this.list = new JList(TODOManager.backend.getList());
+        this.list.setCellRenderer(new ToDoItemRenderer());
+        this.list.setLayoutOrientation(JList.VERTICAL);
+        this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scrollPane.getViewport().setView(this.list);
+        //scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        //this.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+        this.add(scrollPane, constraints);
     }
 
     /**
@@ -23,32 +39,6 @@ public class TaskPanel extends JPanel {
      * @param item 
      */
     public void addItem(ToDoItem item) {
-        this.items.add(item);
-        updatePanel();
-    }
-
-    /**
-     * Method that updates the GUI
-     *
-     * @param items
-     */
-    private void updatePanel() {
-        this.removeAll();
-        for (int i = 0; i < items.size(); i++) {
-            add(this.items.get(i));
-        }
-        this.updateUI();
-    }
-
-    /**
-     * Create an ItemsPanel using the input item and adds this panel to the
-     * TaskPanel
-     *
-     * @param item
-     */
-    private void add(ToDoItem item) {
-        ItemsPanel itemPanel = new ItemsPanel(item);
-        itemPanel.setAlignmentX(0);
-        this.add(itemPanel);
+        TODOManager.backend.addItem(item);
     }
 }
