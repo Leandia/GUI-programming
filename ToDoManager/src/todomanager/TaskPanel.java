@@ -9,10 +9,10 @@ import javax.swing.JPanel;
  * @author Kristian Johansson 
  * @author Kristoffer Wass
  */
-class TaskPanel extends JPanel {
+public class TaskPanel extends JPanel {
     
     private ArrayList<ToDoItem> items = new ArrayList<>();
-
+    
     public TaskPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
