@@ -3,9 +3,9 @@ package todomanager;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -16,11 +16,11 @@ import javax.swing.JTextField;
 import values.Priority;
 
 /**
- * 
+ *
  * @author Emil
  * @author Daniel
  */
-public class NewItemPopup extends JDialog implements ActionListener {
+public class NewItemPopup extends JDialog {
 
     private JPanel myPanel = null;
     private JButton yesButton = null;
@@ -48,6 +48,7 @@ public class NewItemPopup extends JDialog implements ActionListener {
     private String category;
     private GregorianCalendar date;
     private Priority prio;
+    private ToDoItem item;
 
     public NewItemPopup(JFrame frame, boolean modal) {
         //JFrame frame = new JFrame();
@@ -109,13 +110,13 @@ public class NewItemPopup extends JDialog implements ActionListener {
         dates.add(dayTextField, datesConstraints);
         constraints.gridx = 1;
         myPanel.add(dates, constraints);
-        
+
         //5.1
         timeLabel = new JLabel(TODOManager.manager.getBundle().getString("time"));
         constraints.gridx = 0;
         constraints.gridy = 4;
         myPanel.add(timeLabel, constraints);
-        
+
         //5.2
         JPanel time = new JPanel(new GridBagLayout());
         GridBagConstraints timeConstraints = new GridBagConstraints();
@@ -131,8 +132,8 @@ public class NewItemPopup extends JDialog implements ActionListener {
         timeConstraints.gridx = 2;
         constraints.gridx = 1;
         myPanel.add(time, constraints);
-        
-         //6,1
+
+        //6,1
         priorityLabel = new JLabel(TODOManager.manager.getBundle().getString("priority"));
         constraints.gridx = 0;
         constraints.gridy = 5;
@@ -143,14 +144,12 @@ public class NewItemPopup extends JDialog implements ActionListener {
         constraints.gridx = 1;
         myPanel.add(priorityMenu, constraints);
         //7,1
-        yesButton = new JButton(TODOManager.manager.getBundle().getString("add"));
-        yesButton.addActionListener(this);
+        yesButton = new JButton(new yesButton());
         constraints.gridx = 0;
         constraints.gridy = 6;
         myPanel.add(yesButton, constraints);
         //7,2
-        noButton = new JButton(TODOManager.manager.getBundle().getString("cancel"));
-        noButton.addActionListener(this);
+        noButton = new JButton(new noButton());
         constraints.gridx = 1;
         myPanel.add(noButton, constraints);
 
@@ -158,27 +157,18 @@ public class NewItemPopup extends JDialog implements ActionListener {
         pack();
         setVisible(true);
     }
-    
-/**
- * Getter method to get the text from the title textfield
- * @return title a string containing the title from the title text field
- */
-    public String getTitle() {
-        return title;
-    }
 
-/**
- * Getter method to get the text from the description textfield
- * @return title a string containing the description from the title text field
- */
-    public String getDescription() {
-        return description;
-    }
+    /**
+     * Inner class for the yes button.
+     */
+    private class yesButton extends AbstractAction {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (yesButton == e.getSource()) {
-            //System.err.println("User chose yes.");
+        public yesButton() {
+            super(TODOManager.manager.getBundle().getString("add"));
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
             if (!titleTextField.getText().equals("")) {
                 title = titleTextField.getText();
             }
@@ -196,13 +186,46 @@ public class NewItemPopup extends JDialog implements ActionListener {
                         Integer.parseInt(dayTextField.getText()));
             }
             prio = (Priority) priorityMenu.getSelectedItem();
-            setVisible(false);
-        } else if (noButton == e.getSource()) {
-            //System.err.println("User chose no.");
-            title = null;
-            description = null;
+            item = new ToDoItem(0, title, description, category, prio, date);
             setVisible(false);
         }
+    }
+
+    /**
+     * Inner class for the no button.
+     */
+    private class noButton extends AbstractAction {
+
+        public noButton() {
+            super(TODOManager.manager.getBundle().getString("cancel"));
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            title = null;
+            description = null;
+            item = null;
+            setVisible(false);
+        }
+    }
+
+    /**
+     * Getter method to get the text from the title textfield
+     *
+     * @return title a string containing the title from the title text field
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Getter method to get the text from the description textfield
+     *
+     * @return title a string containing the description from the title text
+     * field
+     */
+    public String getDescription() {
+        return description;
     }
 
     public String getCategory() {
@@ -215,5 +238,9 @@ public class NewItemPopup extends JDialog implements ActionListener {
 
     public Priority getPriority() {
         return prio;
+    }
+    
+    public ToDoItem getItem() {
+        return item;
     }
 }

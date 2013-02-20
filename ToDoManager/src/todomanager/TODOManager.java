@@ -117,4 +117,8 @@ public class TODOManager {
         manager = new LanguageManager();
         TODOManager main = new TODOManager();       
     }
+    
+    public static LanguageManager getManager() {
+        return manager;
+    }
 }
