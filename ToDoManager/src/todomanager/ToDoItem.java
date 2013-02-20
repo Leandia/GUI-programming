@@ -21,7 +21,7 @@ public class ToDoItem {
     private String category;
     private GregorianCalendar date;
     private Priority prio;
-
+    
     /**
      * @deprecated Do not use if intended to work with database. Instead use 
      *              ToDoItem(int nb, String titl, String desc, String cat, Priority prio, GregorianCalendar cal)
@@ -52,7 +52,7 @@ public class ToDoItem {
         this.date = cal;
         this.number = nb;
     }
-
+    
     /**
      * Returns the title of a ToDoItem
      *

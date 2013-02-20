@@ -1,6 +1,7 @@
 package todomanager;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,7 +9,9 @@ import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.border.BevelBorder;
 
 /**
@@ -18,21 +21,17 @@ import javax.swing.border.BevelBorder;
  * @author Kristoffer Wass
  * @author Daniel
  */
-public class ItemsPanel extends JPanel {
+public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
 
     private final int width = 6000;
     private final int height = 50;
-    private final ToDoItem item;
+    private ToDoItem item;
     private JCheckBox doneButton;
     private JPanel donePanel;
     private JLabel priority;
     
-    public ItemsPanel(ToDoItem item) {
-        this.item = item;
-        this.setMaximumSize(new Dimension(width, height));
-        this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        this.updateItemPanel();
-        this.setBackgroundColor();
+    public ToDoItemRenderer() {
+        super();
     }
 
     /**
@@ -146,5 +145,15 @@ public class ItemsPanel extends JPanel {
      * @param newHeadline
      */
     private void setHeadline(String newHeadline) {
+    }
+
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        this.item = (ToDoItem) value;
+        this.setMaximumSize(new Dimension(width, height));
+        this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        this.updateItemPanel();
+        this.setBackgroundColor();
+        return this;
     }
 }
