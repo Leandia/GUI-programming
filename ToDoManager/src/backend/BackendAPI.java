@@ -5,6 +5,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.DefaultListModel;
 
 /**
@@ -15,32 +16,61 @@ import javax.swing.DefaultListModel;
 public class BackendAPI {
     
     private Database database;
-    
     private DefaultListModel<ToDoItem> list = new DefaultListModel<>();
     //final DisplayList list;
+    private int index = 0;
     
     public BackendAPI() {
         this.database = new Database();
+        insertItems();
         //this.list = new DisplayList();
     }
     
+    /**
+     * Method to fetch all items from the database and insert 
+     * into the display list.
+     */
+    private void insertItems() {
+        ArrayList<ToDoItem> tempList = this.database.getAllItems();
+        Iterator iter = tempList.iterator();
+        while (iter.hasNext()) {
+            ToDoItem item = (ToDoItem) iter.next();
+            this.list.addElement(item);
+        }
+    }
+    
+    /**
+     * Add an item to the program, both adds the item to be 
+     * displayed and to the database.
+     * @param item 
+     */
     public void addItem(ToDoItem item) {
         this.list.addElement(item);
         database.addItem(item);
     }
     
+    /**
+     * Return the list where items are stored.
+     * @return A list that stores the items.
+     */
     public DefaultListModel getList() {
         return this.list;
     }
     
+    /**
+     * Method to close the database.
+     */
     public void closeDB() {
-        this.database.closeDB();
+        //this.database.closeDB();
     }
     
-    /*
-    public void createDatabase(){
-        this.database = new Database();
-    }*/
+    /**
+     * Method to get the index of the item to add.
+     * @return The index of the next item.
+     */
+    public int getIndex() {
+        return this.index++;
+    }
     
     public static ArrayList<ToDoItem> sortByDate(ArrayList<ToDoItem> items){
         

@@ -187,7 +187,7 @@ public class NewItemPopup extends JDialog {
                         Integer.parseInt(dayTextField.getText()));
             }
             prio = (Priority) priorityMenu.getSelectedItem();
-            item = new ToDoItem(0, title, description, category, prio, date);
+            item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);
             setVisible(false);
         }
     }
