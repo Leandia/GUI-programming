@@ -1,13 +1,11 @@
 package backend;
 
-import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import todomanager.TODOManager;
 
 /**
  * State class that holds all settings for the interface
@@ -19,22 +17,35 @@ public class State {
     private Properties pro = new Properties();
     private int x;
     private int y;
-    
-    public State(){
-    }
-    
+        
+    /**
+     * 
+     * @return Language that is to be used in the graphical interface
+     */
     public String getLanguage(){
         return this.selectedLanguage;
     }
     
+    /**
+     *
+     * @param language Set the language to be used in the graphical interface
+     */
     public void setSelectedLanguage(String language){
         this.selectedLanguage = language;
     }
     
+    /**
+     * 
+     * @param x set the width variable for the state.
+     */
     public void setX(int x){
         this.x = x;
     }
     
+    /**
+     * 
+     * @param x set the height variable for the state.
+     */
     public void setY(int y){
         this.y = y;
     }
@@ -48,8 +59,8 @@ public class State {
             
             pro.setProperty("lan", selectedLanguage);
             pro.setProperty("x",Integer.toString(x));
-            pro.setProperty("y",Integer.toString(y));           
-            System.out.println(Integer.toString(y));
+            pro.setProperty("y",Integer.toString(y)); 
+            
             try{
                 pro.store(new FileOutputStream("config.properties"),null);
             }
@@ -70,15 +81,20 @@ public class State {
     public void loadState(){
         try {
                try{
-                   //load a properties file
+                   
                     pro.load(new FileInputStream("config.properties"));
                     
-                    //get the property value and print it out
                     this.selectedLanguage = pro.getProperty("lan");
+                    
+                    //catch numberformat exception incase there are
+                    //no values for x and y saved yet
                     try{
                         this.y = Integer.parseInt(pro.getProperty("y"));
                         this.x = Integer.parseInt(pro.getProperty("x"));
                     }
+                    //If no states is yet saved x and y are set to 0 which
+                    //would render the return function returning the default
+                    //values instead
                     catch(NumberFormatException e){
                         this.x = 0;
                         this.y = 0;
@@ -96,8 +112,15 @@ public class State {
         }
     }
     
+    /**
+     * 
+     * @param def This is the default window width for the first session or if the
+     * config file has been cleared.
+     * @return The width of the window from the current state
+     */
     public int getWidth(int def){
-        if(this.x > 0){
+        int minHeight = 500;
+        if(this.x > minHeight){
             return this.x;
         }
         else{
@@ -105,8 +128,14 @@ public class State {
         }
     }
     
+    /** 
+     * @param def This is the default window height for the first session or if the
+     * config file has been cleared.
+     * @return The height of the window from the current state
+     */
     public int getHeight(int def){
-        if(this.y > 0){
+        int minSize = 300;
+        if(this.y > minSize){
             return this.y;
         }
         else{
