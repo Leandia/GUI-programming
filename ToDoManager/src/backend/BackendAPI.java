@@ -14,26 +14,33 @@ import javax.swing.DefaultListModel;
  */
 public class BackendAPI {
     
-    static Database database;
+    private Database database;
     
-    DefaultListModel<ToDoItem> list = new DefaultListModel<>();
+    private DefaultListModel<ToDoItem> list = new DefaultListModel<>();
     //final DisplayList list;
     
     public BackendAPI() {
+        this.database = new Database();
         //this.list = new DisplayList();
     }
     
     public void addItem(ToDoItem item) {
         this.list.addElement(item);
+        database.addItem(item);
     }
     
     public DefaultListModel getList() {
         return this.list;
     }
     
+    public void closeDB() {
+        this.database.closeDB();
+    }
+    
+    /*
     public void createDatabase(){
         this.database = new Database();
-    }
+    }*/
     
     public static ArrayList<ToDoItem> sortByDate(ArrayList<ToDoItem> items){
         
