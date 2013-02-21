@@ -62,7 +62,6 @@ public class Database {
         try {
             this.doc = this.builder.build(fileInputStream);
         } catch (JDOMException | IOException ex) {
-            //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.root = this.doc.getRootElement();
         this.data = this.root.getChild("data");
@@ -71,9 +70,8 @@ public class Database {
         try {
             fileInputStream.close();
         } catch (IOException ex) {
-            //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -98,6 +96,7 @@ public class Database {
         addItem.setAttribute("hour", Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
         addItem.setAttribute("minute", Integer.toString(cal.get(Calendar.MINUTE)));
         this.data.addContent(addItem);
+        writeDB();
     }
 
     /**
@@ -117,19 +116,45 @@ public class Database {
      */
     public void deleteItem(ToDoItem item) {
         this.data.removeChild("_" + Integer.toString(item.getNumber()));
+        writeDB();
     }
-    
+
+    /**
+     * Temporary method to continously write the DB.
+     */
+    //TODO Make it better.
+    private void writeDB() {
+        XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(this.file);
+        } catch (FileNotFoundException ex) {
+            System.err.println("File not found!");
+        }
+        try {
+            out.output(this.doc, outputStream);
+        } catch (IOException ex) {
+            System.err.append("IOException");
+        }
+    }
+
     /**
      * Method to save the database to the file supplied when the class was
      * created.
      */
     public void closeDB() {
         XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+        FileOutputStream outputStream = null;
         try {
-            out.output(this.doc, new FileOutputStream(this.file));
-        } catch (IOException ex) {
+            outputStream = new FileOutputStream(this.file);
+        } catch (FileNotFoundException ex) {
+            System.err.println("File not found!");
         }
-        
+        try {
+            out.output(this.doc, outputStream);
+        } catch (IOException ex) {
+            System.err.append("IOException");
+        }
     }
 
     /**
@@ -147,7 +172,8 @@ public class Database {
 
     /**
      * Method to create and add items to the list shown to the world.
-     * @param cat If category is null all items are added, otherwise only items 
+     *
+     * @param cat If category is null all items are added, otherwise only items
      * whose category is the same as the supplied category.
      */
     private ArrayList<ToDoItem> getItems(String cat) {
@@ -188,6 +214,7 @@ public class Database {
 
     /**
      * Add a category to the database.
+     *
      * @param cat The category to add to the database.
      */
     public void addCategory(Category cat) {
@@ -196,25 +223,28 @@ public class Database {
         newCategory.setAttribute("name", cat.getCategoryTitle());
         this.category.addContent(newCategory);
     }
-    
+
     /**
      * Delete a category from the database.
+     *
      * @param cat The Category to be deleted from the database.
      */
     public void deleteCategory(Category cat) {
         this.category.removeChild("_" + Integer.toString(cat.getId()));
     }
-    
+
     /**
      * Edit a category in the database.
+     *
      * @param cat The category in it's edited form.
      */
     public void editCategory(Category cat) {
         addCategory(cat);
     }
-    
+
     /**
      * Get all categories from the database in an ArrayList<Category>.
+     *
      * @return An ArrayList<Category> of all categories in the database.
      */
     public ArrayList<Category> getCategories() {
@@ -230,7 +260,7 @@ public class Database {
         }
         return result;
     }
-    
+
     /**
      * Private class to setup the database if it doesn't exist.
      */
