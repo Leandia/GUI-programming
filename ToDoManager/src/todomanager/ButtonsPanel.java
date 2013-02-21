@@ -14,7 +14,6 @@ public class ButtonsPanel extends JPanel {
      * Create the GUI and show it. For thread safety, this method should be
      * invoked from the event-dispatching thread.
      */
-    private TaskPanel middle;
     private JButton addButton;
 
     /**
@@ -22,13 +21,12 @@ public class ButtonsPanel extends JPanel {
      * @param list
      * @param middle
      */
-    public ButtonsPanel(TaskPanel middle) {
-        this.middle = middle;
+    public ButtonsPanel() {
         createAndShowGUI();
     }
 
     private void createAndShowGUI() {
-        addButton = new JButton(new AddItemPopupAction(middle));
+        addButton = new JButton(new AddItemPopupAction());
         addButton.setActionCommand("button");
         this.add(addButton);
     }

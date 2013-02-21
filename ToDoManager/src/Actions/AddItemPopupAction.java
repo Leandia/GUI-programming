@@ -9,7 +9,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import todomanager.NewItemPopup;
 import todomanager.TODOManager;
-import todomanager.TaskPanel;
 
 /**
  *
@@ -17,11 +16,9 @@ import todomanager.TaskPanel;
  */
 public class AddItemPopupAction extends AbstractAction {
 
-    TaskPanel middle;
 
-    public AddItemPopupAction(TaskPanel middle) {
+    public AddItemPopupAction() {
         super(TODOManager.getManager().getBundle().getString("buttontext"));
-        this.middle = middle;
     }
 
     @Override
@@ -30,7 +27,7 @@ public class AddItemPopupAction extends AbstractAction {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         NewItemPopup opt = new NewItemPopup(frame, true);
         if (opt.getItem() != null) {
-            middle.addItem(opt.getItem());
+            TODOManager.backend.addItem(opt.getItem());
         }
     }
 }

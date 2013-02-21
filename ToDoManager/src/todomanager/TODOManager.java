@@ -1,9 +1,12 @@
 package todomanager;
 
-import Actions.LeftAction;
+import Actions.AddItemPopupAction;
+import backend.State;
+import Actions.QuitAction;
 import Actions.SelectEnglishAsLanguageAction;
 import Actions.SelectSwedishAsLanguageAction;
 import backend.BackendAPI;
+import backend.LanguageManager;
 import java.awt.*;
 import javax.swing.*;
 
@@ -13,19 +16,20 @@ import javax.swing.*;
  */
 public class TODOManager {
 
-    static State savedSettings;
-    static LanguageManager manager;
+    public static State savedSettings;
+    public static LanguageManager manager;
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
     JMenu edit;
+    JMenuItem newItem;
     JMenu settings;
     JMenu language;
     JMenuItem eng;
     JMenuItem swe;
     JMenu help;
     CategoryPanel category;
-    static final BackendAPI backend = new BackendAPI();
+    public static final BackendAPI backend = new BackendAPI();
     
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
@@ -33,13 +37,23 @@ public class TODOManager {
      */
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
-        this.mainWindow.setPreferredSize(new Dimension(700,500));
+        this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700),TODOManager.savedSettings.getHeight(500)));
         windowSetup();
         addMenu();
 
         this.mainWindow.pack();
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                System.out.println(mainWindow.getWidth());
+                TODOManager.savedSettings.setX(mainWindow.getWidth());
+                TODOManager.savedSettings.setY(mainWindow.getHeight());
+                TODOManager.savedSettings.saveState();
+                //bapi.closeDB();
+            }
+        }));
     }
 
     /**
@@ -79,12 +93,14 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the quit button.");
+        QuitAction leftAction = new QuitAction(manager.getBundle().getString("quit"), "This is the quit button.");
         file.add(leftAction);
         //file.add(quit);
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
+        newItem = new JMenuItem(new AddItemPopupAction());
+        edit.add(newItem);
 
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
@@ -98,6 +114,7 @@ public class TODOManager {
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
+        
     }  
          
     public static State getState(){
@@ -109,11 +126,7 @@ public class TODOManager {
         /**
          * Saves settings on program exit
          */
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                TODOManager.savedSettings.saveState();
-            }
-        }));
+        final BackendAPI bapi = new BackendAPI();
         
         savedSettings = new State();
         savedSettings.loadState();
