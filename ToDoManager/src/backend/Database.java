@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
@@ -31,6 +33,8 @@ public class Database {
     private Element data;
     private Element category;
     private String file;
+    private XMLOutputter out;
+    private FileOutputStream fileOutputStream;
 
     /**
      * Constructor using the default filename as name for the database.
@@ -72,6 +76,11 @@ public class Database {
             fileInputStream.close();
         } catch (IOException ex) {
             //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        out = new XMLOutputter(Format.getPrettyFormat());
+        try {
+            fileOutputStream = new FileOutputStream(this.file);
+        } catch (FileNotFoundException ex) {
         }
     }
 
@@ -118,14 +127,20 @@ public class Database {
         this.data.removeChild("_" + Integer.toString(item.getNumber()));
     }
 
+    private void writeDB() {
+        try {
+            out.output(this.doc, fileOutputStream);
+        } catch (IOException ex) {
+        }
+    }
+    
     /**
      * Method to save the database to the file supplied when the class was
      * created.
      */
     public void closeDB() {
-        XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
         try {
-            out.output(this.doc, new FileOutputStream(this.file));
+            this.fileOutputStream.close();
         } catch (IOException ex) {
         }
     }
