@@ -11,8 +11,8 @@ import javax.swing.AbstractAction;
  *
  * @author Emil
  */
-public class LeftAction extends AbstractAction {
-        public LeftAction(String text,String desc) {
+public class QuitAction extends AbstractAction {
+        public QuitAction(String text,String desc) {
             super(text);
             putValue(SHORT_DESCRIPTION, desc);
             }

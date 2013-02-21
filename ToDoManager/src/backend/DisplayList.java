@@ -7,7 +7,6 @@ package backend;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataListener;
-import todomanager.ToDoItem;
 
 /**
  *

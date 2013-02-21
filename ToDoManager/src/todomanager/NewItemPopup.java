@@ -1,5 +1,6 @@
 package todomanager;
 
+import backend.ToDoItem;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;

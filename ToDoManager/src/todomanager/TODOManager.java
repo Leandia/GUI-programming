@@ -1,9 +1,11 @@
 package todomanager;
 
-import Actions.LeftAction;
+import backend.State;
+import Actions.QuitAction;
 import Actions.SelectEnglishAsLanguageAction;
 import Actions.SelectSwedishAsLanguageAction;
 import backend.BackendAPI;
+import backend.LanguageManager;
 import java.awt.*;
 import javax.swing.*;
 
@@ -13,8 +15,8 @@ import javax.swing.*;
  */
 public class TODOManager {
 
-    static State savedSettings;
-    static LanguageManager manager;
+    public static State savedSettings;
+    public static LanguageManager manager = new LanguageManager();
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
@@ -79,7 +81,7 @@ public class TODOManager {
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
-        LeftAction leftAction = new LeftAction(manager.getBundle().getString("quit"), "This is the quit button.");
+        QuitAction leftAction = new QuitAction(manager.getBundle().getString("quit"), "This is the quit button.");
         file.add(leftAction);
         //file.add(quit);
 
@@ -120,7 +122,6 @@ public class TODOManager {
         
         savedSettings = new State();
         savedSettings.loadState();
-        manager = new LanguageManager();
         TODOManager main = new TODOManager();
         
     }

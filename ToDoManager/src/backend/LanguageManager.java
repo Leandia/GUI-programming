@@ -1,8 +1,14 @@
-package todomanager;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package backend;
+
 
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import todomanager.TODOManager;
 
 /**
  *

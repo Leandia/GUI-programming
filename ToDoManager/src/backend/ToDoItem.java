@@ -1,4 +1,4 @@
-package todomanager;
+package backend;
 
 import java.util.GregorianCalendar;
 import values.Priority;

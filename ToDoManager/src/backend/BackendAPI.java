@@ -6,7 +6,6 @@ package backend;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import todomanager.ToDoItem;
 
 /**
  *
