@@ -33,8 +33,6 @@ public class Database {
     private Element data;
     private Element category;
     private String file;
-    private XMLOutputter out;
-    private FileOutputStream fileOutputStream;
 
     /**
      * Constructor using the default filename as name for the database.
@@ -77,11 +75,7 @@ public class Database {
         } catch (IOException ex) {
             //Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        out = new XMLOutputter(Format.getPrettyFormat());
-        try {
-            fileOutputStream = new FileOutputStream(this.file);
-        } catch (FileNotFoundException ex) {
-        }
+        
     }
 
     /**
@@ -126,23 +120,18 @@ public class Database {
     public void deleteItem(ToDoItem item) {
         this.data.removeChild("_" + Integer.toString(item.getNumber()));
     }
-
-    private void writeDB() {
-        try {
-            out.output(this.doc, fileOutputStream);
-        } catch (IOException ex) {
-        }
-    }
     
     /**
      * Method to save the database to the file supplied when the class was
      * created.
      */
     public void closeDB() {
+        XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
         try {
-            this.fileOutputStream.close();
+            out.output(this.doc, new FileOutputStream(this.file));
         } catch (IOException ex) {
         }
+        
     }
 
     /**
@@ -253,9 +242,18 @@ public class Database {
         Element tempData = new Element("data");
         tempRoot.addContent(tempCategory);
         tempRoot.addContent(tempData);
-        XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+        XMLOutputter output = new XMLOutputter(Format.getPrettyFormat());
+        FileOutputStream outputStream = null;
         try {
-            out.output(new Document(tempRoot), new FileOutputStream(this.file));
+            outputStream = new FileOutputStream(this.file);
+        } catch (FileNotFoundException ex) {
+        }
+        try {
+            output.output(new Document(tempRoot), outputStream);
+        } catch (IOException ex) {
+        }
+        try {
+            outputStream.close();
         } catch (IOException ex) {
         }
     }
