@@ -12,6 +12,9 @@ import todomanager.ToDoItem;
  * @author Daniel
  */
 public class BackendAPI {
+    
+    static Database database;
+    
     DefaultListModel<ToDoItem> list = new DefaultListModel<>();
     //final DisplayList list;
     
@@ -26,4 +29,10 @@ public class BackendAPI {
     public DefaultListModel getList() {
         return this.list;
     }
+    
+    public void createDatabase(){
+        this.database = new Database();
+    }
+    
+    
 }
