@@ -115,12 +115,12 @@ public class TODOManager {
         /**
          * Saves settings on program exit
          */
-        BackendAPI bapi = new BackendAPI();
-        bapi.createDatabase();
+        final BackendAPI bapi = new BackendAPI();
         
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 TODOManager.savedSettings.saveState();
+                bapi.closeDB();
             }
         }));
         
