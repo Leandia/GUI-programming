@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import todomanager.TODOManager;
 
 /**
- *
+ * The LanguageManager provides methods for dynamically changing the language
+ * of a application using properties-files for each individual language.
+ * 
  * @author Kristian
  * @author Vita
  */
@@ -34,7 +36,6 @@ public class LanguageManager {
      */
     private String getSelectedLanguage(){
         try{
-            System.out.println(TODOManager.savedSettings.getLanguage());
             return TODOManager.savedSettings.getLanguage();
         }
         catch(NullPointerException e){
@@ -42,6 +43,9 @@ public class LanguageManager {
         }
     }
     
+    /**
+     * Initializes the language to be used
+     */
     private void initLanguage(String language){
         switch(language){
             case "English":
@@ -59,11 +63,11 @@ public class LanguageManager {
         System.out.println(language);
     }
     
+    /**
+     * 
+     * @return The resourcebundle of the manager
+     */
     public ResourceBundle getBundle(){
         return this.bundle;
-    }
-    
-    public ArrayList<Locale> getLocales(){
-        return this.locales;
-    }
+    }   
 }

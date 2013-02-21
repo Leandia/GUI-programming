@@ -17,7 +17,7 @@ import javax.swing.*;
 public class TODOManager {
 
     public static State savedSettings;
-    public static LanguageManager manager = new LanguageManager();
+    public static LanguageManager manager;
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
@@ -37,13 +37,23 @@ public class TODOManager {
      */
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
-        this.mainWindow.setPreferredSize(new Dimension(700,500));
+        this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700),TODOManager.savedSettings.getHeight(500)));
         windowSetup();
         addMenu();
 
         this.mainWindow.pack();
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                System.out.println(mainWindow.getWidth());
+                TODOManager.savedSettings.setX(mainWindow.getWidth());
+                TODOManager.savedSettings.setY(mainWindow.getHeight());
+                TODOManager.savedSettings.saveState();
+                //bapi.closeDB();
+            }
+        }));
     }
 
     /**
@@ -104,6 +114,7 @@ public class TODOManager {
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
+        
     }  
          
     public static State getState(){
@@ -117,15 +128,9 @@ public class TODOManager {
          */
         final BackendAPI bapi = new BackendAPI();
         
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                TODOManager.savedSettings.saveState();
-                bapi.closeDB();
-            }
-        }));
-        
         savedSettings = new State();
         savedSettings.loadState();
+        manager = new LanguageManager();
         TODOManager main = new TODOManager();
         
     }
