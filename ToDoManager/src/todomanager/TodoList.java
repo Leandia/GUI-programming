@@ -21,22 +21,11 @@ public class TodoList extends JPanel {
      */
     public TodoList() {
         top = new ButtonsPanel();
-
-        this.setLayout(new GridBagLayout());
-
-        GridBagConstraints topConstraints = new GridBagConstraints();
-        topConstraints.gridx = 0;
-        topConstraints.gridy = 0;
-        topConstraints.fill = GridBagConstraints.BOTH;
-        topConstraints.weightx = 1.0;
-        this.add(top, topConstraints);
-
-        GridBagConstraints middleConstraints = new GridBagConstraints();
-        middleConstraints.gridx = 0;
-        middleConstraints.gridy = 1;
-        middleConstraints.fill = GridBagConstraints.BOTH;
-        middleConstraints.weightx = 1.0;
-        middleConstraints.weighty = 1.0;
-        this.add(middle, middleConstraints);
+        middle = new TaskPanel();
+        
+        
+        this.setLayout(new BorderLayout());
+        this.add(top, BorderLayout.NORTH);
+        this.add(middle, BorderLayout.CENTER);
     }
 }
