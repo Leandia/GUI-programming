@@ -1,5 +1,6 @@
 package todomanager;
 
+import Actions.AddItemPopupAction;
 import backend.State;
 import Actions.QuitAction;
 import Actions.SelectEnglishAsLanguageAction;
@@ -21,6 +22,7 @@ public class TODOManager {
     JMenu file;
     JMenuItem quit;
     JMenu edit;
+    JMenuItem newItem;
     JMenu settings;
     JMenu language;
     JMenuItem eng;
@@ -87,6 +89,8 @@ public class TODOManager {
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
+        newItem = new JMenuItem(new AddItemPopupAction());
+        edit.add(newItem);
 
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
