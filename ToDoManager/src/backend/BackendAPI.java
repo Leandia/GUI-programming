@@ -20,7 +20,8 @@ public class BackendAPI {
     //final DisplayList list;
     private int index = 0;
     
-    public BackendAPI() {
+    public BackendAPI(int index) {
+        this.index = index;
         this.database = new Database();
         insertItems();
         //this.list = new DisplayList();

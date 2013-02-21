@@ -29,39 +29,42 @@ public class TODOManager {
     JMenuItem swe;
     JMenu help;
     CategoryPanel category;
-    public static final BackendAPI backend = new BackendAPI();
-    
+    public static BackendAPI backend;
+
     /**
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
      */
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
-        this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700),TODOManager.savedSettings.getHeight(500)));
+        this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700), TODOManager.savedSettings.getHeight(500)));
+
         windowSetup();
         addMenu();
 
         this.mainWindow.pack();
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 System.out.println(mainWindow.getWidth());
                 TODOManager.savedSettings.setX(mainWindow.getWidth());
                 TODOManager.savedSettings.setY(mainWindow.getHeight());
+                TODOManager.savedSettings.setItemIndex(backend.getIndex());
                 TODOManager.savedSettings.saveState();
-                //bapi.closeDB();
+
             }
         }));
+
     }
 
     /**
      * Setup of the mainwindow, does not pack or make it visible.
      */
-    private void windowSetup() {        
+    private void windowSetup() {
         mainWindow.setLayout(new GridBagLayout());
-        
+
         category = new CategoryPanel();
         GridBagConstraints categoryConstraints = new GridBagConstraints();
         categoryConstraints.fill = GridBagConstraints.BOTH;
@@ -76,7 +79,7 @@ public class TODOManager {
         todoListConstraints.gridx = 1;
         todoListConstraints.gridy = 0;
         todoListConstraints.weighty = 1.0;
-        todoListConstraints.weightx = 1.0;        
+        todoListConstraints.weightx = 1.0;
         this.mainWindow.getContentPane().add(todoList, todoListConstraints);
 
         //mainPanel.add(todoList, todoListConstraints);
@@ -104,37 +107,35 @@ public class TODOManager {
 
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
-        
+
         language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
         language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
         settings.add(language);
         menu.add(settings);
-        
+
         help = new JMenu(manager.getBundle().getString("help"));
         menu.add(help);
 
         this.mainWindow.setJMenuBar(menu);
-        
-    }  
-         
-    public static State getState(){
+
+    }
+
+    public static State getState() {
         return savedSettings;
     }
-    
+
     public static void main(String[] args) {
-        
+
         /**
          * Saves settings on program exit
          */
-        final BackendAPI bapi = new BackendAPI();
-        
         savedSettings = new State();
         savedSettings.loadState();
+        backend = new BackendAPI(savedSettings.getItemIndex());
         manager = new LanguageManager();
         TODOManager main = new TODOManager();
-        
     }
-    
+
     public static LanguageManager getManager() {
         return manager;
     }
