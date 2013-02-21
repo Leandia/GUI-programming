@@ -30,86 +30,99 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
     private JCheckBox doneButton;
     private JPanel donePanel;
     private JLabel priority;
-    
+    private JLabel title;
+    private JLabel category;
+    private JLabel date;
+
     public ToDoItemRenderer() {
         super();
-    }
 
-    /**
-     * Updates the panel with current data
-     */
-    private void updateItemPanel() {
         this.setLayout(new GridBagLayout());
 
-        // The done button.
+        // -- The done button, position(0,0).
         donePanel = new JPanel();
         donePanel.setOpaque(false);
         doneButton = new JCheckBox(TODOManager.manager.getBundle().getString("done"));
         doneButton.setOpaque(false);
+        doneButton.setEnabled(true);
         donePanel.add(doneButton);
-        donePanel.setPreferredSize(new Dimension(50, 50));
+        donePanel.setPreferredSize(new Dimension(75, 50));
         GridBagConstraints doneConstraints = new GridBagConstraints();
         doneConstraints.gridx = 0;
         doneConstraints.gridy = 0;
         this.add(donePanel, doneConstraints);
 
-        // Display priority with text.
+        // -- Display priority with text, position(1,0).
         JPanel priorityPanel = new JPanel();
         priorityPanel.setOpaque(false);
         priority = new JLabel(TODOManager.manager.getBundle().getString("error"));
-        priority.setText(this.item.getPrio().toString());
-        priorityPanel.setPreferredSize(new Dimension(50, 50));
+        priorityPanel.setPreferredSize(new Dimension(75, 50));
         priorityPanel.add(priority);
         GridBagConstraints prioConstraints = new GridBagConstraints();
         prioConstraints.gridx = 1;
         prioConstraints.gridy = 0;
         this.add(priorityPanel, prioConstraints);
 
-        // Panel for title and date.
+
+        // -- Panel for title, category and date, position(2,0).
         JPanel titlePanel = new JPanel(new GridBagLayout());
         titlePanel.setOpaque(false);
         GridBagConstraints titleConstraints = new GridBagConstraints();
         titleConstraints.gridx = 0;
         titleConstraints.gridy = 0;
-        titleConstraints.gridwidth = 2;        
-        // Get title.
-        JLabel title = new JLabel(this.item.getTitle());
+        titleConstraints.gridwidth = 2;
+        // Add title.
+        title = new JLabel("-- error no title --");
         titlePanel.add(title, titleConstraints);
         titleConstraints.gridy = 1;
         titleConstraints.gridwidth = 1;
-        // Get date.
+        // Add date.
         JPanel datePanel = new JPanel();
         datePanel.setOpaque(false);
-        JLabel date = new JLabel(this.item.getDate().get(Calendar.YEAR) + "-" + 
-                this.item.getDate().get(Calendar.MONTH) + "-" + 
-                this.item.getDate().get(Calendar.DATE));
+        date = new JLabel("-- error no date --");
         datePanel.add(date);
         titlePanel.add(datePanel, titleConstraints);
         titleConstraints.gridx = 1;
-        // Get category.
+        // Add category.
         JPanel categoryPanel = new JPanel();
         categoryPanel.setOpaque(false);
-        JLabel category = new JLabel(this.item.getCategory());
+        category = new JLabel("-- error no category --");
         categoryPanel.add(category);
         titlePanel.add(categoryPanel, titleConstraints);
-        
+        // Add the titlepanel
         GridBagConstraints titlePanelConstraints = new GridBagConstraints();
         titlePanelConstraints.gridx = 2;
         titlePanelConstraints.gridy = 0;
         titlePanelConstraints.weightx = 1;
         titlePanelConstraints.fill = GridBagConstraints.BOTH;
         this.add(titlePanel, titlePanelConstraints);
-        
-        // Panel for edit and delete buttons.
+
+        // -- Panel for edit and delete buttons, position(3,0).
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
-        editPanel.setPreferredSize(new Dimension(50, 50));
+        editPanel.setPreferredSize(new Dimension(75, 50));
         JLabel buttons = new JLabel("edit/delete");
         editPanel.add(buttons);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
         editConstraints.gridy = 0;
         this.add(editPanel, editConstraints);
+    }
+
+    /**
+     * Updates the panel with current data
+     */
+    private void updateItemPanel() {
+
+        priority.setText(this.item.getPrio().toString());
+
+        title.setText(this.item.getTitle());
+        //System.out.println(this.item.getTitle());
+        category.setText(this.item.getCategory());
+
+        date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
+                + this.item.getDate().get(Calendar.MONTH) + "-"
+                + this.item.getDate().get(Calendar.DATE));
     }
 
     /**
@@ -138,14 +151,6 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
      */
     public String getHeadline() {
         return item.getTitle();
-    }
-
-    /**
-     * Set a new headline for the itempanel.
-     *
-     * @param newHeadline
-     */
-    private void setHeadline(String newHeadline) {
     }
 
     @Override
