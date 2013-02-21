@@ -9,7 +9,7 @@ import javax.swing.AbstractAction;
 
 /**
  *
- * @author EIS i7 Gamer
+ * @author Emil
  */
 public class LeftAction extends AbstractAction {
         public LeftAction(String text,String desc) {
