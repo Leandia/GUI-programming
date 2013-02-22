@@ -150,14 +150,24 @@ public class BackendAPI {
                 break;
             case TODAY:
                 for(int i=0;i<this.list.getSize();i++){
-                    if(this.list.get(i).getDate().getTime().getDay() == cal.getTime().getDay()){
+                    if(!CompareDateAndTime.isToday(new Date(), this.list.get(i).getDate().getTime())){
                         this.list.remove(i);
                     }
                 }
                 break;
             case TOMORROW:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(!CompareDateAndTime.isTomorrow(new Date(), this.list.get(i).getDate().getTime())){
+                        this.list.remove(i);
+                    }
+                }
                 break;
             case THIS_WEEK:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(!CompareDateAndTime.isThisWeek(new Date(), this.list.get(i).getDate().getTime())){
+                        this.list.remove(i);
+                    }
+                }
                 break;
             case THIS_MONTH:
                 break;

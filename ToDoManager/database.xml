@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <todoManager>
   <category />
-  <data />
+  <data>
+    <_0 title="do presentation" description="...." category="Default" priority="HIGH" year="2013" month="2" day="22" hour="0" minute="0" />
+  </data>
 </todoManager>
