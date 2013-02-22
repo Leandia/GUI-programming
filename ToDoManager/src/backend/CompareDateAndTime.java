@@ -34,47 +34,41 @@ public class CompareDateAndTime {
         }
     }
     
-    private static boolean isThisYear(int thisYear,int toBeCompared){
-        if (thisYear == toBeCompared){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
     
-    private static boolean isThisMonth(int thisMonth, int toBeCompared){
-        if (thisMonth != toBeCompared){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-    
+    /**
+     * 
+     * @param todaysDate
+     * @param toBeCompared
+     * @return 
+     */
     public static boolean isTomorrow(Date todaysDate, Date toBeCompared){
-    
-        int date = todaysDate.getDay();
-        
-        switch (date){
-            case 28:                
-                break;
-            case 29:
-                break;
-            case 30:
-                break;
-            case 31:
-                break;
-            default:
-                if(todaysDate.getDay() == toBeCompared.getDay() ||isThisMonth(todaysDate.getMonth(),toBeCompared.getMonth()) ||isThisYear(todaysDate.getYear(),toBeCompared.getYear())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-        }
-        
+        todaysDate.setDate(todaysDate.getDate()+1);
+        return isToday(todaysDate,toBeCompared);
     }
     
+    /**
+     * Returns true if the date to be checked is in the intervall between
+     * the current time and 23:59:59 on the following sunday.
+     * @param todaysDate Current time
+     * @param toBeCompared Date that is to be checked
+     * @return 
+     */
+    public static boolean isThisWeek(Date todaysDate, Date toBeCompared){
+        Date limit = new Date();
+        
+        limit.setDate(todaysDate.getDate()+8-todaysDate.getDay());
+        limit.setHours(0);
+        limit.setMinutes(0);
+        limit.setSeconds(0);
+        if(toBeCompared.after(todaysDate) || toBeCompared.before(limit)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+   
     
-}
+    
+}    
+    
