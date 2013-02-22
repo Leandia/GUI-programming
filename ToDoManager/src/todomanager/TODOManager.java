@@ -1,14 +1,19 @@
 package todomanager;
 
 import Actions.AddItemPopupAction;
-import backend.State;
 import Actions.QuitAction;
 import Actions.SelectEnglishAsLanguageAction;
 import Actions.SelectSwedishAsLanguageAction;
 import backend.BackendAPI;
 import backend.LanguageManager;
-import java.awt.*;
-import javax.swing.*;
+import backend.State;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -81,24 +86,19 @@ public class TODOManager {
         todoListConstraints.weighty = 1.0;
         todoListConstraints.weightx = 1.0;
         this.mainWindow.getContentPane().add(todoList, todoListConstraints);
-
-        //mainPanel.add(todoList, todoListConstraints);
-        //this.mainWindow.add(mainPanel);
     }
 
     /**
      * Adds the menu to the mainwindow.
      */
     private void addMenu() {
-        //addMenu();
         JMenuBar menu = new JMenuBar();
 
         file = new JMenu(manager.getBundle().getString("file"));
         menu.add(file);
         quit = new JMenuItem(manager.getBundle().getString("quit"));
         QuitAction leftAction = new QuitAction(manager.getBundle().getString("quit"), "This is the quit button.");
-        file.add(leftAction);
-        //file.add(quit);
+        file.add(leftAction);//file.add(quit);
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);

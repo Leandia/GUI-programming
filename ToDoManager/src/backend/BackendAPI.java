@@ -4,9 +4,11 @@
  */
 package backend;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import javax.swing.DefaultListModel;
+import values.TimeFilter;
 
 /**
  *
@@ -19,6 +21,7 @@ public class BackendAPI {
     private DefaultListModel<ToDoItem> list = new DefaultListModel<>();
     //final DisplayList list;
     private int index = 0;
+    private ArrayList<Category> categories = new ArrayList();
     
     public BackendAPI(int index) {
         this.index = index;
@@ -124,6 +127,51 @@ public class BackendAPI {
         }
         
         return result;
+    }
+    
+    /**
+     * Function that filter by time, what period is determined by the filter
+     * parameter
+     * @param filter Which time period to filter by 
+     */
+    private void filterByTime(TimeFilter filter){
+        GregorianCalendar date = new GregorianCalendar();
+        Calendar cal = Calendar.getInstance();
+        
+        switch(filter){
+            case ALL:
+                break;
+            case OLD:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(this.list.get(i).getDate().getTime().before(date.getTime())){
+                        this.list.remove(i);
+                    }
+                }
+                break;
+            case TODAY:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(!CompareDateAndTime.isToday(new Date(), this.list.get(i).getDate().getTime())){
+                        this.list.remove(i);
+                    }
+                }
+                break;
+            case TOMORROW:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(!CompareDateAndTime.isTomorrow(new Date(), this.list.get(i).getDate().getTime())){
+                        this.list.remove(i);
+                    }
+                }
+                break;
+            case THIS_WEEK:
+                for(int i=0;i<this.list.getSize();i++){
+                    if(!CompareDateAndTime.isThisWeek(new Date(), this.list.get(i).getDate().getTime())){
+                        this.list.remove(i);
+                    }
+                }
+                break;
+            case THIS_MONTH:
+                break;
+        }
     }
     
     
