@@ -54,6 +54,15 @@ public class BackendAPI {
     }
     
     /**
+     * 
+     * @param item 
+     */
+    public void deleteItem(ToDoItem item) {
+        this.list.removeElement(item);
+        database.deleteItem(item);
+    }
+    
+    /**
      * Return the list where items are stored.
      * @return A list that stores the items.
      */
@@ -150,21 +159,21 @@ public class BackendAPI {
                 break;
             case TODAY:
                 for(int i=0;i<this.list.getSize();i++){
-                    if(!CompareDateAndTime.isToday(new Date(), this.list.get(i).getDate().getTime())){
+                    if(!CompareDateAndTime.isToday(this.list.get(i).getDate().getTime())){
                         this.list.remove(i);
                     }
                 }
                 break;
             case TOMORROW:
                 for(int i=0;i<this.list.getSize();i++){
-                    if(!CompareDateAndTime.isTomorrow(new Date(), this.list.get(i).getDate().getTime())){
+                    if(!CompareDateAndTime.isTomorrow(this.list.get(i).getDate().getTime())){
                         this.list.remove(i);
                     }
                 }
                 break;
             case THIS_WEEK:
                 for(int i=0;i<this.list.getSize();i++){
-                    if(!CompareDateAndTime.isThisWeek(new Date(), this.list.get(i).getDate().getTime())){
+                    if(!CompareDateAndTime.isThisWeek(this.list.get(i).getDate().getTime())){
                         this.list.remove(i);
                     }
                 }

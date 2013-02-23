@@ -8,14 +8,15 @@ import java.util.Date;
  */
 public class CompareDateAndTime {
     
+    private static Date todaysDate = new Date();
     /**
      * Returns true if the two dates represent the same day
-     * @param todaysDate This represents the current time
      * @param toBeCompared This represents the date to be compared 
      * @return True or false depending on whether or not they are on the same
      * day
      */
-    public static boolean isToday(Date todaysDate, Date toBeCompared){
+    public static boolean isToday(Date toBeCompared){
+        
         if(todaysDate.getDay() != toBeCompared.getDay()){
             return false;
         }
@@ -41,9 +42,9 @@ public class CompareDateAndTime {
      * @param toBeCompared
      * @return 
      */
-    public static boolean isTomorrow(Date todaysDate, Date toBeCompared){
+    public static boolean isTomorrow(Date toBeCompared){
         todaysDate.setDate(todaysDate.getDate()+1);
-        return isToday(todaysDate,toBeCompared);
+        return isToday(toBeCompared);
     }
     
     /**
@@ -53,7 +54,7 @@ public class CompareDateAndTime {
      * @param toBeCompared Date that is to be checked
      * @return 
      */
-    public static boolean isThisWeek(Date todaysDate, Date toBeCompared){
+    public static boolean isThisWeek(Date toBeCompared){
         Date limit = new Date();
         
         limit.setDate(todaysDate.getDate()+8-todaysDate.getDay());
