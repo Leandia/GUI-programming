@@ -6,8 +6,15 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -28,6 +35,7 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
     private final int height = 50;
     private ToDoItem item;
     private JCheckBox doneButton;
+    private ImagePanel donePrioPanel;
     private JPanel donePanel;
     private JLabel priority;
     private JLabel title;
@@ -39,7 +47,14 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
 
         this.setLayout(new GridBagLayout());
 
-        // -- The done button, position(0,0).
+        // -- Panel 1 for done button and priority, position (0,0).
+        donePrioPanel = new ImagePanel();
+        donePrioPanel.setOpaque(false);
+        GridBagConstraints donePrioConstraints = new GridBagConstraints();
+        donePrioConstraints.gridx = 0;
+        donePrioConstraints.gridy = 0;
+        this.add(donePrioPanel, donePrioConstraints);
+        // The done button.
         donePanel = new JPanel();
         donePanel.setOpaque(false);
         doneButton = new JCheckBox(TODOManager.manager.getBundle().getString("done"));
@@ -50,9 +65,8 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
         GridBagConstraints doneConstraints = new GridBagConstraints();
         doneConstraints.gridx = 0;
         doneConstraints.gridy = 0;
-        this.add(donePanel, doneConstraints);
-
-        // -- Display priority with text, position(1,0).
+        donePrioPanel.add(donePanel, doneConstraints);
+        // Display priority with text.
         JPanel priorityPanel = new JPanel();
         priorityPanel.setOpaque(false);
         priority = new JLabel(TODOManager.manager.getBundle().getString("error"));
@@ -61,34 +75,12 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
         GridBagConstraints prioConstraints = new GridBagConstraints();
         prioConstraints.gridx = 1;
         prioConstraints.gridy = 0;
-        this.add(priorityPanel, prioConstraints);
+        donePrioPanel.add(priorityPanel, prioConstraints);
 
 
-        // -- Panel for title, category and date, position(2,0).
+        // -- Panel 2 for title, category and date, position(2,0).
         JPanel titlePanel = new JPanel(new GridBagLayout());
         titlePanel.setOpaque(false);
-        GridBagConstraints titleConstraints = new GridBagConstraints();
-        titleConstraints.gridx = 0;
-        titleConstraints.gridy = 0;
-        titleConstraints.gridwidth = 2;
-        // Add title.
-        title = new JLabel("-- error no title --");
-        titlePanel.add(title, titleConstraints);
-        titleConstraints.gridy = 1;
-        titleConstraints.gridwidth = 1;
-        // Add date.
-        JPanel datePanel = new JPanel();
-        datePanel.setOpaque(false);
-        date = new JLabel("-- error no date --");
-        datePanel.add(date);
-        titlePanel.add(datePanel, titleConstraints);
-        titleConstraints.gridx = 1;
-        // Add category.
-        JPanel categoryPanel = new JPanel();
-        categoryPanel.setOpaque(false);
-        category = new JLabel("-- error no category --");
-        categoryPanel.add(category);
-        titlePanel.add(categoryPanel, titleConstraints);
         // Add the titlepanel
         GridBagConstraints titlePanelConstraints = new GridBagConstraints();
         titlePanelConstraints.gridx = 2;
@@ -96,8 +88,31 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
         titlePanelConstraints.weightx = 1;
         titlePanelConstraints.fill = GridBagConstraints.BOTH;
         this.add(titlePanel, titlePanelConstraints);
+        // Create constraints for items on this panel.
+        GridBagConstraints titleConstraints = new GridBagConstraints();
+        // Add title.
+        title = new JLabel("-- error no title --");
+        titleConstraints.gridx = 0;
+        titleConstraints.gridy = 0;
+        titleConstraints.gridwidth = 2;
+        titlePanel.add(title, titleConstraints);
+        // Add date.
+        JPanel datePanel = new JPanel();
+        datePanel.setOpaque(false);
+        date = new JLabel("-- error no date --");
+        datePanel.add(date);
+        titleConstraints.gridy = 1;
+        titleConstraints.gridwidth = 1;
+        titlePanel.add(datePanel, titleConstraints);
+        // Add category.
+        JPanel categoryPanel = new JPanel();
+        categoryPanel.setOpaque(false);
+        category = new JLabel("-- error no category --");
+        categoryPanel.add(category);
+        titleConstraints.gridx = 1;
+        titlePanel.add(categoryPanel, titleConstraints);
 
-        // -- Panel for edit and delete buttons, position(3,0).
+        // -- Panel 3 for edit and delete buttons, position(3,0).
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
@@ -131,18 +146,34 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
     private void setBackgroundColor() {
         switch (this.item.getPrio()) {
             case LOW:
-                this.setBackground(Color.GREEN);
+                //this.setBackground(Color.GREEN);
+                this.donePrioPanel.setPicture("./Resources/low_prio.gif");
                 break;
             case MEDIUM:
-                this.setBackground(Color.YELLOW);
+                //this.setBackground(Color.YELLOW);
+                this.donePrioPanel.setPicture("./Resources/medium_prio.gif");
                 break;
             case HIGH:
-                this.setBackground(Color.red);
+                //this.setBackground(Color.red);
+                this.donePrioPanel.setPicture("./Resources/high_prio.gif");
                 break;
             default:
                 this.setBackground(Color.GRAY);
                 break;
         }
+    }
+    
+    private void setBackgroundColor(int i) {
+        setBackgroundColor();
+        
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("./Resources/low_prio.gif"));
+        } catch (IOException ex) {
+            System.err.println("Image not found");
+        }
+        JLabel imageIcon = new JLabel(new ImageIcon(image));
+        donePrioPanel.add(imageIcon);
     }
 
     /**

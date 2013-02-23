@@ -1,5 +1,6 @@
 package todomanager;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
@@ -18,9 +19,13 @@ public class CategoryPanel extends JPanel {
      * the bottom.
      */
     public CategoryPanel() {
-        this.setBackground(Color.red);
-        this.setPreferredSize(new Dimension(200, 200));
+        this.setMinimumSize(new Dimension(200, 200));
+        this.setLayout(new BorderLayout());
         categories = new JLabel(TODOManager.manager.getBundle().getString("categories"));
-        this.add(categories);
+        JPanel clock = new JPanel();
+        clock.setBackground(Color.DARK_GRAY);
+        clock.setPreferredSize(new Dimension(150, 150));
+        this.add(clock, BorderLayout.NORTH);
+        this.add(categories, BorderLayout.CENTER);
     }
 }
