@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import values.TimeFilter;
 
 /**
  * State class that holds all settings for the interface
@@ -16,6 +17,7 @@ public class State {
 
     private String selectedLanguage;
     private Properties pro = new Properties();
+    private TimeFilter filtering = TimeFilter.ALL;
     private int x = 0;
     private int y = 0;
     private int itemIndex = 0;
@@ -62,6 +64,7 @@ public class State {
             pro.setProperty("lan", selectedLanguage);
             pro.setProperty("x", Integer.toString(x));
             pro.setProperty("y", Integer.toString(y));
+            pro.setProperty("filter", this.filtering.toString());
             pro.setProperty("itemIndex", Integer.toString(itemIndex));
 
             try {

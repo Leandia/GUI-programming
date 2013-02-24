@@ -1,5 +1,6 @@
 package todomanager;
 
+import Actions.DeleteItemAction;
 import backend.ToDoItem;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -116,8 +118,11 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
-        JLabel buttons = new JLabel("edit/delete");
-        editPanel.add(buttons);
+        JButton editBtn = new JButton("Edit");
+        editPanel.add(editBtn);
+        
+        JButton deleteBtn = new JButton(new DeleteItemAction(TODOManager.manager.getBundle().getString("delete"),this.item,TODOManager.backend));
+        editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
         editConstraints.gridy = 0;
