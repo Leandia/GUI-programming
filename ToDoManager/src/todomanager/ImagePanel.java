@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class ImagePanel extends JPanel {
 
-    private BufferedImage image;
+    private BufferedImage image = null;
 
     public ImagePanel() {
     }
@@ -29,6 +29,8 @@ public class ImagePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 25, 5, null);
+        if (this.image != null) {
+            g.drawImage(image, 25, 5, null);
+        }
     }
 }
