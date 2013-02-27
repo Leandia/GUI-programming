@@ -121,7 +121,7 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
         JButton editBtn = new JButton("Edit");
         editPanel.add(editBtn);
         
-        JButton deleteBtn = new JButton(new DeleteItemAction(TODOManager.manager.getBundle().getString("delete"),this.item,TODOManager.backend));
+        JButton deleteBtn = new JButton(new DeleteItemAction(TODOManager.manager.getBundle().getString("delete"),this.item));
         editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
