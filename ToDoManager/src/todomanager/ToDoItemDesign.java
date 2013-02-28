@@ -39,6 +39,7 @@ public class ToDoItemDesign extends JPanel {
         // -- Panel 1 for done button and priority, position (0,0).
         donePrioPanel = new ImagePanel();
         donePrioPanel.setOpaque(false);
+        donePrioPanel.setPreferredSize(new Dimension(150, 50));
         GridBagConstraints donePrioConstraints = new GridBagConstraints();
         donePrioConstraints.gridx = 0;
         donePrioConstraints.gridy = 0;
@@ -58,8 +59,8 @@ public class ToDoItemDesign extends JPanel {
         // Display priority with text.
         JPanel priorityPanel = new JPanel();
         priorityPanel.setOpaque(false);
+        priorityPanel.setPreferredSize(new Dimension(50, 50));
         priority = new JLabel(TODOManager.manager.getBundle().getString("error"));
-        priorityPanel.setPreferredSize(new Dimension(75, 50));
         priorityPanel.add(priority);
         GridBagConstraints prioConstraints = new GridBagConstraints();
         prioConstraints.gridx = 1;

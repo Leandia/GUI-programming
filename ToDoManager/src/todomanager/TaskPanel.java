@@ -17,16 +17,16 @@ import javax.swing.ListSelectionModel;
  */
 public class TaskPanel extends JPanel {
 
-    // Use JTable instead!
     private final JTable list;
     private JScrollPane scrollPane = new JScrollPane();
+    private int rowHeight = 51;
 
     public TaskPanel() {
         super(new GridBagLayout());
         this.list = new JTable(TODOManager.backend.getListModel());
         this.list.setDefaultRenderer(ToDoItem.class, new ToDoItemRenderer());
         this.list.setDefaultEditor(ToDoItem.class, new ToDoItemEditor());
-        this.list.setRowHeight(50);
+        this.list.setRowHeight(rowHeight);
         scrollPane.getViewport().setView(this.list);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx = 1;
