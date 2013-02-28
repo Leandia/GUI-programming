@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author Kristian Johansson
  * @author Kristoffer Wass
+ * @author Daniel
  */
 public class TaskPanel extends JPanel {
 
@@ -21,11 +22,15 @@ public class TaskPanel extends JPanel {
     private JScrollPane scrollPane = new JScrollPane();
     private int rowHeight = 51;
 
+    /**
+     * Constructor, it sets up the JTable.
+     */
     public TaskPanel() {
         super(new GridBagLayout());
         this.list = new JTable(TODOManager.backend.getListModel());
         this.list.setDefaultRenderer(ToDoItem.class, new ToDoItemRenderer());
         this.list.setDefaultEditor(ToDoItem.class, new ToDoItemEditor());
+        this.list.setTableHeader(null);
         this.list.setRowHeight(rowHeight);
         scrollPane.getViewport().setView(this.list);
         GridBagConstraints constraints = new GridBagConstraints();

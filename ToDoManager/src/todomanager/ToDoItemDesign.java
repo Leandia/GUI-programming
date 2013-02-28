@@ -31,8 +31,11 @@ public class ToDoItemDesign extends JPanel {
     private JLabel category;
     private JLabel date;
     private JButton deleteBtn;
-    private int row;
 
+    /**
+     * Constructor, it sets up the design, creates all the objects and sets them
+     * in apropriate places.
+     */
     public ToDoItemDesign() {
         super();
 
@@ -120,7 +123,7 @@ public class ToDoItemDesign extends JPanel {
     }
 
     /**
-     * Updates the panel with current data
+     * Updates the panel with current data and adds actions.
      */
     public void updateItemPanel(ToDoItem item) {
         this.item = item;
