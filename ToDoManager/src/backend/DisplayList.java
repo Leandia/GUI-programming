@@ -41,10 +41,12 @@ public class DisplayList extends AbstractTableModel {
 
     public void addElement(ToDoItem item) {
         this.list.add(item);
+        this.fireTableDataChanged();
     }
 
     public void removeElement(ToDoItem item) {
         this.list.remove(item);
+        this.fireTableDataChanged();
     }
 
     public ToDoItem get(int i) {
@@ -53,6 +55,7 @@ public class DisplayList extends AbstractTableModel {
 
     public void remove(int i) {
         this.list.remove(i);
+        this.fireTableDataChanged();
     }
 
     // ---------------------------------------------
