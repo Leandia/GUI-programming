@@ -30,6 +30,8 @@ public class ToDoItemDesign extends JPanel {
     private JLabel title;
     private JLabel category;
     private JLabel date;
+    private JButton deleteBtn;
+    private int row;
 
     public ToDoItemDesign() {
         super();
@@ -109,7 +111,7 @@ public class ToDoItemDesign extends JPanel {
         JButton editBtn = new JButton("Edit");
         editPanel.add(editBtn);
 
-        JButton deleteBtn = new JButton(new DeleteItemAction(TODOManager.manager.getBundle().getString("delete"), this.item));
+        deleteBtn = new JButton();
         editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
@@ -122,6 +124,8 @@ public class ToDoItemDesign extends JPanel {
      */
     public void updateItemPanel(ToDoItem item) {
         this.item = item;
+        // Set actions to button here.
+        deleteBtn.setAction(new DeleteItemAction(this.item));
 
         priority.setText(this.item.getPrio().toString());
 

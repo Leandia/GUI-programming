@@ -55,7 +55,7 @@ public class DisplayList extends AbstractTableModel {
 
     public void removeElement(ToDoItem item) {
         this.list.remove(item);
-        this.fireTableDataChanged();
+        this.fireTableStructureChanged();
     }
 
     public ToDoItem get(int i) {
