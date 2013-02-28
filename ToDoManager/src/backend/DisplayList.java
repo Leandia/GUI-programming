@@ -26,17 +26,26 @@ public class DisplayList extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return this.columNames.length;
+        return 1;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return this.list.get(rowIndex);
+        Object result = null;
+        if (this.list != null && this.list.size() > rowIndex) {
+            result = this.list.get(rowIndex);
+        }
+        return result;
     }
 
     @Override
     public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
+        return ToDoItem.class;
+    }
+    
+    @Override
+    public boolean isCellEditable(int columnIndex, int rowIndex) {
+        return true;
     }
 
     public void addElement(ToDoItem item) {

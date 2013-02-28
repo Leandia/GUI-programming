@@ -11,23 +11,23 @@ import javax.swing.ListSelectionModel;
 
 /**
  * TaskPanel class, extends JPanel and holds all currently viewed ToDoItems.
- * @author Kristian Johansson 
+ *
+ * @author Kristian Johansson
  * @author Kristoffer Wass
  */
-public class TaskPanel extends JPanel{
-    
+public class TaskPanel extends JPanel {
+
     // Use JTable instead!
     private final JTable list;
     private JScrollPane scrollPane = new JScrollPane();
-    
+
     public TaskPanel() {
         super(new GridBagLayout());
         this.list = new JTable(TODOManager.backend.getListModel());
         this.list.setDefaultRenderer(ToDoItem.class, new ToDoItemRenderer());
+        this.list.setDefaultEditor(ToDoItem.class, new ToDoItemEditor());
         this.list.setRowHeight(50);
         scrollPane.getViewport().setView(this.list);
-        //scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        //this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx = 1;
         constraints.weighty = 1;
@@ -36,14 +36,12 @@ public class TaskPanel extends JPanel{
     }
 
     /**
-     * Adds an item to the GUI by placing it on the TaskPanel. Takes a
-     * Todoitem as only parameter.
-     * @param item 
+     * Adds an item to the GUI by placing it on the TaskPanel. Takes a Todoitem
+     * as only parameter.
+     *
+     * @param item
      */
     public void addItem(ToDoItem item) {
         TODOManager.backend.addItem(item);
     }
-    
-    
-    
 }
