@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -15,15 +16,15 @@ import javax.swing.ListSelectionModel;
  */
 public class TaskPanel extends JPanel{
     
-    private final JList list;
+    // Use JTable instead!
+    private final JTable list;
     private JScrollPane scrollPane = new JScrollPane();
     
     public TaskPanel() {
         super(new GridBagLayout());
-        this.list = new JList(TODOManager.backend.getList());
-        this.list.setCellRenderer(new ToDoItemRenderer());
-        this.list.setLayoutOrientation(JList.VERTICAL);
-        this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.list = new JTable(TODOManager.backend.getListModel());
+        this.list.setDefaultRenderer(ToDoItem.class, new ToDoItemRenderer());
+        this.list.setRowHeight(50);
         scrollPane.getViewport().setView(this.list);
         //scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         //this.setLayout(new GridBagLayout());
