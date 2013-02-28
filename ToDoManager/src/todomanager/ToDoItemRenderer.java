@@ -11,18 +11,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
+import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.TableCellRenderer;
 
 /**
  * Simple temPanel class that is the visual representation of a todoitem.
@@ -31,7 +29,7 @@ import javax.swing.border.BevelBorder;
  * @author Kristoffer Wass
  * @author Daniel
  */
-public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
+public class ToDoItemRenderer extends JPanel implements TableCellRenderer {
 
     private final int width = 6000;
     private final int height = 50;
@@ -190,7 +188,7 @@ public class ToDoItemRenderer extends JPanel implements ListCellRenderer {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         this.item = (ToDoItem) value;
         this.setMaximumSize(new Dimension(width, height));
         this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
