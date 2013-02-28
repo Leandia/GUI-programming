@@ -43,4 +43,7 @@ public class TaskPanel extends JPanel{
     public void addItem(ToDoItem item) {
         TODOManager.backend.addItem(item);
     }
+    
+    
+    
 }

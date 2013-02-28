@@ -18,7 +18,8 @@ public class CompareDateAndTime {
      * day
      */
     public static boolean isToday(Date toBeCompared){
-        return (todaysDate.getDay() == toBeCompared.getDay() || todaysDate.getMonth() == toBeCompared.getMonth() || todaysDate.getYear() == toBeCompared.getYear());     
+        //Add 1 to the month cause for some reason the dates are off by one month
+        return (todaysDate.getDay() == toBeCompared.getDay() && todaysDate.getMonth()+1 == toBeCompared.getMonth() && todaysDate.getYear() == toBeCompared.getYear());     
     }
     
     
@@ -52,9 +53,6 @@ public class CompareDateAndTime {
         else{
             return false;
         }
-    }
-   
-    
-    
-}    
+    }    
+} 
     

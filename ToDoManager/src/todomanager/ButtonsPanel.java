@@ -2,6 +2,7 @@ package todomanager;
 
 import Actions.AddItemPopupAction;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -23,7 +24,11 @@ public class ButtonsPanel extends JPanel {
      * invoked from the event-dispatching thread.
      */
     private JButton addButton;
-    
+    private TaskPanel panel_all;
+    private TaskPanel panel_today;
+    private TaskPanel panel_tomorrow;
+    private TaskPanel panel_this_week;
+    private TaskPanel panel_old;
     /**
      *
      * @param list
@@ -51,12 +56,18 @@ public class ButtonsPanel extends JPanel {
         btn.gridwidth = 2;
         
         JTabbedPane pane = new JTabbedPane();
+        panel_all = new TaskPanel();
+        panel_today = new TaskPanel();
+        panel_tomorrow = new TaskPanel();
+        panel_this_week = new TaskPanel();
+        panel_old = new TaskPanel();
         
-        pane.add(TODOManager.manager.getBundle().getString("all"),new TaskPanel());
-        pane.add(TODOManager.manager.getBundle().getString("today"),new TaskPanel());
-        pane.add(TODOManager.manager.getBundle().getString("tomorrow"),new TaskPanel());        
-        pane.add(TODOManager.manager.getBundle().getString("this_week"),new TaskPanel());
-        pane.add(TODOManager.manager.getBundle().getString("old"),new TaskPanel());
+        
+        pane.add(TODOManager.manager.getBundle().getString("all"),panel_all);
+        pane.add(TODOManager.manager.getBundle().getString("today"),panel_today);
+        pane.add(TODOManager.manager.getBundle().getString("tomorrow"),panel_tomorrow);        
+        pane.add(TODOManager.manager.getBundle().getString("this_week"),panel_this_week);
+        pane.add(TODOManager.manager.getBundle().getString("old"),panel_old);
         
         pane.addChangeListener(new ChangeListener() {
 
@@ -82,8 +93,8 @@ public class ButtonsPanel extends JPanel {
                     default:
                         filter = TimeFilter.ALL;
                         break;
-                
                 }
+                
                 TODOManager.backend.filterByTime(filter);
             }
         });

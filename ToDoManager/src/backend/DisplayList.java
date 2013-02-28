@@ -67,5 +67,6 @@ public class DisplayList extends AbstractTableModel {
 
     public void setList(ArrayList<ToDoItem> list) {
         this.list = list;
+        this.fireTableDataChanged();
     }
 }

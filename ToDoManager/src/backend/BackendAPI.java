@@ -5,6 +5,7 @@
 package backend;
 
 import java.util.*;
+import javax.swing.JPanel;
 import values.TimeFilter;
 
 /**
@@ -27,6 +28,8 @@ public class BackendAPI {
         //this.list = new DisplayList();
     }
 
+    
+    
     /**
      * Method to fetch all items from the database and insert into the display
      * list.
@@ -139,43 +142,50 @@ public class BackendAPI {
      *
      * @param filter Which time period to filter by
      */
-    private void filterByTime(TimeFilter filter) {
+    public void filterByTime(TimeFilter filter) {
         GregorianCalendar date = new GregorianCalendar();
         Calendar cal = Calendar.getInstance();
-
+        ArrayList<ToDoItem> list = this.displayList.getList();
+        
         switch (filter) {
-            case ALL:
+            default:
                 break;
             case OLD:
-                for (int i = 0; i < this.displayList.getRowCount(); i++) {
-                    if (this.displayList.get(i).getDate().getTime().before(date.getTime())) {
-                        this.displayList.remove(i);
+                for (int i = 0; i < list.size(); i++) {
+                    
+                    if (list.get(i).getDate().getTime().after(date.getTime())) {
+                        list.remove(i);
                     }
                 }
+                this.displayList.setList(list);
                 break;
             case TODAY:
-                for (int i = 0; i < this.displayList.getRowCount(); i++) {
-                    if (!CompareDateAndTime.isToday(this.displayList.get(i).getDate().getTime())) {
-                        this.displayList.remove(i);
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(list.get(i).getDate().getTime());
+                    if (!CompareDateAndTime.isToday(list.get(i).getDate().getTime())) {
+                        list.remove(i);
                     }
                 }
+                this.displayList.setList(list);
                 break;
             case TOMORROW:
-                for (int i = 0; i < this.displayList.getRowCount(); i++) {
-                    if (!CompareDateAndTime.isTomorrow(this.displayList.get(i).getDate().getTime())) {
-                        this.displayList.remove(i);
+                for (int i = 0; i < list.size(); i++) {
+                    if (!CompareDateAndTime.isTomorrow(list.get(i).getDate().getTime())) {
+                        list.remove(i);
                     }
                 }
+                this.displayList.setList(list);
                 break;
             case THIS_WEEK:
-                for (int i = 0; i < this.displayList.getRowCount(); i++) {
-                    if (!CompareDateAndTime.isThisWeek(this.displayList.get(i).getDate().getTime())) {
-                        this.displayList.remove(i);
+                for (int i = 0; i < list.size(); i++) {
+                    if (!CompareDateAndTime.isThisWeek(list.get(i).getDate().getTime())) {
+                        list.remove(i);
                     }
                 }
-                break;
-            case THIS_MONTH:
+                this.displayList.setList(list);
                 break;
         }
+        
+        
     }
 }
