@@ -4,7 +4,6 @@ import java.util.GregorianCalendar;
 
 /**
  * Static class for doing operations regarding comparing dates and times.
- * This class is yet to be tested
  * @author Kristian
  */
 public class CompareDateAndTime {
@@ -21,6 +20,8 @@ public class CompareDateAndTime {
      * @return 
      */
     public static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
+        
+        //Adding 31 due to how Gregoriancalendar is implemented.
         if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
             return (31+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
         }
@@ -35,7 +36,6 @@ public class CompareDateAndTime {
      */
     public static boolean isThisWeek(GregorianCalendar toBeCompared){
         int day_of_week = todaysDate.get(GregorianCalendar.DAY_OF_WEEK)-1;
-        System.out.println(day_of_week);
         switch(day_of_week){
             default:
                 return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2)|| isSpecficDay(toBeCompared,3)|| isSpecficDay(toBeCompared,4)|| isSpecficDay(toBeCompared,5)|| isSpecficDay(toBeCompared,6);
