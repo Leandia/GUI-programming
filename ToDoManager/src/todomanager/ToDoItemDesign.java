@@ -135,9 +135,12 @@ public class ToDoItemDesign extends JPanel {
         title.setText(this.item.getTitle());
 
         category.setText(this.item.getCategory());
-
+        //Month start by 0 in gregoriancalendar so need to add 1 to
+        //display the correct value
+        int month = this.item.getDate().get(Calendar.MONTH)+1;
+        
         date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
-                + this.item.getDate().get(Calendar.MONTH) + "-"
+                + month + "-"
                 + this.item.getDate().get(Calendar.DATE));
 
         setBackgroundColor();

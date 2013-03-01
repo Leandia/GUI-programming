@@ -179,12 +179,15 @@ public class NewItemPopup extends JDialog {
             if (!categoryTextField.getText().equals("")) {
                 category = categoryTextField.getText();
             }
+            
+            //For month we need to withdraw 1 to get the correct value for
+            //month since Gregoriancalendar starts at 0
             if (!yearTextField.getText().equals("")
                     && !monthTextField.getText().equals("")
                     && !dayTextField.getText().equals("")) {
                 date = new GregorianCalendar(Integer.parseInt(yearTextField.getText()),
-                        Integer.parseInt(monthTextField.getText()),
-                        Integer.parseInt(dayTextField.getText()));
+                        Integer.parseInt(monthTextField.getText())-1,
+                        Integer.parseInt(dayTextField.getText()));                
             }
             prio = (Priority) priorityMenu.getSelectedItem();
             item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);

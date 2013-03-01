@@ -23,9 +23,9 @@ public class CompareDateAndTime {
         
         //Adding 31 due to how Gregoriancalendar is implemented.
         if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
-            return (31+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
+            return (offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
         }
-        return (todaysDate.get(GregorianCalendar.DAY_OF_YEAR)+31+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());     
+        return (todaysDate.get(GregorianCalendar.DAY_OF_YEAR)+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());     
     }
     
     /**

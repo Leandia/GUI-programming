@@ -101,11 +101,13 @@ public class ButtonsPanel extends JPanel {
                 
                 
                 TODOManager.savedSettings.setFiltering(filter);
+                
                 TODOManager.backend.filterByTime(filter);
             }
         });
         //Sets the initial selected tab, default will be "all"
         pane.setSelectedIndex(setTab(TODOManager.savedSettings.getFilter()));
+        TODOManager.backend.filterByTime(TODOManager.savedSettings.getFilter());
         this.add(pane,btn);
     }
     
