@@ -16,6 +16,7 @@ import values.TimeFilter;
 /**
  *
  * @author Emil
+ * @author Kristian
  */
 public class ButtonsPanel extends JPanel {
 
@@ -71,6 +72,9 @@ public class ButtonsPanel extends JPanel {
         
         pane.addChangeListener(new ChangeListener() {
 
+            /**
+             * Called when user changes tabs
+             */
             @Override
             public void stateChanged(ChangeEvent e) {
                 JTabbedPane pane = (JTabbedPane) e.getSource();
@@ -95,12 +99,12 @@ public class ButtonsPanel extends JPanel {
                         break;
                 }
                 
-                //Sets the initial selected tab, default will be "all"
+                
                 TODOManager.savedSettings.setFiltering(filter);
                 TODOManager.backend.filterByTime(filter);
             }
         });
-        
+        //Sets the initial selected tab, default will be "all"
         pane.setSelectedIndex(setTab(TODOManager.savedSettings.getFilter()));
         this.add(pane,btn);
     }
