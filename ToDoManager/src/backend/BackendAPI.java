@@ -143,9 +143,8 @@ public class BackendAPI {
      * @param filter Which time period to filter by
      */
     public void filterByTime(TimeFilter filter) {
-        GregorianCalendar date = new GregorianCalendar();
-        Calendar cal = Calendar.getInstance();
         ArrayList<ToDoItem> list = this.displayList.getList();
+        ArrayList<ToDoItem> temp = new ArrayList();
         
         switch (filter) {
             default:
@@ -153,36 +152,36 @@ public class BackendAPI {
             case OLD:
                 for (int i = 0; i < list.size(); i++) {
                     
-                    if (list.get(i).getDate().getTime().after(date.getTime())) {
-                        list.remove(i);
+                    if (!list.get(i).getDate().after(new GregorianCalendar())) {
+                        temp.add(list.get(i));
                     }
                 }
-                this.displayList.setList(list);
+                this.displayList.setList(temp);
                 break;
             case TODAY:
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i).getDate().getTime());
-                    if (!CompareDateAndTime.isToday(list.get(i).getDate().getTime())) {
-                        list.remove(i);
+                    
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(),0)) {
+                        temp.add(list.get(i));
                     }
                 }
-                this.displayList.setList(list);
+                this.displayList.setList(temp);
                 break;
             case TOMORROW:
                 for (int i = 0; i < list.size(); i++) {
-                    if (!CompareDateAndTime.isTomorrow(list.get(i).getDate().getTime())) {
-                        list.remove(i);
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(),1)) {
+                        temp.add(list.get(i));
                     }
                 }
-                this.displayList.setList(list);
+                this.displayList.setList(temp);
                 break;
             case THIS_WEEK:
                 for (int i = 0; i < list.size(); i++) {
-                    if (!CompareDateAndTime.isThisWeek(list.get(i).getDate().getTime())) {
-                        list.remove(i);
+                    if (CompareDateAndTime.isThisWeek(list.get(i).getDate())) {
+                        temp.add(list.get(i));
                     }
                 }
-                this.displayList.setList(list);
+                this.displayList.setList(temp);
                 break;
         }
         

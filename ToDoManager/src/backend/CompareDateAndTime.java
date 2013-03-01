@@ -1,6 +1,6 @@
 package backend;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Static class for doing operations regarding comparing dates and times.
@@ -9,28 +9,22 @@ import java.util.Date;
  */
 public class CompareDateAndTime {
     
-    private static Date todaysDate = new Date();
+    private static GregorianCalendar todaysDate = new GregorianCalendar();
     
     /**
-     * Returns true if the two dates represent the same day
-     * @param toBeCompared This represents the date to be compared 
-     * @return True or false depending on whether or not they are on the same
-     * day
-     */
-    public static boolean isToday(Date toBeCompared){
-        //Add 1 to the month cause for some reason the dates are off by one month
-        return (todaysDate.getDay() == toBeCompared.getDay() && todaysDate.getMonth()+1 == toBeCompared.getMonth() && todaysDate.getYear() == toBeCompared.getYear());     
-    }
-    
-    
-    /**
-     * 
-     * @param toBeCompared
+     * Boolean that evaluates whether the input day is a specific day
+     * relative to today. Offset decides which day in relation to 
+     * todays date. So for example offset = 0 would mean it checks if tobeCompared
+     * is today
+     * @param toBeCompared Date to be compared
+     * @param offset Number of days added or removed from todays day.
      * @return 
      */
-    public static boolean isTomorrow(Date toBeCompared){
-        todaysDate.setDate(todaysDate.getDate()+1);
-        return isToday(toBeCompared);
+    public static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
+        if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
+            return (31+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
+        }
+        return (todaysDate.get(GregorianCalendar.DAY_OF_YEAR)+31+offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());     
     }
     
     /**
@@ -39,19 +33,25 @@ public class CompareDateAndTime {
      * @param toBeCompared Date that is to be checked
      * @return 
      */
-    public static boolean isThisWeek(Date toBeCompared){
-        Date limit = new Date();
-        
-        limit.setDate(todaysDate.getDate()+8-todaysDate.getDay());
-        limit.setHours(0);
-        limit.setMinutes(0);
-        limit.setSeconds(0);
-        
-        if(toBeCompared.after(todaysDate) || toBeCompared.before(limit)){
-            return true;
-        }
-        else{
-            return false;
+    public static boolean isThisWeek(GregorianCalendar toBeCompared){
+        int day_of_week = todaysDate.get(GregorianCalendar.DAY_OF_WEEK)-1;
+        System.out.println(day_of_week);
+        switch(day_of_week){
+            default:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2)|| isSpecficDay(toBeCompared,3)|| isSpecficDay(toBeCompared,4)|| isSpecficDay(toBeCompared,5)|| isSpecficDay(toBeCompared,6);
+            case 2:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2)|| isSpecficDay(toBeCompared,3)|| isSpecficDay(toBeCompared,4)|| isSpecficDay(toBeCompared,5);
+            case 3:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2)|| isSpecficDay(toBeCompared,3)|| isSpecficDay(toBeCompared,4);
+            case 4:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2)|| isSpecficDay(toBeCompared,3);
+            case 5:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1)|| isSpecficDay(toBeCompared,2);
+            case 6:
+                return isSpecficDay(toBeCompared,0) || isSpecficDay(toBeCompared,1);
+            case 7:
+                return isSpecficDay(toBeCompared,0);
+                
         }
     }    
 } 
