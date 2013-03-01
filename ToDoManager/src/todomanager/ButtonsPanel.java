@@ -95,10 +95,33 @@ public class ButtonsPanel extends JPanel {
                         break;
                 }
                 
+                //Sets the initial selected tab, default will be "all"
+                TODOManager.savedSettings.setFiltering(filter);
                 TODOManager.backend.filterByTime(filter);
             }
         });
         
+        pane.setSelectedIndex(setTab(TODOManager.savedSettings.getFilter()));
         this.add(pane,btn);
+    }
+    
+    /**
+     * Sets tab using the input filter constant
+     * @param filter Which tab to set from startup
+     * @return Index of that tab
+     */
+    private int setTab(TimeFilter filter){
+        switch(filter){
+                    case TODAY:
+                        return 1;
+                    case TOMORROW:
+                        return 2;
+                    case THIS_WEEK:
+                        return 3;
+                    case OLD:
+                        return 4;
+                    default:
+                        return 0;
+                }
     }
 }

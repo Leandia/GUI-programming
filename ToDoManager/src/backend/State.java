@@ -89,7 +89,8 @@ public class State {
                 pro.load(new FileInputStream("config.properties"));
 
                 this.selectedLanguage = pro.getProperty("lan");
-
+                stringToTimeFilter(pro.getProperty("filter"));
+                
                 //catch numberformat exception incase there are
                 //no values for x and y saved yet
                 try {
@@ -104,6 +105,8 @@ public class State {
                     this.y = 0;
                     this.itemIndex = 0;
                 }
+                
+                
 
 
             } catch (FileNotFoundException e) {
@@ -148,8 +151,40 @@ public class State {
     public void setItemIndex(int itemIndex) {
         this.itemIndex = itemIndex;
     }
+    
+    public void setFiltering(TimeFilter filter){
+        this.filtering = filter;
+    }
+    
+    public TimeFilter getFilter(){
+        return this.filtering;
+    }
 
     public int getItemIndex() {
         return itemIndex;
+    }
+    
+    private void stringToTimeFilter(String convert){
+        switch(convert){
+            default:
+                this.filtering = null;
+                break;
+            case "ALL":
+                this.filtering = TimeFilter.ALL;
+                break;
+            case "TODAY":
+                this.filtering = TimeFilter.TODAY;
+                break;
+            case "TOMORROW":
+                this.filtering = TimeFilter.TOMORROW;
+                break;
+            case "THIS_WEEK":
+                this.filtering = TimeFilter.THIS_WEEK;
+                break;
+            case "OLD":
+                this.filtering = TimeFilter.OLD;
+                break;    
+                
+        }
     }
 }
