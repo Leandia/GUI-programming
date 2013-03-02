@@ -1,6 +1,5 @@
 package todomanager;
 
-import backend.InputUtility;
 import backend.ToDoItem;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -120,10 +119,10 @@ public class NewItemPopup extends JDialog {
         timeConstraints.weighty = 1;
         timeConstraints.gridx = 0;
         timeConstraints.gridy = 0;
-        hourTextField = new JTextField(2);
+        hourTextField = new JTextField("12");
         time.add(hourTextField, timeConstraints);
         timeConstraints.gridx = 1;
-        minutesTextField = new JTextField(2);
+        minutesTextField = new JTextField("00");
         time.add(minutesTextField, timeConstraints);
         timeConstraints.gridx = 2;
         constraints.gridx = 1;
