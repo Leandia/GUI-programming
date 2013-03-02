@@ -1,19 +1,13 @@
 package todomanager;
 
+import backend.InputUtility;
 import backend.ToDoItem;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import values.Priority;
 
 /**
@@ -54,6 +48,7 @@ public class NewItemPopup extends JDialog {
     public NewItemPopup(JFrame frame, boolean modal) {
         //JFrame frame = new JFrame();
         super(frame, modal);
+        this.setLocationByPlatform(true);
         myPanel = new JPanel();
         myPanel.setLayout(new GridBagLayout());
         getContentPane().add(myPanel);
@@ -170,28 +165,56 @@ public class NewItemPopup extends JDialog {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!titleTextField.getText().equals("")) {
+            //If fields arent filled properly a new todoitem shouldnt be
+            //created.
+            boolean createItem = true;
+            
+            //Each item needs a title, cant be an empty string. Any characters
+            //are ok though.
+            if (InputUtility.validateString(titleTextField.getText(),80)) {
                 title = titleTextField.getText();
             }
-            if (!descriptionTextField.getText().equals("")) {
-                description = descriptionTextField.getText();
+            else{
+                JOptionPane.showMessageDialog(null, "You must enter a title",
+                "Error!", JOptionPane.ERROR_MESSAGE);
+                createItem = false;
             }
-            if (!categoryTextField.getText().equals("")) {
+            
+            if (InputUtility.validateString(categoryTextField.getText(),30)) {
                 category = categoryTextField.getText();
             }
             
+            int year = InputUtility.tryParseInt(yearTextField.getText());
+            int month = InputUtility.tryParseInt(monthTextField.getText());
+            int day = InputUtility.tryParseInt(dayTextField.getText());
+            int hour = InputUtility.tryParseInt(hourTextField.getText());
+            int min = InputUtility.tryParseInt(minutesTextField.getText());
+            
             //For month we need to withdraw 1 to get the correct value for
-            //month since Gregoriancalendar starts at 0
-            if (!yearTextField.getText().equals("")
-                    && !monthTextField.getText().equals("")
-                    && !dayTextField.getText().equals("")) {
-                date = new GregorianCalendar(Integer.parseInt(yearTextField.getText()),
-                        Integer.parseInt(monthTextField.getText())-1,
-                        Integer.parseInt(dayTextField.getText()));                
+            //month since Gregoriancalendar starts at 0 for month
+            if (year != -1 && month != -1 && day != -1 && hour != -1 && min != -1) {
+                date = new GregorianCalendar(year,month-1,day,hour,min);
             }
+            else{
+                //Displays an error message when date or time fields arent
+                //properly filled
+                JOptionPane.showMessageDialog(null, "Date and time must be numbers",
+                "Error!", JOptionPane.ERROR_MESSAGE);
+                createItem = false;
+            }
+            
+            //This should be removed when description is removed form todoitems
+            description = "temp";
+            
             prio = (Priority) priorityMenu.getSelectedItem();
-            item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);
-            setVisible(false);
+            
+            
+            if(createItem){
+                item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);
+                setVisible(false);
+            }
+            
+            
         }
     }
 
