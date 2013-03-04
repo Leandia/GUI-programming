@@ -31,7 +31,8 @@ public class ToDoItemDesign extends JPanel {
     private JLabel category;
     private JLabel date;
     private JButton deleteBtn;
-
+    private JButton editBtn;
+    
     /**
      * Constructor, it sets up the design, creates all the objects and sets them
      * in apropriate places.
@@ -111,7 +112,7 @@ public class ToDoItemDesign extends JPanel {
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
-        JButton editBtn = new JButton("Edit");
+        editBtn = new JButton(TODOManager.manager.getBundle().getString("edit"));
         editPanel.add(editBtn);
 
         deleteBtn = new JButton();
@@ -167,5 +168,12 @@ public class ToDoItemDesign extends JPanel {
                 this.setBackground(Color.GRAY);
                 break;
         }
+    }
+    
+    public void updateLabels(){
+        this.doneButton.setText(TODOManager.manager.getBundle().getString("done"));
+        this.editBtn.setText(TODOManager.manager.getBundle().getString("edit"));
+        deleteBtn.removeAll();
+        deleteBtn.setAction(new DeleteItemAction(this.item));
     }
 }

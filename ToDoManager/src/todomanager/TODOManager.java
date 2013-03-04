@@ -32,6 +32,7 @@ public class TODOManager {
     JMenu language;
     JMenuItem eng;
     JMenuItem swe;
+    TodoList todoList;
     JMenu help;
     CategoryPanel category;
     public static BackendAPI backend;
@@ -78,7 +79,7 @@ public class TODOManager {
         categoryConstraints.weighty = 1.0;
         this.mainWindow.getContentPane().add(category, categoryConstraints);
 
-        TodoList todoList = new TodoList();
+        todoList = new TodoList();
         GridBagConstraints todoListConstraints = new GridBagConstraints();
         todoListConstraints.fill = GridBagConstraints.BOTH;
         todoListConstraints.gridx = 1;
@@ -107,8 +108,9 @@ public class TODOManager {
 
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
-
-        language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
+        SelectEnglishAsLanguageAction act = new SelectEnglishAsLanguageAction(manager.getBundle().getString("english"));
+       
+        language.add(act);
         language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
         settings.add(language);
         menu.add(settings);
@@ -119,11 +121,30 @@ public class TODOManager {
         this.mainWindow.setJMenuBar(menu);
 
     }
-
-    public static State getState() {
-        return savedSettings;
+    
+    private void updateLabels(){
+        this.file.setText(manager.getBundle().getString("file"));
+        this.quit.setText(manager.getBundle().getString("quit"));
+        file.removeAll();
+        file.add(new QuitAction(manager.getBundle().getString("file"),"This is the quit button."));
+        this.edit.setText(manager.getBundle().getString("edit"));
+        edit.removeAll();
+        edit.add(new JMenuItem(new AddItemPopupAction()));
+        this.settings.setText(manager.getBundle().getString("settings"));
+        this.language.setText(manager.getBundle().getString("language"));
+        language.removeAll();
+        language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
+        language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
+        this.help.setText(manager.getBundle().getString("help"));
+        
     }
 
+    public void changeLocale(){
+        this.todoList.top.updateLabels();
+        this.category.updateLabels();
+        updateLabels();
+    }
+    
     public static void main(String[] args) {
 
         /**
@@ -134,9 +155,6 @@ public class TODOManager {
         backend = new BackendAPI(savedSettings.getItemIndex());
         manager = new LanguageManager();
         TODOManager main = new TODOManager();
-    }
-
-    public static LanguageManager getManager() {
-        return manager;
+        manager.setTodoManager(main);
     }
 }

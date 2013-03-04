@@ -18,7 +18,7 @@ public class AddItemPopupAction extends AbstractAction {
 
 
     public AddItemPopupAction() {
-        super(TODOManager.getManager().getBundle().getString("buttontext"));
+        super(TODOManager.manager.getBundle().getString("buttontext"));
     }
 
     @Override

@@ -28,4 +28,8 @@ public class CategoryPanel extends JPanel {
         this.add(clock, BorderLayout.NORTH);
         this.add(categories, BorderLayout.CENTER);
     }
+    
+    public void updateLabels(){
+        this.categories.setText(TODOManager.manager.getBundle().getString("categories"));
+    }
 }

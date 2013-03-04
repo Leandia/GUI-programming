@@ -23,6 +23,7 @@ public class LanguageManager {
     private ArrayList<Locale> locales = new ArrayList();
     private ResourceBundle bundle;
     private String defaultLanguage = "English";
+    private TODOManager manager;
     
     public LanguageManager(){
         locales.add(new Locale.Builder().setLanguage("en").setRegion("US").build());
@@ -53,6 +54,7 @@ public class LanguageManager {
                 break;
             case "Swedish":
                 bundle = ResourceBundle.getBundle(fileName, locales.get(1));
+                break;
         }
     }
     
@@ -60,8 +62,11 @@ public class LanguageManager {
      * This should set the language stored on file to the input parameter
      **/
     public void UpdateLanguage(String language){
-        System.out.println(language);
+        initLanguage(language);
+        this.manager.changeLocale();
     }
+    
+    
     
     /**
      * 
@@ -70,4 +75,8 @@ public class LanguageManager {
     public ResourceBundle getBundle(){
         return this.bundle;
     }   
+    
+    public void setTodoManager(TODOManager mngr){
+        this.manager = mngr;
+    }
 }

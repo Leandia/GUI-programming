@@ -25,7 +25,8 @@ public class SelectEnglishAsLanguageAction extends AbstractAction{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            TODOManager.getState().setSelectedLanguage(eng);
+            TODOManager.savedSettings.setSelectedLanguage(eng);
+            TODOManager.manager.UpdateLanguage(eng);
         }
     
 }

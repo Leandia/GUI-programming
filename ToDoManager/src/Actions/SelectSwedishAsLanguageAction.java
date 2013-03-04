@@ -6,6 +6,9 @@ package Actions;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import todomanager.TODOManager;
 
 /**
@@ -25,6 +28,7 @@ public class SelectSwedishAsLanguageAction extends AbstractAction{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            TODOManager.getState().setSelectedLanguage(swe);
+            TODOManager.savedSettings.setSelectedLanguage(swe);
+            TODOManager.manager.UpdateLanguage(swe);
         }
      }

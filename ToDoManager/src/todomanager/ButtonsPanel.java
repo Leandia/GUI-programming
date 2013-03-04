@@ -30,6 +30,7 @@ public class ButtonsPanel extends JPanel {
     private TaskPanel panel_tomorrow;
     private TaskPanel panel_this_week;
     private TaskPanel panel_old;
+    private JTabbedPane pane;
     /**
      *
      * @param list
@@ -40,8 +41,7 @@ public class ButtonsPanel extends JPanel {
     }
 
     private void createAndShowGUI() {
-        addButton = new JButton(new AddItemPopupAction());
-        addButton.setActionCommand("button");
+        addButton = new JButton();
         setLayout(new GridBagLayout());
         GridBagConstraints btn = new GridBagConstraints();
         btn.gridx = 1;
@@ -56,19 +56,10 @@ public class ButtonsPanel extends JPanel {
         btn.anchor = GridBagConstraints.WEST;
         btn.gridwidth = 2;
         
-        JTabbedPane pane = new JTabbedPane();
-        panel_all = new TaskPanel();
-        panel_today = new TaskPanel();
-        panel_tomorrow = new TaskPanel();
-        panel_this_week = new TaskPanel();
-        panel_old = new TaskPanel();
+        pane = new JTabbedPane();
         
-        
-        pane.add(TODOManager.manager.getBundle().getString("all"),panel_all);
-        pane.add(TODOManager.manager.getBundle().getString("today"),panel_today);
-        pane.add(TODOManager.manager.getBundle().getString("tomorrow"),panel_tomorrow);        
-        pane.add(TODOManager.manager.getBundle().getString("this_week"),panel_this_week);
-        pane.add(TODOManager.manager.getBundle().getString("old"),panel_old);
+        //Set title for each tab
+        updateLabels();
         
         pane.addChangeListener(new ChangeListener() {
 
@@ -129,5 +120,24 @@ public class ButtonsPanel extends JPanel {
                     default:
                         return 0;
                 }
+    }
+
+    /**
+     * Function that sets all labels belonging to the buttonpanel.
+     */
+    public void updateLabels(){
+        pane.removeAll();
+        panel_all = new TaskPanel();
+        panel_today = new TaskPanel();
+        panel_tomorrow = new TaskPanel();
+        panel_this_week = new TaskPanel();
+        panel_old = new TaskPanel();
+        
+        pane.add(panel_all,TODOManager.manager.getBundle().getString("all"));
+        pane.add(panel_today,TODOManager.manager.getBundle().getString("today"));
+        pane.add(panel_tomorrow,TODOManager.manager.getBundle().getString("tomorrow"));        
+        pane.add(panel_this_week,TODOManager.manager.getBundle().getString("this_week"));
+        pane.add(panel_old,TODOManager.manager.getBundle().getString("old"));
+        this.addButton.setAction(new AddItemPopupAction());
     }
 }
