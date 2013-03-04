@@ -126,8 +126,8 @@ public class State {
      * @return The width of the window from the current state
      */
     public int getWidth(int def) {
-        int minHeight = 500;
-        if (this.x > minHeight) {
+        int minWidth = 500;
+        if (this.x > minWidth) {
             return this.x;
         } else {
             return def;
@@ -140,8 +140,8 @@ public class State {
      * @return The height of the window from the current state
      */
     public int getHeight(int def) {
-        int minSize = 300;
-        if (this.y > minSize) {
+        int minHeight = 300;
+        if (this.y > minHeight) {
             return this.y;
         } else {
             return def;

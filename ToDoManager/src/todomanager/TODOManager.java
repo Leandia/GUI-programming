@@ -54,7 +54,6 @@ public class TODOManager {
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-                System.out.println(mainWindow.getWidth());
                 TODOManager.savedSettings.setX(mainWindow.getWidth());
                 TODOManager.savedSettings.setY(mainWindow.getHeight());
                 TODOManager.savedSettings.setItemIndex(backend.getIndex());
@@ -122,6 +121,10 @@ public class TODOManager {
 
     }
     
+    /**
+     * Updates all internationalized components belonging
+     * to the TODOManager class given the set locale. 
+     */
     private void updateLabels(){
         this.file.setText(manager.getBundle().getString("file"));
         this.quit.setText(manager.getBundle().getString("quit"));
@@ -139,6 +142,10 @@ public class TODOManager {
         
     }
 
+    /**
+     * Method is called on localechange and calls all methods for updating the
+     * GUI components that are internationalized
+     */
     public void changeLocale(){
         this.todoList.top.updateLabels();
         this.category.updateLabels();
@@ -147,9 +154,6 @@ public class TODOManager {
     
     public static void main(String[] args) {
 
-        /**
-         * Saves settings on program exit
-         */
         savedSettings = new State();
         savedSettings.loadState();
         backend = new BackendAPI(savedSettings.getItemIndex());

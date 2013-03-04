@@ -123,21 +123,20 @@ public class ButtonsPanel extends JPanel {
     }
 
     /**
-     * Function that sets all labels belonging to the buttonpanel.
+     * Function that sets all internationalized components
+     * belonging to the buttonpanel.
      */
     public void updateLabels(){
+        //Creates a taskpanel for each tab in the panel. First needs to remove
+        //any previous components. 
         pane.removeAll();
-        panel_all = new TaskPanel();
-        panel_today = new TaskPanel();
-        panel_tomorrow = new TaskPanel();
-        panel_this_week = new TaskPanel();
-        panel_old = new TaskPanel();
         
-        pane.add(panel_all,TODOManager.manager.getBundle().getString("all"));
-        pane.add(panel_today,TODOManager.manager.getBundle().getString("today"));
-        pane.add(panel_tomorrow,TODOManager.manager.getBundle().getString("tomorrow"));        
-        pane.add(panel_this_week,TODOManager.manager.getBundle().getString("this_week"));
-        pane.add(panel_old,TODOManager.manager.getBundle().getString("old"));
+        //Adds the panel and a label to each of the tabs accordingly.
+        pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("all"));
+        pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("today"));
+        pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("tomorrow"));        
+        pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("this_week"));
+        pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("old"));
         this.addButton.setAction(new AddItemPopupAction());
     }
 }
