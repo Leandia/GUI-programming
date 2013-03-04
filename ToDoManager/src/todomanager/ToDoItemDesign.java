@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Calendar;
+import java.util.Locale;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class ToDoItemDesign extends JPanel {
     private JLabel title;
     private JLabel category;
     private JLabel date;
+    private JLabel time;
     private JButton deleteBtn;
     private JButton editBtn;
 
@@ -101,12 +103,19 @@ public class ToDoItemDesign extends JPanel {
         titleConstraints.gridy = 1;
         titleConstraints.gridwidth = 1;
         titlePanel.add(datePanel, titleConstraints);
+        // Add Time
+        JPanel timePanel = new JPanel();
+        timePanel.setOpaque(false);
+        time = new JLabel("-- error no time --");
+        datePanel.add(time);
+        titleConstraints.gridx = 1;
+        titlePanel.add(time, titleConstraints);
         // Add category.
         JPanel categoryPanel = new JPanel();
         categoryPanel.setOpaque(false);
         category = new JLabel("-- error no category --");
         categoryPanel.add(category);
-        titleConstraints.gridx = 1;
+        titleConstraints.gridx = 2;
         titlePanel.add(categoryPanel, titleConstraints);
 
         // -- Panel 3 for edit and delete buttons, position(3,0).
@@ -157,6 +166,15 @@ public class ToDoItemDesign extends JPanel {
         date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
                 + month + "-"
                 + this.item.getDate().get(Calendar.DATE));
+
+        //Set time, minute is always atleast 2 characters long, for example
+        //12:08 is displayed as 12:08 not 12:8.
+        String minute = Integer.toString(this.item.getDate().get(Calendar.MINUTE));
+        if (minute.length() < 2) {
+            minute = "0" + minute;
+        }
+        time.setText(this.item.getDate().get(Calendar.HOUR_OF_DAY) + ":"
+                + minute);
 
         setBackgroundColor();
     }
