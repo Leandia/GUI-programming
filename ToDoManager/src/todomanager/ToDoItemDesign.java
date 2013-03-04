@@ -161,11 +161,16 @@ public class ToDoItemDesign extends JPanel {
         category.setText(this.item.getCategory());
         //Month start by 0 in gregoriancalendar so need to add 1 to
         //display the correct value
-        int month = this.item.getDate().get(Calendar.MONTH) + 1;
+        String month = Integer.toString(this.item.getDate().get(Calendar.MONTH) + 1);
+        if (month.length() < 2) {
+            month = "0" + month;
+        }
+        String day = Integer.toString(this.item.getDate().get(Calendar.DATE));
+        if (day.length() < 2) {
+            day = "0" + day;
+        }
 
-        date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
-                + month + "-"
-                + this.item.getDate().get(Calendar.DATE));
+        date.setText(this.item.getDate().get(Calendar.YEAR) + "-" + month + "-" + day);
 
         //Set time, minute is always atleast 2 characters long, for example
         //12:08 is displayed as 12:08 not 12:8.
