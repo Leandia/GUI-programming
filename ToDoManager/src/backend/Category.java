@@ -1,7 +1,6 @@
 package backend;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /*
  * To change this template, choose Tools | Templates
@@ -65,22 +64,6 @@ public class Category {
 
     public ArrayList getToDoItems() {
         return this.toDoItems;
-    }
-    
-    /**
-     * Fills the category with items that belong in this category
-     * @param items Complete list of todoitems
-     */
-    public void fillCategory(ArrayList<ToDoItem> items){
-        Iterator iterator = items.iterator();
-        ToDoItem item;
-        
-        while(iterator.hasNext()){
-            item = (ToDoItem)iterator.next();
-            if(item.getCategory().matches(this.categoryTitle)){
-                this.addToDoItem(item);
-            }
-        }
     }
         
     

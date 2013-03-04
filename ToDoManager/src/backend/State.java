@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import javax.swing.JFrame;
 import values.TimeFilter;
 
 /**
@@ -17,6 +16,7 @@ import values.TimeFilter;
 public class State {
 
     private String selectedLanguage;
+    private String selectedCategory;
     private Properties pro = new Properties();
     private TimeFilter filtering = TimeFilter.ALL;
     private int x = 0;
@@ -24,7 +24,7 @@ public class State {
     private int itemIndex = 0;
     private int xPos;
     private int yPos;
-
+    
     /**
      *
      * @return Language that is to be used in the graphical interface
@@ -63,13 +63,13 @@ public class State {
      */
     public void saveState() {
         try {
-
             pro.setProperty("lan", selectedLanguage);
             pro.setProperty("x", Integer.toString(x));
             pro.setProperty("y", Integer.toString(y));
             pro.setProperty("xpos",Integer.toString(xPos));
             pro.setProperty("ypos",Integer.toString(yPos));
             pro.setProperty("filter", this.filtering.toString());
+            pro.setProperty("category", selectedCategory);
             pro.setProperty("itemIndex", Integer.toString(itemIndex));
 
             try {
@@ -95,6 +95,7 @@ public class State {
 
                 this.selectedLanguage = pro.getProperty("lan");
                 stringToTimeFilter(pro.getProperty("filter"));
+                this.selectedCategory = pro.getProperty("category");
                 
                 //catch numberformat exception incase there are
                 //no values for x and y saved yet
@@ -211,5 +212,13 @@ public class State {
                 break;    
                 
         }
+    }
+    
+    public String getSelectedCategory(){
+        return this.selectedCategory;
+    }
+
+    void setSelectedCategory(String category) {
+        this.selectedCategory = category;
     }
 }

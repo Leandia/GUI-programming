@@ -6,12 +6,14 @@ package backend;
 
 import java.util.*;
 import javax.swing.JPanel;
+import todomanager.TODOManager;
 import values.TimeFilter;
 
 /**
  *
  * @author Daniel
  * @author Emil
+ * @author Kristian
  */
 public class BackendAPI {
 
@@ -20,12 +22,18 @@ public class BackendAPI {
     //final DisplayList list;
     private int index = 0;
     private ArrayList<Category> categories = new ArrayList();
+    private String selectedCategory;
+    private TimeFilter filter;
 
     public BackendAPI(int index) {
         this.index = index;
         this.database = new Database();
-        insertItems();
+        this.selectedCategory = TODOManager.savedSettings.getSelectedCategory();
+        this.filter = TODOManager.savedSettings.getFilter();
+        
+        //setDisplayItems();
         initCategories();
+        viewChange();
         //this.list = new DisplayList();
     }
 
@@ -34,14 +42,37 @@ public class BackendAPI {
     /**
      * Method to fetch all items from the database and insert into the display
      * list.
-     */
-    private void insertItems() {
-        ArrayList<ToDoItem> tempList = this.database.getAllItems();
+     
+    private void isnsertItems() {
+        ArrayList<ToDoItem> tempList = getDisplayItems(this.selectedCategory);
         Iterator iter = tempList.iterator();
         while (iter.hasNext()) {
             ToDoItem item = (ToDoItem) iter.next();
             this.displayList.addElement(item);
         }
+    }*/
+    
+    
+    private void setDisplayItems(){
+        ArrayList<ToDoItem> temp = new ArrayList();
+        ArrayList<ToDoItem> allItems = this.database.getAllItems();
+        ToDoItem item;
+        
+        if(this.selectedCategory == null || this.selectedCategory.equals("All")){
+            this.displayList.setList(allItems);
+        }
+        else{
+            Iterator iterator = allItems.iterator();
+            
+            while(iterator.hasNext()){
+                item = (ToDoItem)iterator.next();
+                if(item.getCategory().equals(this.selectedCategory)){
+                    temp.add(item);
+                }
+            }
+            this.displayList.setList(temp);;
+        }
+        
     }
 
     /**
@@ -140,10 +171,8 @@ public class BackendAPI {
     /**
      * Function that filter by time, what period is determined by the filter
      * parameter
-     *
-     * @param filter Which time period to filter by
      */
-    public void filterByTime(TimeFilter filter) {
+    private void filterByTime() {
         ArrayList<ToDoItem> list = this.displayList.getList();
         ArrayList<ToDoItem> temp = new ArrayList();
         
@@ -189,35 +218,60 @@ public class BackendAPI {
     }
 
     /**
+     * Called on changes in which items to view, either changing category
+     * or time filter. In returns calls each method respectively.
+     */
+    public void viewChange(){
+        setDisplayItems();
+        filterByTime();
+    }
+    /**
      * Initializes categories on startup
      */
     private void initCategories() {
-        Iterator iterator;
-        ArrayList<ToDoItem> items = this.database.getAllItems();
-        
+        System.out.println(this.database.getCategories().size());
         if(this.database.getCategories().isEmpty()){
-            this.categories.add(new Category(1,"Home"));
-            this.categories.add(new Category(2,"Work"));
-            this.categories.add(new Category(1,"Other"));
+            addCategory(new Category(2,"Home",new ArrayList()));
+            addCategory(new Category(3,"Work",new ArrayList()));
+            addCategory(new Category(4,"Other",new ArrayList()));
         }
         else{
-                iterator = this.database.getCategories().iterator();
+            System.out.println("test");
+            this.categories = this.database.getCategories();
+        }
                 
-                while(iterator.hasNext()){
-                    this.categories.add((Category)iterator.next());
-                }
-        }
-        
-        iterator = this.categories.iterator();
-        Category category;
-        
-        while(iterator.hasNext()){
-            category = (Category)iterator.next();
-            category.fillCategory(items);
-        }
-        
-        
+    } 
+    
+    /**
+     * Adds a category to the list of categories, also writes through to
+     * the database.
+     * @param category 
+     */
+    public void addCategory(Category category){
+        this.categories.add(category);
+        this.database.addCategory(category);
     }
     
+    /**
+     * Deletes the input category from the list of categories,
+     * deletes also from the database
+     * @param category 
+     */
+    public void deleteCategory(Category category){
+        this.categories.remove(category);
+        this.database.deleteCategory(category);
+    }
+
+    public ArrayList<Category> getCategories() {
+        return this.categories;
+    }
+
+    public void setSelectedCategory(String category) {
+        this.selectedCategory = category;
+        TODOManager.savedSettings.setSelectedCategory(category);
+    }
     
+    public void setFilter(TimeFilter filt){
+        this.filter = filt;
+    }
 }
