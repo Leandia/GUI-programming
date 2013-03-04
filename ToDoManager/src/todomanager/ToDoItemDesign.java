@@ -5,18 +5,17 @@
 package todomanager;
 
 import Actions.DeleteItemAction;
+import Actions.EditItemAction;
 import backend.ToDoItem;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Calendar;
-import java.util.Locale;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import values.Priority;
 
 /**
  *
@@ -122,7 +121,7 @@ public class ToDoItemDesign extends JPanel {
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
-        editBtn = new JButton(TODOManager.manager.getBundle().getString("edit"));
+        editBtn = new JButton();
         editPanel.add(editBtn);
 
         deleteBtn = new JButton();
@@ -140,6 +139,7 @@ public class ToDoItemDesign extends JPanel {
         this.item = item;
         // Set actions to button here.
         deleteBtn.setAction(new DeleteItemAction(this.item));
+        editBtn.setAction(new EditItemAction(this.item));
 
         switch (this.item.getPrio()) {
             case LOW:
