@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import javax.swing.JFrame;
 import values.TimeFilter;
 
 /**
@@ -21,6 +22,8 @@ public class State {
     private int x = 0;
     private int y = 0;
     private int itemIndex = 0;
+    private int xPos;
+    private int yPos;
 
     /**
      *
@@ -64,6 +67,8 @@ public class State {
             pro.setProperty("lan", selectedLanguage);
             pro.setProperty("x", Integer.toString(x));
             pro.setProperty("y", Integer.toString(y));
+            pro.setProperty("xpos",Integer.toString(xPos));
+            pro.setProperty("ypos",Integer.toString(yPos));
             pro.setProperty("filter", this.filtering.toString());
             pro.setProperty("itemIndex", Integer.toString(itemIndex));
 
@@ -96,6 +101,8 @@ public class State {
                 try {
                     this.y = Integer.parseInt(pro.getProperty("y"));
                     this.x = Integer.parseInt(pro.getProperty("x"));
+                    this.xPos = Integer.parseInt(pro.getProperty("xpos"));
+                    this.yPos = Integer.parseInt(pro.getProperty("ypos"));
                     this.itemIndex = Integer.parseInt(pro.getProperty("itemIndex"));
                 } //If no states is yet saved x and y are set to 0 which
                 //would render the return function returning the default
@@ -103,6 +110,8 @@ public class State {
                 catch (NumberFormatException e) {
                     this.x = 0;
                     this.y = 0;
+                    this.xPos = 0;
+                    this.yPos = 0;
                     this.itemIndex = 0;
                 }
                 
@@ -146,6 +155,22 @@ public class State {
         } else {
             return def;
         }
+    }
+    
+    public int getXPos(){
+        return this.xPos;
+    }
+    
+    public int getYPos(){
+        return this.yPos;
+    }
+    
+    public void setXPos(int x){
+        this.xPos = x;
+    }
+    
+    public void setYPos(int y){
+        this.yPos = y;
     }
 
     public void setItemIndex(int itemIndex) {

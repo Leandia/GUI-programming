@@ -44,7 +44,7 @@ public class TODOManager {
     public TODOManager() {
         this.mainWindow = new JFrame("ToDo Manager");
         this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700), TODOManager.savedSettings.getHeight(500)));
-
+        this.mainWindow.setBounds(savedSettings.getXPos(), savedSettings.getYPos(), savedSettings.getWidth(700), savedSettings.getHeight(500));
         windowSetup();
         addMenu();
 
@@ -56,9 +56,11 @@ public class TODOManager {
             public void run() {
                 TODOManager.savedSettings.setX(mainWindow.getWidth());
                 TODOManager.savedSettings.setY(mainWindow.getHeight());
+                System.out.println(mainWindow.getX());
+                TODOManager.savedSettings.setXPos(mainWindow.getX());
+                TODOManager.savedSettings.setYPos(mainWindow.getY());
                 TODOManager.savedSettings.setItemIndex(backend.getIndex());
                 TODOManager.savedSettings.saveState();
-
             }
         }));
 
