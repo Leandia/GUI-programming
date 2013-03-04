@@ -21,8 +21,6 @@ public class NewItemPopup extends JDialog {
     private JButton noButton = null;
     private JLabel titleLabel = null;
     private JTextField titleTextField = null;
-    private JLabel descriptionLabel = null;
-    private JTextField descriptionTextField = null;
     private JLabel categoryLabel = null;
     private JTextField categoryTextField = null;
     private JLabel dateLabel = null;
@@ -34,11 +32,13 @@ public class NewItemPopup extends JDialog {
     private JTextField minutesTextField = null;
     private JLabel priorityLabel = null;
     private JComboBox priorityMenu = null;
-    private Priority[] prioList = {Priority.LOW,
-        Priority.MEDIUM, Priority.HIGH};
+    private String[] prioList = {
+        TODOManager.manager.getBundle().getString("low"),
+        TODOManager.manager.getBundle().getString("medium"),
+        TODOManager.manager.getBundle().getString("high")};
     // Choosable values.
     private String title;
-    private String description;
+    private String description = "not implemented";
     private String category;
     private GregorianCalendar date;
     private Priority prio;
@@ -54,25 +54,20 @@ public class NewItemPopup extends JDialog {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx = 1;
         constraints.weighty = 1;
+        constraints.fill = GridBagConstraints.BOTH;
 
         //1,1
         titleLabel = new JLabel(TODOManager.manager.getBundle().getString("title"));
         constraints.gridx = 0;
         constraints.gridy = 0;
         myPanel.add(titleLabel, constraints);
-        //1,2
-        titleTextField = new JTextField(10);
-        constraints.gridx = 1;
-        myPanel.add(titleTextField, constraints);
         //2,1
-        descriptionLabel = new JLabel(TODOManager.manager.getBundle().getString("description"));
+        titleTextField = new JTextField(10);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        myPanel.add(descriptionLabel, constraints);
-        //2,2
-        descriptionTextField = new JTextField(10);
-        constraints.gridx = 1;
-        myPanel.add(descriptionTextField, constraints);
+        constraints.gridwidth = 2;
+        myPanel.add(titleTextField, constraints);
+        constraints.gridwidth = 1;
         //3,1
         categoryLabel = new JLabel(TODOManager.manager.getBundle().getString("category"));
         constraints.gridx = 0;
@@ -167,53 +162,53 @@ public class NewItemPopup extends JDialog {
             //If fields arent filled properly a new todoitem shouldnt be
             //created.
             boolean createItem = true;
-            
+
             //Each item needs a title, cant be an empty string. Any characters
             //are ok though.
-            if (InputUtility.validateString(titleTextField.getText(),80)) {
+            if (InputUtility.validateString(titleTextField.getText(), 80)) {
                 title = titleTextField.getText();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "You must enter a title",
-                "Error!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("newItemTitleError"),
+                        "Error!", JOptionPane.ERROR_MESSAGE);
                 createItem = false;
             }
-            
-            if (InputUtility.validateString(categoryTextField.getText(),30)) {
+
+            if (InputUtility.validateString(categoryTextField.getText(), 30)) {
                 category = categoryTextField.getText();
             }
-            
+
             int year = InputUtility.tryParseInt(yearTextField.getText());
             int month = InputUtility.tryParseInt(monthTextField.getText());
             int day = InputUtility.tryParseInt(dayTextField.getText());
             int hour = InputUtility.tryParseInt(hourTextField.getText());
             int min = InputUtility.tryParseInt(minutesTextField.getText());
-            
+
             //For month we need to withdraw 1 to get the correct value for
             //month since Gregoriancalendar starts at 0 for month
             if (year != -1 && month != -1 && day != -1 && hour != -1 && min != -1) {
-                date = new GregorianCalendar(year,month-1,day,hour,min);
-            }
-            else{
+                date = new GregorianCalendar(year, month - 1, day, hour, min);
+            } else {
                 //Displays an error message when date or time fields arent
                 //properly filled
-                JOptionPane.showMessageDialog(null, "Date and time must be numbers",
-                "Error!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("newItemNumberError"),
+                        "Error!", JOptionPane.ERROR_MESSAGE);
                 createItem = false;
             }
-            
-            //This should be removed when description is removed form todoitems
-            description = "temp";
-            
-            prio = (Priority) priorityMenu.getSelectedItem();
-            
-            
-            if(createItem){
+
+            if (((String) priorityMenu.getSelectedItem()).equals(TODOManager.manager.getBundle().getString("low"))) {
+                prio = Priority.LOW;
+            } else if (((String) priorityMenu.getSelectedItem()).equals(TODOManager.manager.getBundle().getString("medium"))) {
+                prio = Priority.MEDIUM;
+            } else if (((String) priorityMenu.getSelectedItem()).equals(TODOManager.manager.getBundle().getString("high"))) {
+                prio = Priority.HIGH;
+            }
+
+            if (createItem) {
                 item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);
                 setVisible(false);
             }
-            
-            
+
+
         }
     }
 
@@ -265,7 +260,7 @@ public class NewItemPopup extends JDialog {
     public Priority getPriority() {
         return prio;
     }
-    
+
     public ToDoItem getItem() {
         return item;
     }
