@@ -47,7 +47,6 @@ public class TODOManager {
         this.mainWindow.setBounds(savedSettings.getXPos(), savedSettings.getYPos(), savedSettings.getWidth(700), savedSettings.getHeight(500));
         windowSetup();
         addMenu();
-
         this.mainWindow.pack();
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +55,6 @@ public class TODOManager {
             public void run() {
                 TODOManager.savedSettings.setX(mainWindow.getWidth());
                 TODOManager.savedSettings.setY(mainWindow.getHeight());
-                System.out.println(mainWindow.getX());
                 TODOManager.savedSettings.setXPos(mainWindow.getX());
                 TODOManager.savedSettings.setYPos(mainWindow.getY());
                 TODOManager.savedSettings.setItemIndex(backend.getIndex());
