@@ -25,6 +25,7 @@ public class BackendAPI {
         this.index = index;
         this.database = new Database();
         insertItems();
+        initCategories();
         //this.list = new DisplayList();
     }
 
@@ -186,4 +187,37 @@ public class BackendAPI {
         
         
     }
+
+    /**
+     * Initializes categories on startup
+     */
+    private void initCategories() {
+        Iterator iterator;
+        ArrayList<ToDoItem> items = this.database.getAllItems();
+        
+        if(this.database.getCategories().isEmpty()){
+            this.categories.add(new Category(1,"Home"));
+            this.categories.add(new Category(2,"Work"));
+            this.categories.add(new Category(1,"Other"));
+        }
+        else{
+                iterator = this.database.getCategories().iterator();
+                
+                while(iterator.hasNext()){
+                    this.categories.add((Category)iterator.next());
+                }
+        }
+        
+        iterator = this.categories.iterator();
+        Category category;
+        
+        while(iterator.hasNext()){
+            category = (Category)iterator.next();
+            category.fillCategory(items);
+        }
+        
+        
+    }
+    
+    
 }
