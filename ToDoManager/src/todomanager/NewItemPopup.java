@@ -1,6 +1,7 @@
 package todomanager;
 
 import backend.ToDoItem;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -134,7 +135,7 @@ public class NewItemPopup extends JDialog {
         constraints.gridx = 1;
         myPanel.add(priorityMenu, constraints);
         //7,1
-        yesButton = new JButton(new yesButton());
+        yesButton = new JButton(new yesButton(this));
         constraints.gridx = 0;
         constraints.gridy = 6;
         myPanel.add(yesButton, constraints);
@@ -153,8 +154,12 @@ public class NewItemPopup extends JDialog {
      */
     private class yesButton extends AbstractAction {
 
-        public yesButton() {
+        private NewItemPopup window;
+        private Color errorColor = Color.RED;
+
+        public yesButton(NewItemPopup window) {
             super(TODOManager.manager.getBundle().getString("add"));
+            this.window = window;
         }
 
         @Override
@@ -168,6 +173,7 @@ public class NewItemPopup extends JDialog {
             if (InputUtility.validateString(titleTextField.getText(), 80)) {
                 title = titleTextField.getText();
             } else {
+                this.window.titleTextField.setBorder(BorderFactory.createLineBorder(errorColor));
                 JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("newItemTitleError"),
                         "Error!", JOptionPane.ERROR_MESSAGE);
                 createItem = false;
@@ -190,6 +196,11 @@ public class NewItemPopup extends JDialog {
             } else {
                 //Displays an error message when date or time fields arent
                 //properly filled
+                this.window.yearTextField.setBorder(BorderFactory.createLineBorder(errorColor));
+                this.window.monthTextField.setBorder(BorderFactory.createLineBorder(errorColor));
+                this.window.dayTextField.setBorder(BorderFactory.createLineBorder(errorColor));
+                this.window.hourTextField.setBorder(BorderFactory.createLineBorder(errorColor));
+                this.window.minutesTextField.setBorder(BorderFactory.createLineBorder(errorColor));
                 JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("newItemNumberError"),
                         "Error!", JOptionPane.ERROR_MESSAGE);
                 createItem = false;
@@ -207,8 +218,6 @@ public class NewItemPopup extends JDialog {
                 item = new ToDoItem(TODOManager.backend.getIndex(), title, description, category, prio, date);
                 setVisible(false);
             }
-
-
         }
     }
 
