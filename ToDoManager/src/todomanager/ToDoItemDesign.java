@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import values.Priority;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ToDoItemDesign extends JPanel {
     private JLabel date;
     private JButton deleteBtn;
     private JButton editBtn;
-    
+
     /**
      * Constructor, it sets up the design, creates all the objects and sets them
      * in apropriate places.
@@ -131,15 +132,28 @@ public class ToDoItemDesign extends JPanel {
         // Set actions to button here.
         deleteBtn.setAction(new DeleteItemAction(this.item));
 
-        priority.setText(this.item.getPrio().toString());
+        switch (this.item.getPrio()) {
+            case LOW:
+                priority.setText(TODOManager.manager.getBundle().getString("low"));
+                break;
+            case MEDIUM:
+                priority.setText(TODOManager.manager.getBundle().getString("medium"));
+                break;
+            case HIGH:
+                priority.setText(TODOManager.manager.getBundle().getString("high"));
+                break;
+            default:
+                priority.setText("--Error--");
+                break;
+        }
 
         title.setText(this.item.getTitle());
 
         category.setText(this.item.getCategory());
         //Month start by 0 in gregoriancalendar so need to add 1 to
         //display the correct value
-        int month = this.item.getDate().get(Calendar.MONTH)+1;
-        
+        int month = this.item.getDate().get(Calendar.MONTH) + 1;
+
         date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
                 + month + "-"
                 + this.item.getDate().get(Calendar.DATE));
@@ -169,8 +183,8 @@ public class ToDoItemDesign extends JPanel {
                 break;
         }
     }
-    
-    public void updateLabels(){
+
+    public void updateLabels() {
         this.doneButton.setText(TODOManager.manager.getBundle().getString("done"));
         this.editBtn.setText(TODOManager.manager.getBundle().getString("edit"));
         deleteBtn.removeAll();
