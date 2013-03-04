@@ -6,10 +6,10 @@ import javax.swing.AbstractAction;
 import todomanager.TODOManager;
 
 /**
- *
+ * Class for delete item action. Extends AbstractAction.
  * @author Kristian
  */
-public class DeleteItemAction extends AbstractAction{
+public class DeleteItemAction extends AbstractAction {
 
     private ToDoItem todoItem;
     
