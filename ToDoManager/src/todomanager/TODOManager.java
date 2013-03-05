@@ -129,7 +129,7 @@ public class TODOManager {
         this.file.setText(manager.getBundle().getString("file"));
         this.quit.setText(manager.getBundle().getString("quit"));
         file.removeAll();
-        file.add(new QuitAction(manager.getBundle().getString("file"),"This is the quit button."));
+        file.add(new QuitAction(manager.getBundle().getString("quit"),"This is the quit button."));
         this.edit.setText(manager.getBundle().getString("edit"));
         edit.removeAll();
         edit.add(new JMenuItem(new AddItemPopupAction()));

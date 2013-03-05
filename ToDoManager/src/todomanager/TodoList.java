@@ -20,11 +20,9 @@ public class TodoList extends JPanel {
      * the bottom a panel showing number of items.
      */
     public TodoList() {
-        //middle = new TaskPanel();
         top = new ButtonsPanel();
         
         this.setLayout(new BorderLayout());
         this.add(top, BorderLayout.NORTH);
-        //this.add(middle, BorderLayout.CENTER);
     }
 }

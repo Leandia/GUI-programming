@@ -25,11 +25,6 @@ public class ButtonsPanel extends JPanel {
      * invoked from the event-dispatching thread.
      */
     private JButton addButton;
-    private TaskPanel panel_all;
-    private TaskPanel panel_today;
-    private TaskPanel panel_tomorrow;
-    private TaskPanel panel_this_week;
-    private TaskPanel panel_old;
     private JTabbedPane pane;
     /**
      *
@@ -57,6 +52,7 @@ public class ButtonsPanel extends JPanel {
         btn.gridwidth = 2;
         
         pane = new JTabbedPane();
+        pane.setPreferredSize(new Dimension(200,1500));
         
         //Set title for each tab
         updateLabels();
