@@ -2,20 +2,19 @@ package todomanager;
 
 
 import Actions.AddCategoryAction;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import backend.CategoryListModel;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -26,7 +25,6 @@ import javax.swing.event.ListSelectionListener;
  */
 public class CategoryPanel extends JPanel {
 
-    private JLabel categories;
     private JList list;
     private CategoryListModel model = TODOManager.backend.getCategoryListModel();
     
@@ -43,10 +41,6 @@ public class CategoryPanel extends JPanel {
         addClock();
         addAddCategoryButton();
     }
-    
-    public void updateLabels(){
-        this.categories.setText(TODOManager.manager.getBundle().getString("categories"));
-    }
 
     /**
      * Adds list of categories to the interface
@@ -59,6 +53,26 @@ public class CategoryPanel extends JPanel {
             public void valueChanged(ListSelectionEvent lse) {
                 TODOManager.backend.setSelectedCategory(model.getElementAt(list.getSelectedIndex()).toString());
                 TODOManager.backend.viewChange();
+            }
+        });
+        
+        list.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+                if(ke.getKeyCode() == KeyEvent.VK_DELETE){
+                    TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                
             }
         });
         

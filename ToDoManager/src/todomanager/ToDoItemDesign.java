@@ -4,6 +4,7 @@
  */
 package todomanager;
 
+import CustomComponents.ImagePanel;
 import Actions.DeleteItemAction;
 import Actions.EditItemAction;
 import backend.ToDoItem;

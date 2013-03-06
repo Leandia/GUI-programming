@@ -151,7 +151,6 @@ public class TODOManager {
      */
     public void changeLocale(){
         this.todoList.top.updateLabels();
-        this.category.updateLabels();
         updateLabels();
     }
     
