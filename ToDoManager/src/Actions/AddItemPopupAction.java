@@ -28,6 +28,7 @@ public class AddItemPopupAction extends AbstractAction {
         NewItemPopup opt = new NewItemPopup(frame, true);
         if (opt.getItem() != null) {
             TODOManager.backend.addItem(opt.getItem());
+            TODOManager.backend.viewChange();
         }
     }
 }

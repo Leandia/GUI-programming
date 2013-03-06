@@ -57,6 +57,9 @@ public class CategoryPanel extends JPanel {
             }
         });
         
+        //On startup sets selected category
+        
+        list.setSelectedValue(TODOManager.savedSettings.getSelectedCategory(), true);
         GridBagConstraints c = new GridBagConstraints();
         c.fill =GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -99,4 +102,5 @@ public class CategoryPanel extends JPanel {
         
         this.add(addCategory, c);
     }
+
 }

@@ -7,8 +7,9 @@
     <_3 name="Other" />
   </category>
   <data>
-    <_3 title="All" description="not implemented" category="All" priority="MEDIUM" year="2013" month="2" day="4" hour="12" minute="0" />
-    <_4 title="awreware" description="not implemented" category="Other" priority="LOW" year="2013" month="2" day="4" hour="12" minute="0" />
-    <_5 title="work" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="6" hour="12" minute="0" />
+    <_0 title="Idag kl. 12:35" description="not implemented" category="Home" priority="LOW" year="2013" month="2" day="6" hour="12" minute="35" />
+    <_1 title="idag, men gammalt" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="6" hour="12" minute="22" />
+    <_2 title="aweg" description="not implemented" category="Other" priority="LOW" year="2013" month="2" day="6" hour="12" minute="0" />
+    <_3 title="test" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="6" hour="12" minute="0" />
   </data>
 </todoManager>
