@@ -104,7 +104,7 @@ public class TODOManager {
 
         edit = new JMenu(manager.getBundle().getString("edit"));
         menu.add(edit);
-        newItem = new JMenuItem(new AddItemPopupAction());
+        newItem = new JMenuItem(new AddItemPopupAction(TODOManager.manager.getBundle().getString("buttontext")));
         edit.add(newItem);
         edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
         

@@ -32,8 +32,8 @@ public class ToDoItemDesign extends JPanel {
     private JLabel category;
     private JLabel date;
     private JLabel time;
-    private JButton deleteBtn;
-    private JButton editBtn;
+    private IconButton deleteBtn;
+    private IconButton editBtn;
 
     /**
      * Constructor, it sets up the design, creates all the objects and sets them
@@ -121,10 +121,10 @@ public class ToDoItemDesign extends JPanel {
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
-        editBtn = new JButton();
+        editBtn = new IconButton(new EditItemAction(this.item,"Text for now"),"./Resources/test.gif");
         editPanel.add(editBtn);
 
-        deleteBtn = new JButton();
+        deleteBtn = new IconButton(new DeleteItemAction(this.item,"Text for now"),"./Resources/test.gif");
         editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
@@ -209,8 +209,8 @@ public class ToDoItemDesign extends JPanel {
 
     public void updateLabels() {
         this.doneButton.setText(TODOManager.manager.getBundle().getString("done"));
-        this.editBtn.setText(TODOManager.manager.getBundle().getString("edit"));
-        deleteBtn.removeAll();
-        deleteBtn.setAction(new DeleteItemAction(this.item));
+        //this.editBtn.setText(TODOManager.manager.getBundle().getString("edit"));
+        //deleteBtn.removeAll();
+        //deleteBtn.setAction(new DeleteItemAction(this.item));
     }
 }

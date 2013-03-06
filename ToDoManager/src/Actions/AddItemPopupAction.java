@@ -18,9 +18,12 @@ public class AddItemPopupAction extends AbstractAction {
 
 
     public AddItemPopupAction() {
-        super(TODOManager.manager.getBundle().getString("buttontext"));
     }
-
+    
+    public AddItemPopupAction(String text) {
+        super(text);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = new JFrame();

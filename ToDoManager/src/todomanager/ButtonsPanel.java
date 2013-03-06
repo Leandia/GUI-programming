@@ -24,7 +24,7 @@ public class ButtonsPanel extends JPanel {
      * Create the GUI and show it. For thread safety, this method should be
      * invoked from the event-dispatching thread.
      */
-    private JButton addButton;
+    private IconButton addButton;
     private JTabbedPane pane;
     /**
      *
@@ -36,7 +36,7 @@ public class ButtonsPanel extends JPanel {
     }
 
     private void createAndShowGUI() {
-        addButton = new JButton();
+        addButton = new IconButton(new AddItemPopupAction(),"./Resources/test.gif");
         setLayout(new GridBagLayout());
         GridBagConstraints btn = new GridBagConstraints();
         btn.gridx = 1;
@@ -133,6 +133,6 @@ public class ButtonsPanel extends JPanel {
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("tomorrow"));        
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("this_week"));
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("old"));
-        this.addButton.setAction(new AddItemPopupAction());
+        //this.addButton.setAction(new AddItemPopupAction());
     }
 }
