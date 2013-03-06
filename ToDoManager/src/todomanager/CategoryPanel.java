@@ -9,8 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import backend.CategoryListModel;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -58,8 +61,17 @@ public class CategoryPanel extends JPanel {
         });
         
         //On startup sets selected category
-        
         list.setSelectedValue(TODOManager.savedSettings.getSelectedCategory(), true);
+        
+        //Set style of the list, font, text size and alignment
+        list.setFont(new Font("",Font.HANGING_BASELINE,18));
+        list.setCellRenderer(new DefaultListCellRenderer(){
+            @Override
+            public int getHorizontalAlignment() {
+                return CENTER;
+            }
+            });
+        
         GridBagConstraints c = new GridBagConstraints();
         c.fill =GridBagConstraints.BOTH;
         c.gridx = 0;
