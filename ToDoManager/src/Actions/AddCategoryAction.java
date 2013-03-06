@@ -26,9 +26,8 @@ public class AddCategoryAction extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        frame = new JFrame(TODOManager.manager.getBundle().getString("add_new_category"));
+        frame = new JFrame();
         frame.setPreferredSize(new Dimension(200,200));
-        
         
         popup = new NewCategoryPopup(frame);
     }

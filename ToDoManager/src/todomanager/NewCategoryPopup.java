@@ -1,6 +1,7 @@
 package todomanager;
 
 import backend.Category;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,8 @@ public class NewCategoryPopup extends JDialog {
     GridBagConstraints c = new GridBagConstraints();
     
     public NewCategoryPopup(JFrame frame){
-        super(frame,true);
+        super(frame,TODOManager.manager.getBundle().getString("add_new_category"));
+        super.setPreferredSize(new Dimension(200,200));
         mainPanel = new JPanel(new GridBagLayout());
         this.getContentPane().add(mainPanel);
         
@@ -43,7 +45,7 @@ public class NewCategoryPopup extends JDialog {
         
         c.gridx = 0;
         c.gridy = 1;
-        yBtn = new JButton(new YesButton(this));
+        yBtn = new JButton(new AddButton(this));
         mainPanel.add(yBtn,c);
         
         c.gridx = 1;
@@ -57,12 +59,12 @@ public class NewCategoryPopup extends JDialog {
     }
 
 
-    private class YesButton extends AbstractAction{
+    private class AddButton extends AbstractAction{
         
         private NewCategoryPopup window;
         
-        private YesButton(NewCategoryPopup popup){
-            super("Yes");
+        private AddButton(NewCategoryPopup popup){
+            super(TODOManager.manager.getBundle().getString("add"));
             window = popup;            
         }
                 
@@ -88,7 +90,7 @@ public class NewCategoryPopup extends JDialog {
         private NewCategoryPopup window;
         
         private CancelButton(NewCategoryPopup popup){
-            super("Cancel");
+            super(TODOManager.manager.getBundle().getString("cancel"));
             window = popup;            
         }
         

@@ -1,5 +1,6 @@
 package todomanager;
 
+import Actions.AddCategoryAction;
 import Actions.AddItemPopupAction;
 import Actions.QuitAction;
 import Actions.SelectEnglishAsLanguageAction;
@@ -104,7 +105,8 @@ public class TODOManager {
         menu.add(edit);
         newItem = new JMenuItem(new AddItemPopupAction());
         edit.add(newItem);
-
+        edit.add(new JMenuItem(new AddCategoryAction()));
+        
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
         SelectEnglishAsLanguageAction act = new SelectEnglishAsLanguageAction(manager.getBundle().getString("english"));
