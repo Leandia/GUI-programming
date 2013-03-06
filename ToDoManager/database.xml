@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <todoManager>
-  <category />
+  <category>
+    <_0 name="All" />
+    <_1 name="Home" />
+    <_2 name="Work" />
+    <_3 name="Other" />
+  </category>
   <data>
     <_3 title="All" description="not implemented" category="All" priority="MEDIUM" year="2013" month="2" day="4" hour="12" minute="0" />
     <_4 title="awreware" description="not implemented" category="Other" priority="LOW" year="2013" month="2" day="4" hour="12" minute="0" />
+    <_5 title="work" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="6" hour="12" minute="0" />
   </data>
 </todoManager>

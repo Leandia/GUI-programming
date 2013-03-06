@@ -44,6 +44,7 @@ public class NewItemPopup extends JDialog {
     private GregorianCalendar date;
     private Priority prio;
     private ToDoItem item;
+    private JList list;
 
     public NewItemPopup(JFrame frame, boolean modal) {
         //JFrame frame = new JFrame();
@@ -75,9 +76,10 @@ public class NewItemPopup extends JDialog {
         constraints.gridy = 2;
         myPanel.add(categoryLabel, constraints);
         //3,2
-        categoryTextField = new JTextField("Default", 10);
+        list = new JList(TODOManager.backend.getCategoryListModel());
         constraints.gridx = 1;
-        myPanel.add(categoryTextField, constraints);
+        myPanel.add(list, constraints);
+        
         //4,1
         dateLabel = new JLabel(TODOManager.manager.getBundle().getString("date"));
         constraints.gridx = 0;
@@ -179,10 +181,9 @@ public class NewItemPopup extends JDialog {
                 createItem = false;
             }
 
-            if (InputUtility.validateString(categoryTextField.getText(), 30)) {
-                category = categoryTextField.getText();
-            }
-
+            
+            category = (String) list.getSelectedValue();
+            
             int year = InputUtility.tryParseInt(yearTextField.getText());
             int month = InputUtility.tryParseInt(monthTextField.getText());
             int day = InputUtility.tryParseInt(dayTextField.getText());

@@ -13,7 +13,7 @@ public class InputUtility {
      * @param maxSize The user provides a maxsize for the string to have
      * @return True or false
      */
-    public static boolean validateString(String input,int maxSize){
+    protected static boolean validateString(String input,int maxSize){
         if(!input.equals("") && input.length()<maxSize){
             return true;
         }
@@ -29,7 +29,7 @@ public class InputUtility {
      * @return The int representation of the string or -1 if it couldnt be 
      * converted
      */
-    public static int tryParseInt(String input){
+    protected static int tryParseInt(String input){
         int result;
         
         try{

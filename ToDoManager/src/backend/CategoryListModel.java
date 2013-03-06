@@ -25,8 +25,13 @@ public class CategoryListModel extends AbstractListModel {
         return this.list.get(i).getCategoryTitle();
     }
     
+    public ArrayList<Category> getList(){
+        return this.list;
+    }
+    
     protected void addCategory(Category category){
         this.list.add(category);
+        System.out.println("addCategory executed");
         this.fireContentsChanged(this, 0, this.list.size());
     }
     

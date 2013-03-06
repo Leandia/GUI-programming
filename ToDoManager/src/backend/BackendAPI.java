@@ -237,9 +237,8 @@ public class BackendAPI {
             addCategory(new Category(3,"Other",new ArrayList()));
         }
         else{
-            this.categories = this.database.getCategories();
+            this.categoryList.setList(this.database.getCategories());
         }
-        setCategoryList();
     } 
     
     /**
@@ -248,7 +247,7 @@ public class BackendAPI {
      * @param category 
      */
     public void addCategory(Category category){
-        this.categories.add(category);
+        this.categoryList.addCategory(category);
         this.database.addCategory(category);
     }
     
@@ -258,12 +257,8 @@ public class BackendAPI {
      * @param category 
      */
     public void deleteCategory(Category category){
-        this.categories.remove(category);
+        this.categoryList.removeCategory(category);
         this.database.deleteCategory(category);
-    }
-
-    public ArrayList<Category> getCategories() {
-        return this.categories;
     }
 
     public void setSelectedCategory(String category) {
@@ -275,9 +270,9 @@ public class BackendAPI {
         return this.categoryList;
     }
     
-    private void setCategoryList(){
-        this.categoryList.setList(categories);
-    }
+    //private void setCategoryList(ArrayList<Category> categories){
+    //    this.categoryList.setList(categories);
+    //}
     
     public void setFilter(TimeFilter filt){
         this.filter = filt;
