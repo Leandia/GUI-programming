@@ -14,7 +14,11 @@ public class EditItemAction  extends AbstractAction {
     private ToDoItem todoItem;
     
     public EditItemAction(ToDoItem item){
-        super(TODOManager.manager.getBundle().getString("edit"));
+        this.todoItem = item;
+    }
+    
+    public EditItemAction(ToDoItem item,String text){
+        super(text);
         this.todoItem = item;
     }
     

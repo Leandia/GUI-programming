@@ -11,6 +11,7 @@ import backend.State;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -42,7 +43,7 @@ public class TODOManager {
      * Constructor divides the mainwindow in two sides, left and right, and
      * inserts categories to left and todoList to the right.
      */
-    public TODOManager() {
+    public TODOManager() throws IOException {
         this.mainWindow = new JFrame("ToDo Manager");
         this.mainWindow.setPreferredSize(new Dimension(TODOManager.savedSettings.getWidth(700), TODOManager.savedSettings.getHeight(500)));
         this.mainWindow.setBounds(savedSettings.getXPos(), savedSettings.getYPos(), savedSettings.getWidth(700), savedSettings.getHeight(500));
@@ -68,7 +69,7 @@ public class TODOManager {
     /**
      * Setup of the mainwindow, does not pack or make it visible.
      */
-    private void windowSetup() {
+    private void windowSetup() throws IOException {
         mainWindow.setLayout(new GridBagLayout());
 
         category = new CategoryPanel();
@@ -105,7 +106,7 @@ public class TODOManager {
         menu.add(edit);
         newItem = new JMenuItem(new AddItemPopupAction());
         edit.add(newItem);
-        edit.add(new JMenuItem(new AddCategoryAction()));
+        edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
         
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
@@ -154,7 +155,7 @@ public class TODOManager {
         updateLabels();
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         savedSettings = new State();
         savedSettings.loadState();

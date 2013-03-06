@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.IOException;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.event.ListSelectionEvent;
@@ -34,9 +35,10 @@ public class CategoryPanel extends JPanel {
      * top and categories in the middle and buttons to make/delete categories at
      * the bottom.
      */
-    public CategoryPanel() {
+    public CategoryPanel() throws IOException {
         this.setMinimumSize(new Dimension(200, 200));
         this.setLayout(new GridBagLayout());
+        this.setBackground(Color.white);
         addNewCategoryList();
         addClock();
         addAddCategoryButton();
@@ -101,8 +103,8 @@ public class CategoryPanel extends JPanel {
         this.add(clock, c);
     }
 
-    private void addAddCategoryButton() {
-        JButton addCategory = new JButton(new AddCategoryAction());
+    private void addAddCategoryButton() throws IOException {
+        IconButton addCategory = new IconButton(new AddCategoryAction(),"./Resources/test.gif");
         
         GridBagConstraints c = new GridBagConstraints();
         c.fill =GridBagConstraints.BOTH;

@@ -14,7 +14,11 @@ public class DeleteItemAction extends AbstractAction {
     private ToDoItem todoItem;
     
     public DeleteItemAction(ToDoItem item){
-        super(TODOManager.manager.getBundle().getString("delete"));
+        this.todoItem = item;
+    }
+    
+    public DeleteItemAction(ToDoItem item,String text){
+        super(text);
         this.todoItem = item;
     }
     

@@ -21,7 +21,10 @@ public class AddCategoryAction extends AbstractAction {
     private NewCategoryPopup popup;
     
     public AddCategoryAction(){
-        super(TODOManager.manager.getBundle().getString("add_category"));
+    }
+    
+    public AddCategoryAction(String text){
+        super(text);
     }
     
     @Override
