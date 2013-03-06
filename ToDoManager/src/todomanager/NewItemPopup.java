@@ -182,7 +182,15 @@ public class NewItemPopup extends JDialog {
             }
 
             
-            category = (String) list.getSelectedValue();
+            if((String)list.getSelectedValue() != null){
+                category = (String)list.getSelectedValue();
+            }
+            else{
+                this.window.list.setBorder(BorderFactory.createLineBorder(errorColor));
+                JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("newItemCategoryError"),
+                        "Error!", JOptionPane.ERROR_MESSAGE);
+                createItem = false;
+            }                
             
             int year = InputUtility.tryParseInt(yearTextField.getText());
             int month = InputUtility.tryParseInt(monthTextField.getText());

@@ -1,6 +1,5 @@
 package todomanager;
 
-import backend.Category;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -77,7 +76,7 @@ public class NewCategoryPopup extends JDialog {
             }
             
             if(createCategory){
-                TODOManager.backend.addCategory(new Category(1,title));
+                TODOManager.backend.createCategory(title);
                 window.setVisible(false);
             }
             

@@ -221,7 +221,7 @@ public class BackendAPI {
      * Called on changes in which items to view, either changing category
      * or time filter. In returns calls each method respectively.
      */
-    public void viewChange(){
+    public final void viewChange(){
         setDisplayItems();
         filterByTime();
     }
@@ -270,11 +270,11 @@ public class BackendAPI {
         return this.categoryList;
     }
     
-    //private void setCategoryList(ArrayList<Category> categories){
-    //    this.categoryList.setList(categories);
-    //}
-    
     public void setFilter(TimeFilter filt){
         this.filter = filt;
+    }
+
+    public void createCategory(String title) {
+        addCategory(new Category(this.categoryList.getSize(),title,new ArrayList()));
     }
 }

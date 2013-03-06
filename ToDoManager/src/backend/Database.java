@@ -220,6 +220,7 @@ public class Database {
         Element newCategory = new Element("_" + Integer.toString(cat.getId()));
         newCategory.setAttribute("name", cat.getCategoryTitle());
         this.category.addContent(newCategory);
+        writeDB();
     }
 
     /**
@@ -229,6 +230,7 @@ public class Database {
      */
     public void deleteCategory(Category cat) {
         this.category.removeChild("_" + Integer.toString(cat.getId()));
+        writeDB();
     }
 
     /**

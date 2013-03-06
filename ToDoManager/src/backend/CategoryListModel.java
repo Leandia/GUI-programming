@@ -31,7 +31,6 @@ public class CategoryListModel extends AbstractListModel {
     
     protected void addCategory(Category category){
         this.list.add(category);
-        System.out.println("addCategory executed");
         this.fireContentsChanged(this, 0, this.list.size());
     }
     
