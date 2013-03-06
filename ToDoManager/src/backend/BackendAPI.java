@@ -5,7 +5,6 @@
 package backend;
 
 import java.util.*;
-import javax.swing.JPanel;
 import todomanager.TODOManager;
 import values.TimeFilter;
 
@@ -24,6 +23,7 @@ public class BackendAPI {
     private ArrayList<Category> categories = new ArrayList();
     private String selectedCategory;
     private TimeFilter filter;
+    private CategoryListModel categoryList = new CategoryListModel();
 
     public BackendAPI(int index) {
         this.index = index;
@@ -229,17 +229,17 @@ public class BackendAPI {
      * Initializes categories on startup
      */
     private void initCategories() {
-        System.out.println(this.database.getCategories().size());
+        
         if(this.database.getCategories().isEmpty()){
-            addCategory(new Category(2,"Home",new ArrayList()));
-            addCategory(new Category(3,"Work",new ArrayList()));
-            addCategory(new Category(4,"Other",new ArrayList()));
+            addCategory(new Category(0,"All",new ArrayList()));
+            addCategory(new Category(1,"Home",new ArrayList()));
+            addCategory(new Category(2,"Work",new ArrayList()));
+            addCategory(new Category(3,"Other",new ArrayList()));
         }
         else{
-            System.out.println("test");
             this.categories = this.database.getCategories();
         }
-                
+        setCategoryList();
     } 
     
     /**
@@ -269,6 +269,14 @@ public class BackendAPI {
     public void setSelectedCategory(String category) {
         this.selectedCategory = category;
         TODOManager.savedSettings.setSelectedCategory(category);
+    }
+    
+    public CategoryListModel getCategoryListModel(){
+        return this.categoryList;
+    }
+    
+    private void setCategoryList(){
+        this.categoryList.setList(categories);
     }
     
     public void setFilter(TimeFilter filt){

@@ -1,27 +1,30 @@
 package todomanager;
 
 
-import backend.Category;
+import Actions.AddCategoryAction;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import backend.CategoryListModel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * The left side of the main window displaying time and categories.
  * @author vita, daniel
+ * @author Kristian
  */
 public class CategoryPanel extends JPanel {
 
-    private ArrayList<Category> categoryList;
     private JLabel categories;
-    private JComboBox catCombo;
+    private JList list;
+    private CategoryListModel model = TODOManager.backend.getCategoryListModel();
     
     /**
      * The left side of the main window, will be divided and show time at the
@@ -30,44 +33,70 @@ public class CategoryPanel extends JPanel {
      */
     public CategoryPanel() {
         this.setMinimumSize(new Dimension(200, 200));
-        this.setLayout(new BorderLayout());
-        categories = new JLabel(TODOManager.manager.getBundle().getString("categories"));
-        JPanel clock = new JPanel();
-        clock.setBackground(Color.DARK_GRAY);
-        clock.setPreferredSize(new Dimension(150, 150));
-        this.categoryList = TODOManager.backend.getCategories();
-        catCombo = new JComboBox();
-        displayCategories();
-        this.add(clock, BorderLayout.NORTH);
-        this.add(categories, BorderLayout.CENTER);
-        this.add(catCombo,BorderLayout.SOUTH);
-        
-        
+        this.setLayout(new GridBagLayout());
+        addNewCategoryList();
+        addClock();
+        addAddCategoryButton();
     }
     
     public void updateLabels(){
         this.categories.setText(TODOManager.manager.getBundle().getString("categories"));
     }
-    
-    //Temporary way of selecting categories, not sure how we wanna do this. 
-    //No matter what this is probably not the way to go so shouldnt be final
-    private void displayCategories(){
-        Iterator iterator = this.categoryList.iterator();
-        Category category;
-        this.catCombo.addItem("All");
-        while(iterator.hasNext()){
-            category = (Category) iterator.next();
-            this.catCombo.addItem(category.getCategoryTitle());
-            catCombo.addActionListener(new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    TODOManager.backend.setSelectedCategory(catCombo.getSelectedItem().toString());
-                    TODOManager.backend.viewChange();
-                }
-            });
-        }
+    /**
+     * Adds list of categories to the interface
+     */
+    private void addNewCategoryList() {
+        list = new JList(model);
+        list.addListSelectionListener(new ListSelectionListener() {
         
-        this.catCombo.setSelectedItem(TODOManager.savedSettings.getSelectedCategory());
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                TODOManager.backend.setSelectedCategory(model.getElementAt(list.getSelectedIndex()).toString());
+                TODOManager.backend.viewChange();
+            }
+        });
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill =GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.weightx = 1;
+        c.weighty = 10;
+        
+        this.add(list,c);
+        
+        
+    }
+
+    /**
+     * Adds the clock to the interface
+     */
+    private void addClock() {
+        JPanel clock = new JPanel();
+        clock.setBackground(Color.DARK_GRAY);
+        clock.setPreferredSize(new Dimension(150, 150));
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill =GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = .1;
+        
+        this.add(clock, c);
+    }
+
+    private void addAddCategoryButton() {
+        JButton addCategory = new JButton(new AddCategoryAction());
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill =GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 4;
+        c.weightx = 1;
+        c.weighty = .1;
+        c.anchor = GridBagConstraints.SOUTH;
+        
+        this.add(addCategory, c);
     }
 }

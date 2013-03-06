@@ -29,7 +29,7 @@ public class State {
      *
      * @return Language that is to be used in the graphical interface
      */
-    public String getLanguage() {
+    protected String getLanguage() {
         return this.selectedLanguage;
     }
 
@@ -218,7 +218,7 @@ public class State {
         return this.selectedCategory;
     }
 
-    void setSelectedCategory(String category) {
+    protected void setSelectedCategory(String category) {
         this.selectedCategory = category;
     }
 }

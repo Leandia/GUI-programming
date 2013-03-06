@@ -3,12 +3,12 @@ package backend;
 import java.util.GregorianCalendar;
 
 /**
- * Simplre class with static methods for doing operations regarding comparing dates and times.
+ * Simple class with static methods for doing operations regarding comparing dates and times.
  * @author Kristian
  */
 public class CompareDateAndTime {
     
-    private static GregorianCalendar todaysDate = new GregorianCalendar();
+    protected static GregorianCalendar todaysDate = new GregorianCalendar();
     
     /**
      * Boolean that evaluates whether the input day is a specific day
@@ -19,7 +19,7 @@ public class CompareDateAndTime {
      * @param offset Number of days added or removed from todays day.
      * @return 
      */
-    public static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
+    protected static boolean isSpecficDay(GregorianCalendar toBeCompared, int offset){
         
         if(todaysDate.get(GregorianCalendar.DAY_OF_YEAR) == 365){
             return (offset == toBeCompared.get(GregorianCalendar.DAY_OF_YEAR) && todaysDate.getTime().getYear() == toBeCompared.getTime().getYear());
@@ -33,7 +33,7 @@ public class CompareDateAndTime {
      * @param toBeCompared Date that is to be checked
      * @return True or false depending on whether its in the intervall or not
      */
-    public static boolean isThisWeek(GregorianCalendar toBeCompared){
+    protected static boolean isThisWeek(GregorianCalendar toBeCompared){
         int day_of_week = todaysDate.get(GregorianCalendar.DAY_OF_WEEK)-1;
         switch(day_of_week){
             default:
