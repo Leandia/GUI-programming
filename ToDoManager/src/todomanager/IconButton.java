@@ -44,4 +44,8 @@ public class IconButton extends JButton{
         
         this.setIcon(new ImageIcon(newImg));                
     }
+    
+    public IconButton(String path){
+        this(null,path);
+    }
 }

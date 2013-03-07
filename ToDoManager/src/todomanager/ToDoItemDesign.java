@@ -122,10 +122,10 @@ public class ToDoItemDesign extends JPanel {
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
         editPanel.setPreferredSize(new Dimension(75, 50));
-        editBtn = new IconButton(new EditItemAction(this.item,"Text for now"),"./Resources/test.gif");
+        editBtn = new IconButton("./Resources/test.gif");
         editPanel.add(editBtn);
 
-        deleteBtn = new IconButton(new DeleteItemAction(this.item,"Text for now"),"./Resources/test.gif");
+        deleteBtn = new IconButton("./Resources/test.gif");
         editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;

@@ -14,7 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import javax.swing.DefaultListCellRenderer;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -64,15 +64,20 @@ public class CategoryPanel extends JPanel {
             }
 
             @Override
-            public void keyPressed(KeyEvent ke) {
+            public void keyPressed(KeyEvent ke) {                
+                //You can delete categories using the delete key, a confirm dialog
+                //will popup for the user to answer to
                 if(ke.getKeyCode() == KeyEvent.VK_DELETE){
-                    TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
+                    int result = JOptionPane.showConfirmDialog(null, TODOManager.manager.getBundle().getString("catequestion"));
+                    System.out.println(JOptionPane.YES_OPTION);
+                    if(result == JOptionPane.YES_OPTION){
+                        TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
+                    }
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent ke) {
-                
+            public void keyReleased(KeyEvent ke) {                
             }
         });
         
