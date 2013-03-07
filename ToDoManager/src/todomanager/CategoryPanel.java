@@ -70,8 +70,7 @@ public class CategoryPanel extends JPanel {
                 //will popup for the user to answer to
                 if(ke.getKeyCode() == KeyEvent.VK_DELETE){
                     int result = JOptionPane.showConfirmDialog(null, TODOManager.manager.getBundle().getString("catequestion"));
-                    System.out.println(JOptionPane.YES_OPTION);
-                    if(result == JOptionPane.YES_OPTION){
+                    if(result == JOptionPane.YES_OPTION && !model.getList().get(list.getSelectedIndex()).getCategoryTitle().equals(TODOManager.manager.getBundle().getString("all"))){
                         TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
                     }
                 }
@@ -110,7 +109,11 @@ public class CategoryPanel extends JPanel {
      * Adds the clock to the interface
      */
     private void addClock() {
-        JPanel clock = new JPanel();
+        
+        Clock clock = new Clock();
+        Thread thread = new Thread(clock,"thread1");
+        thread.start();
+        
         clock.setBackground(Color.DARK_GRAY);
         clock.setPreferredSize(new Dimension(150, 150));
         GridBagConstraints c = new GridBagConstraints();
