@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Calendar;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -120,11 +121,13 @@ public class ToDoItemDesign extends JPanel {
         // -- Panel 3 for edit and delete buttons, position(3,0).
         JPanel editPanel = new JPanel();
         editPanel.setOpaque(false);
-        editPanel.setPreferredSize(new Dimension(75, 50));
-        editBtn = new IconButton("./Resources/test.gif");
+        //editPanel.setPreferredSize(new Dimension(75, 50));
+        editPanel.setLayout(new BoxLayout(editPanel, BoxLayout.X_AXIS));
+        editBtn = new IconButton();
         editPanel.add(editBtn);
 
-        deleteBtn = new IconButton("./Resources/test.gif");
+        //deleteBtn = new IconButton("./Resources/test.gif");
+        deleteBtn = new IconButton();
         editPanel.add(deleteBtn);
         GridBagConstraints editConstraints = new GridBagConstraints();
         editConstraints.gridx = 3;
@@ -139,7 +142,9 @@ public class ToDoItemDesign extends JPanel {
         this.item = item;
         // Set actions to button here.
         deleteBtn.setAction(new DeleteItemAction(this.item));
+        deleteBtn.setImage("./Resources/delete-gif.gif");
         editBtn.setAction(new EditItemAction(this.item));
+        editBtn.setImage("./Resources/edit-gif.gif");
 
         switch (this.item.getPrio()) {
             case LOW:
