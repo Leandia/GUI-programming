@@ -40,6 +40,7 @@ public class TaskReminder extends TimerTask{
        
        while(iterator.hasNext()){
            Category cat = (Category)iterator.next();
+           Collections.sort(cat.getToDoItems(), new DateComparator());
            try{
                items.add((ToDoItem)cat.getToDoItems().get(0));
            }
@@ -54,12 +55,12 @@ public class TaskReminder extends TimerTask{
        if(!items.isEmpty() && setCount){
            setCount(getTimeLeftInMilliSeconds(items.get(0)));
            setCount = false;
-       }
+       }       
        count = count-60000;
            
        System.out.println(count);
        
-       if(count<=0)
+       if(getTimeLeftInMilliSeconds(items.get(0))<=0)
        {
            toolkit.beep();
            JOptionPane.showMessageDialog(null, "jaa!");
@@ -67,7 +68,7 @@ public class TaskReminder extends TimerTask{
        }        
        try {
            Thread.currentThread().sleep(60000);
-   }
+    }
        catch (InterruptedException e) {
        }
     }
