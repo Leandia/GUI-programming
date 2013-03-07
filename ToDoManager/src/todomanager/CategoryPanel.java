@@ -36,7 +36,7 @@ public class CategoryPanel extends JPanel {
     public CategoryPanel() throws IOException {
         this.setMinimumSize(new Dimension(200, 200));
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.white);
+        this.setBackground(Color.lightGray);
         addNewCategoryList();
         addClock();
         addAddCategoryButton();
@@ -47,6 +47,7 @@ public class CategoryPanel extends JPanel {
      */
     private void addNewCategoryList() {
         list = new JList(model);
+        list.setBackground(Color.lightGray);
         list.addListSelectionListener(new ListSelectionListener() {
         
             @Override

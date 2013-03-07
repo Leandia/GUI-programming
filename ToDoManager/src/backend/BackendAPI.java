@@ -231,10 +231,10 @@ public class BackendAPI {
     private void initCategories() {
         
         if(this.database.getCategories().isEmpty()){
-            addCategory(new Category(0,"All",new ArrayList()));
-            addCategory(new Category(1,"Home",new ArrayList()));
-            addCategory(new Category(2,"Work",new ArrayList()));
-            addCategory(new Category(3,"Other",new ArrayList()));
+            addCategory(new Category(0,TODOManager.manager.getBundle().getString("all"),new ArrayList()));
+            addCategory(new Category(1,TODOManager.manager.getBundle().getString("home"),new ArrayList()));
+            addCategory(new Category(2,TODOManager.manager.getBundle().getString("work"),new ArrayList()));
+            addCategory(new Category(3,TODOManager.manager.getBundle().getString("other"),new ArrayList()));
         }
         else{
             this.categoryList.setList(this.database.getCategories());
