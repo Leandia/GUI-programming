@@ -12,10 +12,19 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.DefaultMetalTheme;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.MetalTheme;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 
 /**
  *
@@ -107,11 +116,11 @@ public class TODOManager {
         newItem = new JMenuItem(new AddItemPopupAction(TODOManager.manager.getBundle().getString("buttontext")));
         edit.add(newItem);
         edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
-        
+
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
         SelectEnglishAsLanguageAction act = new SelectEnglishAsLanguageAction(manager.getBundle().getString("english"));
-       
+
         language.add(act);
         language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
         settings.add(language);
@@ -123,16 +132,16 @@ public class TODOManager {
         this.mainWindow.setJMenuBar(menu);
 
     }
-    
+
     /**
-     * Updates all internationalized components belonging
-     * to the TODOManager class given the set locale. 
+     * Updates all internationalized components belonging to the TODOManager
+     * class given the set locale.
      */
-    private void updateLabels(){
+    private void updateLabels() {
         this.file.setText(manager.getBundle().getString("file"));
         this.quit.setText(manager.getBundle().getString("quit"));
         file.removeAll();
-        file.add(new QuitAction(manager.getBundle().getString("quit"),"This is the quit button."));
+        file.add(new QuitAction(manager.getBundle().getString("quit"), "This is the quit button."));
         this.edit.setText(manager.getBundle().getString("edit"));
         edit.removeAll();
         edit.add(new JMenuItem(new AddItemPopupAction()));
@@ -142,19 +151,32 @@ public class TODOManager {
         language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
         language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
         this.help.setText(manager.getBundle().getString("help"));
-        
+
     }
 
     /**
      * Method is called on localechange and calls all methods for updating the
      * GUI components that are internationalized
      */
-    public void changeLocale(){
+    public void changeLocale() {
         this.todoList.top.updateLabels();
         updateLabels();
     }
-    
+
     public static void main(String[] args) throws IOException {
+        MetalTheme theme = new Theme();
+        MetalLookAndFeel.setCurrentTheme(theme);
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TODOManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(TODOManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(TODOManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(TODOManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         savedSettings = new State();
         savedSettings.loadState();
