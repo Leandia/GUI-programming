@@ -23,6 +23,6 @@ public class TodoList extends JPanel {
         top = new ButtonsPanel();
         
         this.setLayout(new BorderLayout());
-        this.add(top, BorderLayout.NORTH);
+        this.add(top, BorderLayout.CENTER);
     }
 }

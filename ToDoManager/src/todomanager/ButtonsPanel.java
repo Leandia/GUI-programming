@@ -38,8 +38,7 @@ public class ButtonsPanel extends JPanel {
         GridBagConstraints btn = new GridBagConstraints();
         btn.gridx = 1;
         btn.gridy = 0;
-        btn.weightx = 1;
-        btn.weighty = 1;;
+        btn.anchor = GridBagConstraints.EAST;
         this.add(addButton,btn);
         
         btn.gridx = 0;
@@ -92,6 +91,8 @@ public class ButtonsPanel extends JPanel {
         //Sets the initial selected tab, default will be "all"
         pane.setSelectedIndex(setTab(TODOManager.savedSettings.getFilter()));
         TODOManager.backend.viewChange();
+        btn.weightx = 1;
+        btn.weighty = 1;
         this.add(pane,btn);
     }
     
