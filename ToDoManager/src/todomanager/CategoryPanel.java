@@ -2,12 +2,8 @@ package todomanager;
 
 
 import Actions.AddCategoryAction;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
 import backend.CategoryListModel;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -36,7 +32,6 @@ public class CategoryPanel extends JPanel {
     public CategoryPanel() throws IOException {
         this.setMinimumSize(new Dimension(200, 200));
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.lightGray);
         addNewCategoryList();
         addClock();
         addAddCategoryButton();
@@ -47,7 +42,6 @@ public class CategoryPanel extends JPanel {
      */
     private void addNewCategoryList() {
         list = new JList(model);
-        list.setBackground(Color.lightGray);
         list.addListSelectionListener(new ListSelectionListener() {
         
             @Override
@@ -114,7 +108,6 @@ public class CategoryPanel extends JPanel {
         Thread thread = new Thread(clock,"thread1");
         thread.start();
         
-        clock.setBackground(Color.DARK_GRAY);
         clock.setPreferredSize(new Dimension(150, 150));
         GridBagConstraints c = new GridBagConstraints();
         c.fill =GridBagConstraints.BOTH;

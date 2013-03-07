@@ -40,12 +40,13 @@ public class ToDoItemDesign extends JPanel {
      */
     public ToDoItemDesign() {
         super();
+        this.setOpaque(false);
 
         this.setLayout(new GridBagLayout());
 
         // -- Panel 1 for done button and priority, position (0,0).
         donePrioPanel = new ImagePanel();
-        donePrioPanel.setOpaque(false);
+        donePrioPanel.setOpaque(true);
         donePrioPanel.setPreferredSize(new Dimension(150, 50));
         GridBagConstraints donePrioConstraints = new GridBagConstraints();
         donePrioConstraints.gridx = 0;
