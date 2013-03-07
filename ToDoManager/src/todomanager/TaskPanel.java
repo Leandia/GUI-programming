@@ -3,11 +3,9 @@ package todomanager;
 import backend.ToDoItem;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
 /**
  * TaskPanel class, extends JPanel and holds all currently viewed ToDoItems.
