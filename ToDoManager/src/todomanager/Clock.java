@@ -1,16 +1,18 @@
 package todomanager;
 
-import javax.swing.*;   
-import java.awt.*;   
-import java.util.Date;  
+import java.awt.*;  
+import java.util.Date;
+import javax.swing.*;  
 
 public class Clock extends JPanel implements Runnable{  
     
     int currentHour;  
     int currentMinute;  
-    int currentSecond;  
+    int currentSecond; 
+    String minuteCorrection = "";
+    String secondCorrection = "";
     
-    Font myFont=new Font("Tahoma",Font.BOLD+Font.ITALIC,19);       
+    Font myFont=new Font("Tahoma",Font.BOLD,15);       
     Color myColor=new Color(255,255,255);  
       
     //Font metrics that will use to store font informations width of a character  
@@ -28,7 +30,20 @@ public class Clock extends JPanel implements Runnable{
     currentHour=myDate.getHours();  
     currentMinute=myDate.getMinutes();  
     currentSecond=myDate.getSeconds();  
-      
+     
+    if (currentMinute < 10){
+        this.minuteCorrection = "0";
+    }
+    if (currentSecond < 10){
+        this.secondCorrection = "0";
+    }
+    if (currentMinute >= 10){
+        this.minuteCorrection = "";
+    }
+    if (currentSecond >= 10){
+        this.secondCorrection = "";
+    }
+    
     //Set font   
     g.setFont(myFont);  
       
@@ -41,11 +56,11 @@ public class Clock extends JPanel implements Runnable{
     //Set color that will use to draw digital number  
     g.setColor(myColor);  
        
-    g.drawString(Integer.toString(currentHour),hourXCoordinate,20);  
-    g.drawString(":",(hourXCoordinate+minuteXCoordinate)/2,20);  
-    g.drawString(Integer.toString(currentMinute),minuteXCoordinate,20);  
-    g.drawString(":",(secondXCoordinate+minuteXCoordinate)/2,20);  
-    g.drawString(Integer.toString(currentSecond),secondXCoordinate,20);  
+    g.drawString(Integer.toString(currentHour),hourXCoordinate,80);  
+    g.drawString(":",(hourXCoordinate+minuteXCoordinate)/2,80);  
+    g.drawString(minuteCorrection + Integer.toString(currentMinute),minuteXCoordinate,80);  
+    g.drawString(":",(secondXCoordinate+minuteXCoordinate)/2,80);  
+    g.drawString(secondCorrection + Integer.toString(currentSecond),secondXCoordinate,80);
     }  
 
     @Override
@@ -64,4 +79,4 @@ public class Clock extends JPanel implements Runnable{
            }  
             }
     }
-}  
+}

@@ -3,6 +3,8 @@ package Actions;
 import backend.ToDoItem;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import todomanager.NewItemPopup;
 import todomanager.TODOManager;
 
 /**
@@ -24,6 +26,16 @@ public class EditItemAction  extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO implement the edit thingie.
+
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        System.out.print(this.todoItem.getPrio());
+        NewItemPopup opt = new NewItemPopup(frame, true, this.todoItem.getTitle(), this.todoItem.getCategory(),
+                this.todoItem.getDate(), this.todoItem.getPrio());
+        if (opt.getItem() != null) {
+            TODOManager.backend.deleteItem(this.todoItem);
+            TODOManager.backend.addItem(opt.getItem());
+            TODOManager.backend.viewChange();
+        }
     }
 }
