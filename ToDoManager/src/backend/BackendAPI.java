@@ -6,10 +6,10 @@ package backend;
 
 import java.util.*;
 import todomanager.TODOManager;
+import values.Sorting;
 import values.TimeFilter;
 
 /**
- *
  * @author Daniel
  * @author Emil
  * @author Kristian
@@ -24,6 +24,7 @@ public class BackendAPI {
     private String selectedCategory;
     private TimeFilter filter;
     private CategoryListModel categoryList = new CategoryListModel();
+    private Sorting sorting;
 
     public BackendAPI(int index) {
         this.index = index;
@@ -36,21 +37,6 @@ public class BackendAPI {
         viewChange();
         //this.list = new DisplayList();
     }
-
-    
-    
-    /**
-     * Method to fetch all items from the database and insert into the display
-     * list.
-     
-    private void isnsertItems() {
-        ArrayList<ToDoItem> tempList = getDisplayItems(this.selectedCategory);
-        Iterator iter = tempList.iterator();
-        while (iter.hasNext()) {
-            ToDoItem item = (ToDoItem) iter.next();
-            this.displayList.addElement(item);
-        }
-    }*/
     
     
     private void setDisplayItems(){
@@ -115,59 +101,50 @@ public class BackendAPI {
         return displayList;
     }
 
-    public static ArrayList<ToDoItem> sortByDate(ArrayList<ToDoItem> items) {
-
-        if (items.size() <= 1) {
-            return items;
-        }
-        int middle = items.size() / 2;
-
-        ArrayList<ToDoItem> left = new ArrayList<>(middle);
-        ArrayList<ToDoItem> right = new ArrayList<>(items.size() - middle);
-
-        left = sortByDate(left);
-        right = sortByDate(right);
-
-        return dateMerge(left, right);
+    public class DateComparator implements Comparator<ToDoItem> {
+       @Override
+       public int compare(ToDoItem o1, ToDoItem o2) {
+           return o1.getDate().compareTo(o2.getDate());
+       }
     }
-
-    public static ArrayList<ToDoItem> dateMerge(ArrayList<ToDoItem> left, ArrayList<ToDoItem> right) {
-
-        ArrayList<ToDoItem> result = new ArrayList<>(left.size() + right.size());
-
-        int i = 0; //left index
-        int j = 0; //right index
-        int k = 0; //result index
-
-        while (i < left.size() && j < right.size()) {
-
-            if (left.get(i).getDate().compareTo(right.get(j).getDate()) < 0) {
-                result.add(k, right.get(j));
-                j++; //next right index
-            } else {
-
-                result.add(k, left.get(i));
-                i++; //next left index
-            }
-            k++; //next result index 
-        }
-
-        // Append what is left from the left array into the result array.
-        while (i < left.size()) {
-            result.add(k, left.get(i));
-            i++;
-            k++;
-        }
-        // Append what is left from the right array into the result array.
-        while (j < right.size()) {
-            result.add(k, right.get(j));
-            j++;
-            k++;
-        }
-
-        return result;
+   
+    public class TitleComparator implements Comparator<ToDoItem> {
+       @Override
+       public int compare(ToDoItem o1, ToDoItem o2) {
+           return o1.getTitle().compareTo(o2.getTitle());
+       }
     }
-
+   
+    public class CategoryComparator implements Comparator<ToDoItem> {
+       @Override
+       public int compare(ToDoItem o1, ToDoItem o2) {
+           return o2.getCategory().compareTo(o1.getCategory());
+       }
+    }
+    public class PrioComparator implements Comparator<ToDoItem> {
+       @Override
+       public int compare(ToDoItem o1, ToDoItem o2) {
+           return o1.getPrio().compareTo(o2.getPrio());
+       }
+    }    
+   
+    private void sortToDoItems(){
+       sorting = Sorting.TIME;
+       switch(sorting){    
+           case TIME:
+               Collections.sort(this.displayList.getList(), new DateComparator());
+               break;
+           case TITLE:
+               Collections.sort(this.displayList.getList(), new TitleComparator());
+               break;
+           case CATEGORY:
+               Collections.sort(this.displayList.getList(), new CategoryComparator());
+           case PRIO:
+               Collections.sort(this.displayList.getList(), new PrioComparator());
+           default:
+       }
+    }
+    
     /**
      * Function that filter by time, what period is determined by the filter
      * parameter
@@ -224,6 +201,7 @@ public class BackendAPI {
     public final void viewChange(){
         setDisplayItems();
         filterByTime();
+        sortToDoItems();
     }
     /**
      * Initializes categories on startup

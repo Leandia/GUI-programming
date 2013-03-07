@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -184,5 +185,9 @@ public class TODOManager {
         manager = new LanguageManager();
         TODOManager main = new TODOManager();
         manager.setTodoManager(main);
+        
+        Timer timer = new Timer();
+        TaskReminder reminder = new TaskReminder();
+        timer.schedule(reminder,0,1*60000);
     }
 }
