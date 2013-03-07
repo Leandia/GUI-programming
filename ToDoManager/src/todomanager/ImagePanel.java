@@ -1,4 +1,4 @@
-package CustomComponents;
+package todomanager;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

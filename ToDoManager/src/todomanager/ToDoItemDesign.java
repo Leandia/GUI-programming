@@ -4,7 +4,6 @@
  */
 package todomanager;
 
-import CustomComponents.ImagePanel;
 import Actions.DeleteItemAction;
 import Actions.EditItemAction;
 import backend.ToDoItem;
@@ -13,7 +12,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Calendar;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
