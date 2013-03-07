@@ -1,7 +1,9 @@
 package todomanager;
 
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 
 /**
@@ -27,6 +29,10 @@ public class Theme extends DefaultMetalTheme {
     private ColorUIResource background = new ColorUIResource(Color.decode("#EFD993"));
     // get white
     private ColorUIResource white = new ColorUIResource(Color.decode("#B8A562"));
+    // Font1
+    private FontUIResource font1 = new FontUIResource(Font.MONOSPACED, Font.HANGING_BASELINE, 18);
+    // Font2
+    private FontUIResource font2 = new FontUIResource(Font.SANS_SERIF, Font.CENTER_BASELINE, 12);
 
     public Theme() {
         super();
@@ -120,5 +126,39 @@ public class Theme extends DefaultMetalTheme {
     @Override
     public ColorUIResource getMenuBackground() {
         return getWhite();
+    }
+
+    /**
+     * The user text input font.
+     *
+     * @return
+     */
+    @Override
+    public FontUIResource getUserTextFont() {
+        return font2;
+    }
+
+    @Override
+    public FontUIResource getSystemTextFont() {
+        return font1;
+    }
+
+    @Override
+    public FontUIResource getSubTextFont() {
+        return font2;
+    }
+    
+    @Override
+    public FontUIResource getWindowTitleFont() {
+        return font1;
+    }
+    
+    /**
+     * The font in the tabs, on the panels and in the warning popups.
+     * @return 
+     */
+    @Override
+    public FontUIResource getControlTextFont() {
+        return font2;
     }
 }
