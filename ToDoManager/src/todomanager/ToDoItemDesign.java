@@ -140,12 +140,13 @@ public class ToDoItemDesign extends JPanel {
      */
     public void updateItemPanel(ToDoItem item) {
         this.item = item;
-        // Set actions to button here.
+        // Set actions and images to buttons here.
         deleteBtn.setAction(new DeleteItemAction(this.item));
         deleteBtn.setImage("./Resources/delete-gif.gif");
         editBtn.setAction(new EditItemAction(this.item));
         editBtn.setImage("./Resources/edit-gif.gif");
 
+        // Set the priority text according to language.
         switch (this.item.getPrio()) {
             case LOW:
                 priority.setText(TODOManager.manager.getBundle().getString("low"));
@@ -190,7 +191,7 @@ public class ToDoItemDesign extends JPanel {
     }
 
     /**
-     * Sets the color of the item as function of priority
+     * Sets the background of the donePrioPanel as function of priority
      */
     private void setBackgroundColor() {
         switch (this.item.getPrio()) {
