@@ -5,6 +5,7 @@
 package todomanager;
 
 import Actions.DeleteItemAction;
+import Actions.DoneAction;
 import Actions.EditItemAction;
 import backend.ToDoItem;
 import java.awt.Color;
@@ -141,10 +142,15 @@ public class ToDoItemDesign extends JPanel {
     public void updateItemPanel(ToDoItem item) {
         this.item = item;
         // Set actions and images to buttons here.
+        // Delete button.
         deleteBtn.setAction(new DeleteItemAction(this.item));
         deleteBtn.setImage("./Resources/delete-gif.gif");
+        // Edit Button.
         editBtn.setAction(new EditItemAction(this.item));
         editBtn.setImage("./Resources/edit-gif.gif");
+        // Done button.
+        doneButton.setSelected(this.item.getDone());
+        doneButton.setAction(new DoneAction(this.item, doneButton));
 
         // Set the priority text according to language.
         switch (this.item.getPrio()) {

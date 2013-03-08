@@ -22,10 +22,12 @@ public class ToDoItem {
     private GregorianCalendar date;
     private Priority prio;
     private boolean reminded;
-    
+    private boolean done = false;
+
     /**
-     * @deprecated Do not use if intended to work with database. Instead use 
-     *              ToDoItem(int nb, String titl, String desc, String cat, Priority prio, GregorianCalendar cal)
+     * @deprecated Do not use if intended to work with database. Instead use
+     * ToDoItem(int nb, String titl, String desc, String cat, Priority prio,
+     * GregorianCalendar cal)
      * @param titl Title
      * @param desc Description
      * @param cat Category
@@ -37,7 +39,7 @@ public class ToDoItem {
     }
 
     /**
-     * 
+     *
      * @param nb A number that uniquely identifies a todoItem.
      * @param titl Title
      * @param desc Description
@@ -54,7 +56,7 @@ public class ToDoItem {
         this.number = nb;
         this.reminded = false;
     }
-    
+
     /**
      * Returns the title of a ToDoItem
      *
@@ -109,12 +111,19 @@ public class ToDoItem {
         this.prio = prio;
     }
 
-    public boolean getReminded(){
+    public boolean getReminded() {
         return this.reminded;
     }
-    
-    public void setReminded(boolean rem){
+
+    public void setReminded(boolean rem) {
         this.reminded = rem;
     }
-    
+
+    public boolean getDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 }
