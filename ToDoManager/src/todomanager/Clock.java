@@ -3,6 +3,8 @@ package todomanager;
 import java.awt.*;
 import java.util.Date;
 import javax.swing.*;
+//set a digital clock, background from theme, font metrics the same as in category 
+//list
 
 public class Clock extends JPanel implements Runnable {
 
@@ -12,9 +14,8 @@ public class Clock extends JPanel implements Runnable {
     String minuteCorrection = "";
     String secondCorrection = "";
     Font myFont = new Font ("",Font.HANGING_BASELINE,19);
-    //Font myFont = new Font("Ariel", Font.BOLD, 16);
-    //Color myColor=new Color(255,255,255);  
-    //Font metrics that will use to store font informations width of a character  
+    
+    
     FontMetrics fm;
 
     public void paint(Graphics g) {
@@ -51,9 +52,7 @@ public class Clock extends JPanel implements Runnable {
         int minuteXCoordinate = hourXCoordinate + (fm.getMaxAdvance() * 2);
         int secondXCoordinate = hourXCoordinate + (fm.getMaxAdvance() * 4);
 
-        //Set color that will use to draw digital number
-        // NO, use the theme color!
-        //g.setColor(myColor);  
+        
 
         g.drawString(Integer.toString(currentHour), hourXCoordinate, 80);
         g.drawString(":", (hourXCoordinate + minuteXCoordinate) / 2, 80);
