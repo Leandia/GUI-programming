@@ -2,6 +2,7 @@ package Actions;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import todomanager.SortBar;
 import todomanager.TODOManager;
 import values.Sorting;
 
@@ -11,14 +12,18 @@ import values.Sorting;
  */
 public class TimeSortingAction extends AbstractAction {
 
-    public TimeSortingAction() {
+    SortBar sort;
+
+    public TimeSortingAction(SortBar sort) {
         super();
+        this.sort = sort;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        sort.resetIcon();
         TODOManager.backend.setSorting(Sorting.TIME);
         TODOManager.backend.viewChange();
+        sort.updateIcon();
     }
-    
 }

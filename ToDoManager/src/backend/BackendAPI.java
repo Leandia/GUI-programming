@@ -24,7 +24,7 @@ public class BackendAPI {
     private String selectedCategory;
     private TimeFilter filter;
     private CategoryListModel categoryList = new CategoryListModel();
-    private Sorting sorting;
+    private Sorting sorting = Sorting.TIME;
 
     public BackendAPI(int index) {
         this.index = index;
@@ -70,19 +70,20 @@ public class BackendAPI {
         getCategoryFromString(item.getCategory()).addToDoItem(item);
         database.addItem(item);
     }
-    
+
     /**
      * Retrieves the category object corresponding to the input string.
+     *
      * @param cat String that represents a category title
      * @return Category object
      */
-    private Category getCategoryFromString(String cat){
+    private Category getCategoryFromString(String cat) {
         Iterator iterator = this.categoryList.getList().iterator();
         Category category;
-        
-        while(iterator.hasNext()){
+
+        while (iterator.hasNext()) {
             category = (Category) iterator.next();
-            if(category.getCategoryTitle().equals(cat)){
+            if (category.getCategoryTitle().equals(cat)) {
                 return category;
             }
         }
@@ -151,7 +152,6 @@ public class BackendAPI {
     }
 
     private void sortToDoItems() {
-        sorting = Sorting.TIME;
         switch (sorting) {
             case TIME:
                 Collections.sort(this.displayList.getList(), new DateComparator());
@@ -278,6 +278,10 @@ public class BackendAPI {
 
     public void setSorting(Sorting sorting) {
         this.sorting = sorting;
+    }
+
+    public Sorting getSorting() {
+        return sorting;
     }
 
     public void createCategory(String title) {
