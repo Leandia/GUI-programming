@@ -16,5 +16,6 @@
     <_24 title="third ALL" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="11" minute="0" />
     <_25 title="fourth ALL" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
     <_26 title="supertest" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
+    <_15 title="test nr.3" description="not implemented" category="Home" priority="HIGH" year="2013" month="2" day="9" hour="15" minute="0" />
   </data>
 </todoManager>

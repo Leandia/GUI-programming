@@ -37,7 +37,7 @@ public class TaskPanel extends JPanel {
         constraints.gridy = 0;
         constraints.weightx = 1;
         SortBar sorting = new SortBar();
-        sorting.setPreferredSize(new Dimension(100, 10));
+        sorting.setPreferredSize(new Dimension(600, 20));
         this.add(sorting, constraints);
         
         

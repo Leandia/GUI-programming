@@ -11,7 +11,8 @@ public class Clock extends JPanel implements Runnable {
     int currentSecond;
     String minuteCorrection = "";
     String secondCorrection = "";
-    Font myFont = new Font("Tahoma", Font.BOLD, 15);
+    Font myFont = new Font ("",Font.HANGING_BASELINE,19);
+    //Font myFont = new Font("Ariel", Font.BOLD, 16);
     //Color myColor=new Color(255,255,255);  
     //Font metrics that will use to store font informations width of a character  
     FontMetrics fm;
