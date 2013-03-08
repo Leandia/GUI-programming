@@ -23,7 +23,6 @@ public class NewItemPopup extends JDialog {
     private JLabel titleLabel = null;
     private JTextField titleTextField = null;
     private JLabel categoryLabel = null;
-    private JTextField categoryTextField = null;
     private JLabel dateLabel = null;
     private JTextField yearTextField = null;
     private JTextField monthTextField = null;

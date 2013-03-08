@@ -115,6 +115,7 @@ public class TODOManager {
         edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
         
         settings = new JMenu(manager.getBundle().getString("settings"));
+        
         language = new JMenu(manager.getBundle().getString("language"));
         
         changeLanguageToSwedish = new JCheckBoxMenuItem(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish"))); 
@@ -158,11 +159,17 @@ public class TODOManager {
         edit.removeAll();
         edit.add(new JMenuItem(new AddItemPopupAction(TODOManager.manager.getBundle().getString("add_item"))));
         edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
+        
+        
         this.settings.setText(manager.getBundle().getString("settings"));
         this.language.setText(manager.getBundle().getString("language"));
+        
         language.removeAll();
+        changeLanguageToSwedish = new JCheckBoxMenuItem(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish"))); 
+        changeLanguageToEnglish = new JCheckBoxMenuItem(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
         language.add(changeLanguageToSwedish);
         language.add(changeLanguageToEnglish);
+        
         switch(savedSettings.getLanguage()){
             case "Swedish":
                 changeLanguageToSwedish.setSelected(true);
@@ -171,6 +178,7 @@ public class TODOManager {
                 changeLanguageToEnglish.setSelected(true);
                 break;
         }
+        
         this.help.setText(manager.getBundle().getString("help"));
         
     }
