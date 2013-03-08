@@ -1,15 +1,9 @@
 package todomanager;
 
-import Actions.CategorySortingAction;
-import Actions.PrioSortingAction;
-import Actions.TimeSortingAction;
-import Actions.TitleSortingAction;
 import backend.ToDoItem;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,7 +22,7 @@ public class TaskPanel extends JPanel {
     private int rowHeight = 51;
 
     /**
-     * Constructor, it sets up the JTable.
+     * Constructor, it sets up a sortBar with a JTable underneath.
      */
     public TaskPanel() {
         super(new GridBagLayout());
@@ -51,15 +45,5 @@ public class TaskPanel extends JPanel {
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.BOTH;
         this.add(scrollPane, constraints);
-    }
-
-    /**
-     * Adds an item to the GUI by placing it on the TaskPanel. Takes a Todoitem
-     * as only parameter.
-     *
-     * @param item
-     */
-    public void addItem(ToDoItem item) {
-        TODOManager.backend.addItem(item);
     }
 }
