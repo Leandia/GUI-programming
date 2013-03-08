@@ -19,6 +19,13 @@ public class IconButton extends JButton {
     private File picture;
     private Image icon;
 
+    
+    /**
+     * Constructor that also adds a action to the button, also provides a
+     * file path
+     * @param action
+     * @param path 
+     */
     public IconButton(AbstractAction action, String path) {
         //Add action to the button
         super(action);
@@ -27,13 +34,24 @@ public class IconButton extends JButton {
         setImage(path);
     }
 
+    /**
+     * Constructor that takes a string representation of the file path
+     * @param path 
+     */
     public IconButton(String path) {
         this(null, path);
     }
 
+    /**
+     * Default constructor
+     */
     public IconButton() {
     }
 
+    /**
+     * Sets the icon if not set previously.
+     * @param path Path to the image file
+     */
     public void setImage(String path) {
         //Create a new file to retrieve the pic from
         picture = new File(path);
