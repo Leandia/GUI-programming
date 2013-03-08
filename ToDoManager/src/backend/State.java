@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import values.Sorting;
 import values.TimeFilter;
 
 /**
@@ -17,6 +18,7 @@ public class State {
 
     private String selectedLanguage;
     private String selectedCategory;
+    private String selectedSorting ="";
     private Properties pro = new Properties();
     private TimeFilter filtering = TimeFilter.ALL;
     private int x = 0;
@@ -63,6 +65,7 @@ public class State {
      */
     public void saveState() {
         try {
+            pro.setProperty("sort", selectedSorting);
             pro.setProperty("lan", selectedLanguage);
             pro.setProperty("x", Integer.toString(x));
             pro.setProperty("y", Integer.toString(y));
@@ -96,6 +99,7 @@ public class State {
                 this.selectedLanguage = pro.getProperty("lan");
                 stringToTimeFilter(pro.getProperty("filter"));
                 this.selectedCategory = pro.getProperty("category");
+                //this.selectedSorting = pro.getProperty("sort");
                 
                 //catch numberformat exception incase there are
                 //no values for x and y saved yet
@@ -129,6 +133,34 @@ public class State {
         }
     }
 
+    private void stringToTimeFilter(String convert){
+        switch(convert){
+            default:
+                this.filtering = null;
+                break;
+            case "ALL":
+                this.filtering = TimeFilter.ALL;
+                break;
+            case "TODAY":
+                this.filtering = TimeFilter.TODAY;
+                break;
+            case "TOMORROW":
+                this.filtering = TimeFilter.TOMORROW;
+                break;
+            case "THIS_WEEK":
+                this.filtering = TimeFilter.THIS_WEEK;
+                break;
+            case "OLD":
+                this.filtering = TimeFilter.OLD;
+                break;    
+                
+        }
+    }
+    
+    //************************************************
+    //Get and set methods
+    //************************************************
+    
     /**
      *
      * @param def This is the default window width for the first session or if
@@ -190,32 +222,25 @@ public class State {
         return itemIndex;
     }
     
-    private void stringToTimeFilter(String convert){
-        switch(convert){
+    public String getSelectedCategory(){
+        return this.selectedCategory;
+    }
+    
+    public Sorting getSelectedSorting(){
+        switch(this.selectedSorting){
             default:
-                this.filtering = null;
-                break;
-            case "ALL":
-                this.filtering = TimeFilter.ALL;
-                break;
-            case "TODAY":
-                this.filtering = TimeFilter.TODAY;
-                break;
-            case "TOMORROW":
-                this.filtering = TimeFilter.TOMORROW;
-                break;
-            case "THIS_WEEK":
-                this.filtering = TimeFilter.THIS_WEEK;
-                break;
-            case "OLD":
-                this.filtering = TimeFilter.OLD;
-                break;    
-                
+                return Sorting.TIME;
+            case "PRIO":
+                return Sorting.PRIO;
+            case "CATEGORY":
+                return Sorting.CATEGORY;
+            case "TITLE":
+                return Sorting.TITLE;                
         }
     }
     
-    public String getSelectedCategory(){
-        return this.selectedCategory;
+    public void setSelectedSorting(Sorting sort){
+        this.selectedSorting = sort.toString();
     }
 
     protected void setSelectedCategory(String category) {

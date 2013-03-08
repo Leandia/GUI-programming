@@ -3,6 +3,7 @@ package todomanager;
 
 import Actions.AddCategoryAction;
 import backend.CategoryListModel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -32,6 +33,7 @@ public class CategoryPanel extends JPanel {
     public CategoryPanel() throws IOException {
         this.setMinimumSize(new Dimension(200, 200));
         this.setLayout(new GridBagLayout());
+        this.setBackground(TODOManager.theme.getWindowBackground());
         addNewCategoryList();
         addClock();
         addAddCategoryButton();
@@ -62,12 +64,14 @@ public class CategoryPanel extends JPanel {
             public void keyPressed(KeyEvent ke) {                
                 //You can delete categories using the delete key, a confirm dialog
                 //will popup for the user to answer to
-                if(ke.getKeyCode() == KeyEvent.VK_DELETE){
+                if(ke.getKeyCode() == KeyEvent.VK_DELETE && list.getSelectedValue().equals(TODOManager.backend.getCategoryListModel().getElementAt(0))){
                     int result = JOptionPane.showConfirmDialog(null, TODOManager.manager.getBundle().getString("catequestion"));
                     if(result == JOptionPane.YES_OPTION && !model.getList().get(list.getSelectedIndex()).getCategoryTitle().equals(TODOManager.manager.getBundle().getString("all"))){
                         TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
                     }
                 }
+                
+                
             }
 
             @Override

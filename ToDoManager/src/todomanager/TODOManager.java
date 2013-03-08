@@ -33,6 +33,7 @@ public class TODOManager {
 
     public static State savedSettings;
     public static LanguageManager manager;
+    public static MetalTheme theme;
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
@@ -163,7 +164,7 @@ public class TODOManager {
     }
 
     public static void main(String[] args) throws IOException {
-        MetalTheme theme = new Theme();
+        theme = new Theme();
         MetalLookAndFeel.setCurrentTheme(theme);
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
