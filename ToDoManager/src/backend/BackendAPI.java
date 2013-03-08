@@ -67,7 +67,26 @@ public class BackendAPI {
      */
     public void addItem(ToDoItem item) {
         this.displayList.addElement(item);
+        getCategoryFromString(item.getCategory()).addToDoItem(item);
         database.addItem(item);
+    }
+    
+    /**
+     * Retrieves the category object corresponding to the input string.
+     * @param cat String that represents a category title
+     * @return Category object
+     */
+    private Category getCategoryFromString(String cat){
+        Iterator iterator = this.categoryList.getList().iterator();
+        Category category;
+        
+        while(iterator.hasNext()){
+            category = (Category) iterator.next();
+            if(category.getCategoryTitle().equals(cat)){
+                return category;
+            }
+        }
+        return (Category) this.categoryList.getElementAt(0);
     }
 
     /**
