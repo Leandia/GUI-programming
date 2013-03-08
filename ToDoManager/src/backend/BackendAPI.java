@@ -31,34 +31,32 @@ public class BackendAPI {
         this.database = new Database();
         this.selectedCategory = TODOManager.savedSettings.getSelectedCategory();
         this.filter = TODOManager.savedSettings.getFilter();
-        
+
         //setDisplayItems();
         initCategories();
         viewChange();
         //this.list = new DisplayList();
     }
-    
-    
-    private void setDisplayItems(){
+
+    private void setDisplayItems() {
         ArrayList<ToDoItem> temp = new ArrayList();
         ArrayList<ToDoItem> allItems = this.database.getAllItems();
         ToDoItem item;
-        
-        if(this.selectedCategory == null || this.selectedCategory.equals("All")){
+
+        if (this.selectedCategory == null || this.selectedCategory.equals("All")) {
             this.displayList.setList(allItems);
-        }
-        else{
+        } else {
             Iterator iterator = allItems.iterator();
-            
-            while(iterator.hasNext()){
-                item = (ToDoItem)iterator.next();
-                if(item.getCategory().equals(this.selectedCategory)){
+
+            while (iterator.hasNext()) {
+                item = (ToDoItem) iterator.next();
+                if (item.getCategory().equals(this.selectedCategory)) {
                     temp.add(item);
                 }
             }
             this.displayList.setList(temp);;
         }
-        
+
     }
 
     /**
@@ -102,49 +100,54 @@ public class BackendAPI {
     }
 
     public class DateComparator implements Comparator<ToDoItem> {
-       @Override
-       public int compare(ToDoItem o1, ToDoItem o2) {
-           return o1.getDate().compareTo(o2.getDate());
-       }
+
+        @Override
+        public int compare(ToDoItem o1, ToDoItem o2) {
+            return o1.getDate().compareTo(o2.getDate());
+        }
     }
-   
+
     public class TitleComparator implements Comparator<ToDoItem> {
-       @Override
-       public int compare(ToDoItem o1, ToDoItem o2) {
-           return o1.getTitle().compareTo(o2.getTitle());
-       }
+
+        @Override
+        public int compare(ToDoItem o1, ToDoItem o2) {
+            return o1.getTitle().compareTo(o2.getTitle());
+        }
     }
-   
+
     public class CategoryComparator implements Comparator<ToDoItem> {
-       @Override
-       public int compare(ToDoItem o1, ToDoItem o2) {
-           return o2.getCategory().compareTo(o1.getCategory());
-       }
+
+        @Override
+        public int compare(ToDoItem o1, ToDoItem o2) {
+            return o2.getCategory().compareTo(o1.getCategory());
+        }
     }
+
     public class PrioComparator implements Comparator<ToDoItem> {
-       @Override
-       public int compare(ToDoItem o1, ToDoItem o2) {
-           return o1.getPrio().compareTo(o2.getPrio());
-       }
-    }    
-   
-    private void sortToDoItems(){
-       sorting = Sorting.TIME;
-       switch(sorting){    
-           case TIME:
-               Collections.sort(this.displayList.getList(), new DateComparator());
-               break;
-           case TITLE:
-               Collections.sort(this.displayList.getList(), new TitleComparator());
-               break;
-           case CATEGORY:
-               Collections.sort(this.displayList.getList(), new CategoryComparator());
-           case PRIO:
-               Collections.sort(this.displayList.getList(), new PrioComparator());
-           default:
-       }
+
+        @Override
+        public int compare(ToDoItem o1, ToDoItem o2) {
+            return o1.getPrio().compareTo(o2.getPrio());
+        }
     }
-    
+
+    private void sortToDoItems() {
+        sorting = Sorting.TIME;
+        switch (sorting) {
+            case TIME:
+                Collections.sort(this.displayList.getList(), new DateComparator());
+                break;
+            case TITLE:
+                Collections.sort(this.displayList.getList(), new TitleComparator());
+                break;
+            case CATEGORY:
+                Collections.sort(this.displayList.getList(), new CategoryComparator());
+            case PRIO:
+                Collections.sort(this.displayList.getList(), new PrioComparator());
+            default:
+        }
+    }
+
     /**
      * Function that filter by time, what period is determined by the filter
      * parameter
@@ -152,7 +155,7 @@ public class BackendAPI {
     private void filterByTime() {
         ArrayList<ToDoItem> list = this.displayList.getList();
         ArrayList<ToDoItem> temp = new ArrayList();
-        
+
         switch (filter) {
             default:
                 break;
@@ -166,8 +169,8 @@ public class BackendAPI {
                 break;
             case TODAY:
                 for (int i = 0; i < list.size(); i++) {
-                    
-                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(),0)) {
+
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 0)) {
                         temp.add(list.get(i));
                     }
                 }
@@ -175,7 +178,7 @@ public class BackendAPI {
                 break;
             case TOMORROW:
                 for (int i = 0; i < list.size(); i++) {
-                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(),1)) {
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 1)) {
                         temp.add(list.get(i));
                     }
                 }
@@ -190,51 +193,53 @@ public class BackendAPI {
                 this.displayList.setList(temp);
                 break;
         }
-        
-        
+
+
     }
 
     /**
-     * Called on changes in which items to view, either changing category
-     * or time filter. In returns calls each method respectively.
+     * Called on changes in which items to view, either changing category or
+     * time filter. In returns calls each method respectively.
      */
-    public final void viewChange(){
+    public final void viewChange() {
         setDisplayItems();
         filterByTime();
         sortToDoItems();
     }
+
     /**
      * Initializes categories on startup
      */
     private void initCategories() {
-        
-        if(this.database.getCategories().isEmpty()){
-            addCategory(new Category(0,TODOManager.manager.getBundle().getString("all"),new ArrayList()));
-            addCategory(new Category(1,TODOManager.manager.getBundle().getString("home"),new ArrayList()));
-            addCategory(new Category(2,TODOManager.manager.getBundle().getString("work"),new ArrayList()));
-            addCategory(new Category(3,TODOManager.manager.getBundle().getString("other"),new ArrayList()));
-        }
-        else{
+
+        if (this.database.getCategories().isEmpty()) {
+            addCategory(new Category(0, TODOManager.manager.getBundle().getString("all"), new ArrayList()));
+            addCategory(new Category(1, TODOManager.manager.getBundle().getString("home"), new ArrayList()));
+            addCategory(new Category(2, TODOManager.manager.getBundle().getString("work"), new ArrayList()));
+            addCategory(new Category(3, TODOManager.manager.getBundle().getString("other"), new ArrayList()));
+        } else {
             this.categoryList.setList(this.database.getCategories());
         }
-    } 
-    
+    }
+
     /**
-     * Adds a category to the list of categories, also writes through to
-     * the database.
-     * @param category 
+     * Adds a category to the list of categories, also writes through to the
+     * database.
+     *
+     * @param category
      */
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
         this.categoryList.addCategory(category);
         this.database.addCategory(category);
     }
-    
+
     /**
-     * Deletes the input category from the list of categories,
-     * deletes also from the database
-     * @param category 
+     * Deletes the input category from the list of categories, deletes also from
+     * the database
+     *
+     * @param category
      */
-    public void deleteCategory(Category category){
+    public void deleteCategory(Category category) {
         this.categoryList.removeCategory(category);
         this.database.deleteCategory(category);
     }
@@ -243,16 +248,20 @@ public class BackendAPI {
         this.selectedCategory = category;
         TODOManager.savedSettings.setSelectedCategory(category);
     }
-    
-    public CategoryListModel getCategoryListModel(){
+
+    public CategoryListModel getCategoryListModel() {
         return this.categoryList;
     }
-    
-    public void setFilter(TimeFilter filt){
+
+    public void setFilter(TimeFilter filt) {
         this.filter = filt;
     }
 
+    public void setSorting(Sorting sorting) {
+        this.sorting = sorting;
+    }
+
     public void createCategory(String title) {
-        addCategory(new Category(this.categoryList.getSize(),title,new ArrayList()));
+        addCategory(new Category(this.categoryList.getSize(), title, new ArrayList()));
     }
 }
