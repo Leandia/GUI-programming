@@ -4,6 +4,7 @@ import backend.ToDoItem;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
+import todomanager.TODOManager;
 
 /**
  * Class to mark items as done.
@@ -28,5 +29,6 @@ public class DoneAction extends AbstractAction {
         } else {
             this.item.setDone(false);
         }
+        TODOManager.backend.viewChange();
     }
 }
