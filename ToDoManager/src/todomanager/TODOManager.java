@@ -16,12 +16,7 @@ import java.text.ParseException;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
@@ -33,7 +28,9 @@ public class TODOManager {
 
     public static State savedSettings;
     public static LanguageManager manager;
-    public static MetalTheme theme;
+    public static MetalTheme theme;    
+    JCheckBoxMenuItem changeLanguageToSwedish;
+    JCheckBoxMenuItem changeLanguageToEnglish;
     JFrame mainWindow;
     JMenu file;
     JMenuItem quit;
@@ -116,13 +113,28 @@ public class TODOManager {
         newItem = new JMenuItem(new AddItemPopupAction(TODOManager.manager.getBundle().getString("buttontext")));
         edit.add(newItem);
         edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
-
+        
         settings = new JMenu(manager.getBundle().getString("settings"));
         language = new JMenu(manager.getBundle().getString("language"));
-        SelectEnglishAsLanguageAction act = new SelectEnglishAsLanguageAction(manager.getBundle().getString("english"));
-
-        language.add(act);
-        language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
+        
+        changeLanguageToSwedish = new JCheckBoxMenuItem(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish"))); 
+        changeLanguageToEnglish = new JCheckBoxMenuItem(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english"))); 
+        
+        ButtonGroup group = new ButtonGroup();
+        group.add(changeLanguageToSwedish);
+        group.add(changeLanguageToEnglish);
+        language.add(changeLanguageToSwedish);
+        language.add(changeLanguageToEnglish);
+        
+        switch(savedSettings.getLanguage()){
+            case "Swedish":
+                changeLanguageToSwedish.setSelected(true);
+                break;
+            case "English":
+                changeLanguageToEnglish.setSelected(true);
+                break;
+        }
+         
         settings.add(language);
         menu.add(settings);
 
@@ -132,26 +144,35 @@ public class TODOManager {
         this.mainWindow.setJMenuBar(menu);
 
     }
-
+    
     /**
-     * Updates all internationalized components belonging to the TODOManager
-     * class given the set locale.
+     * Updates all internationalized components belonging
+     * to the TODOManager class given the set locale. 
      */
-    private void updateLabels() {
+    private void updateLabels(){
         this.file.setText(manager.getBundle().getString("file"));
         this.quit.setText(manager.getBundle().getString("quit"));
         file.removeAll();
-        file.add(new QuitAction(manager.getBundle().getString("quit"), "This is the quit button."));
+        file.add(new QuitAction(manager.getBundle().getString("quit"),"This is the quit button."));
         this.edit.setText(manager.getBundle().getString("edit"));
         edit.removeAll();
-        edit.add(new JMenuItem(new AddItemPopupAction()));
+        edit.add(new JMenuItem(new AddItemPopupAction(TODOManager.manager.getBundle().getString("add_item"))));
+        edit.add(new JMenuItem(new AddCategoryAction(TODOManager.manager.getBundle().getString("add_category"))));
         this.settings.setText(manager.getBundle().getString("settings"));
         this.language.setText(manager.getBundle().getString("language"));
         language.removeAll();
-        language.add(new SelectSwedishAsLanguageAction(manager.getBundle().getString("swedish")));
-        language.add(new SelectEnglishAsLanguageAction(manager.getBundle().getString("english")));
+        language.add(changeLanguageToSwedish);
+        language.add(changeLanguageToEnglish);
+        switch(savedSettings.getLanguage()){
+            case "Swedish":
+                changeLanguageToSwedish.setSelected(true);
+                break;
+            case "English":
+                changeLanguageToEnglish.setSelected(true);
+                break;
+        }
         this.help.setText(manager.getBundle().getString("help"));
-
+        
     }
 
     /**

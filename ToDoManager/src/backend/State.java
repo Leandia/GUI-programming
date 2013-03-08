@@ -29,14 +29,6 @@ public class State {
     
     /**
      *
-     * @return Language that is to be used in the graphical interface
-     */
-    protected String getLanguage() {
-        return this.selectedLanguage;
-    }
-
-    /**
-     *
      * @param language Set the language to be used in the graphical interface
      */
     public void setSelectedLanguage(String language) {
@@ -99,7 +91,7 @@ public class State {
                 this.selectedLanguage = pro.getProperty("lan");
                 stringToTimeFilter(pro.getProperty("filter"));
                 this.selectedCategory = pro.getProperty("category");
-                //this.selectedSorting = pro.getProperty("sort");
+                this.selectedSorting = pro.getProperty("sort");
                 
                 //catch numberformat exception incase there are
                 //no values for x and y saved yet
@@ -246,4 +238,12 @@ public class State {
     protected void setSelectedCategory(String category) {
         this.selectedCategory = category;
     }
+    
+    /**
+     *
+     * @return Language that is to be used in the graphical interface
+     */
+    public String getLanguage() {
+        return this.selectedLanguage;
+    }    
 }

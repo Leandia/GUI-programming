@@ -20,19 +20,17 @@ public class BackendAPI {
     private DisplayList displayList = new DisplayList();
     //final DisplayList list;
     private int index = 0;
-    private ArrayList<Category> categories = new ArrayList();
     private String selectedCategory;
     private TimeFilter filter;
     private CategoryListModel categoryList = new CategoryListModel();
-    private Sorting sorting = Sorting.TIME;
-    private Sorting selectedSorting;
+    private Sorting sorting;
 
     public BackendAPI(int index) {
         this.index = index;
         this.database = new Database();
         this.selectedCategory = TODOManager.savedSettings.getSelectedCategory();
         this.filter = TODOManager.savedSettings.getFilter();
-        this.selectedSorting = TODOManager.savedSettings.getSelectedSorting();
+        this.sorting = TODOManager.savedSettings.getSelectedSorting();
 
         //setDisplayItems();
         initCategories();
@@ -269,11 +267,6 @@ public class BackendAPI {
         TODOManager.savedSettings.setSelectedCategory(category);
     }
     
-    public void setSelectedSorting(Sorting sort){
-        this.selectedSorting = sort;
-        TODOManager.savedSettings.setSelectedSorting(sort);
-    }
-
     public CategoryListModel getCategoryListModel() {
         return this.categoryList;
     }
@@ -283,11 +276,12 @@ public class BackendAPI {
     }
 
     public void setSorting(Sorting sorting) {
+        TODOManager.savedSettings.setSelectedSorting(this.sorting);
         this.sorting = sorting;
     }
 
     public Sorting getSorting() {
-        return sorting;
+        return this.sorting;
     }
 
     public void createCategory(String title) {
