@@ -21,6 +21,7 @@ public class ToDoItem {
     private String category;
     private GregorianCalendar date;
     private Priority prio;
+    private boolean reminded;
     
     /**
      * @deprecated Do not use if intended to work with database. Instead use 
@@ -51,6 +52,7 @@ public class ToDoItem {
         this.prio = prio;
         this.date = cal;
         this.number = nb;
+        this.reminded = false;
     }
     
     /**
@@ -106,6 +108,13 @@ public class ToDoItem {
     public void setPrio(Priority prio) {
         this.prio = prio;
     }
+
+    public boolean getReminded(){
+        return this.reminded;
+    }
     
+    public void setReminded(boolean rem){
+        this.reminded = rem;
+    }
     
 }
