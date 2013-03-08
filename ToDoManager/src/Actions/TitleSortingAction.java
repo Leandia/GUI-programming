@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import todomanager.SortBar;
 import todomanager.TODOManager;
-import values.Sorting;
+import Enum.Sorting;
 
 /**
  *

@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package values;
+package Enum;
 
 /**
- *
+ * Decides what filtering method to use
  * @author Kristian
  */
 public enum TimeFilter {

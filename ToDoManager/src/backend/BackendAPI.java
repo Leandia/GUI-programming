@@ -6,8 +6,8 @@ package backend;
 
 import java.util.*;
 import todomanager.TODOManager;
-import values.Sorting;
-import values.TimeFilter;
+import Enum.Sorting;
+import Enum.TimeFilter;
 
 /**
  * @author Daniel

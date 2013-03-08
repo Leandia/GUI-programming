@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
-import values.Priority;
+import Enum.Priority;
 
 /**
  *

@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import values.Sorting;
-import values.TimeFilter;
+import Enum.Sorting;
+import Enum.TimeFilter;
 
 /**
  * State class that holds all settings for the interface
