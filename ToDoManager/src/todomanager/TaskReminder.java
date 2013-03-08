@@ -88,8 +88,7 @@ public class TaskReminder extends TimerTask{
             //The pending item is the nearest in time
             pending = items.get(0);
         }       
-        System.out.println(items.size());
-
+        
         try{
                 
                         
