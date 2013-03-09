@@ -16,6 +16,13 @@ public class DoneAction extends AbstractAction {
     private ToDoItem item;
     private JCheckBox box;
 
+    /**
+     * Constructor taking the ToDoItem to change and the JCeckbox from which to
+     * read the change.
+     *
+     * @param item A ToDoItem.
+     * @param box A JCheckBox.
+     */
     public DoneAction(ToDoItem item, JCheckBox box) {
         super();
         this.item = item;

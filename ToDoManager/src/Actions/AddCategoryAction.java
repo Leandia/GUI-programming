@@ -9,10 +9,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import todomanager.NewCategoryPopup;
-import todomanager.TODOManager;
 
 /**
- *
+ * Class to add a category.
+ * 
  * @author Kristian
  */
 public class AddCategoryAction extends AbstractAction {
@@ -23,6 +23,11 @@ public class AddCategoryAction extends AbstractAction {
     public AddCategoryAction(){
     }
     
+    /**
+     * Constructor, takes a String as category name.
+     * 
+     * @param text The name of the category.
+     */
     public AddCategoryAction(String text){
         super(text);
     }

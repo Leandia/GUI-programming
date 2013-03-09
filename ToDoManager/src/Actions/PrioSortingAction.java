@@ -8,6 +8,7 @@ import todomanager.TODOManager;
 
 /**
  * Class to set sorting acording to priority.
+ *
  * @author Daniel
  */
 public class PrioSortingAction extends AbstractAction {
@@ -16,6 +17,7 @@ public class PrioSortingAction extends AbstractAction {
 
     /**
      * Constructor, takes a SortBar.
+     *
      * @param sort A SortBar.
      */
     public PrioSortingAction(SortBar sort) {

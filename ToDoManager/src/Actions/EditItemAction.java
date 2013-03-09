@@ -9,21 +9,33 @@ import todomanager.TODOManager;
 
 /**
  * Class for editItemAction. Extends AbstractAction.
+ *
  * @author Daniel
  */
-public class EditItemAction  extends AbstractAction {
+public class EditItemAction extends AbstractAction {
 
     private ToDoItem todoItem;
-    
-    public EditItemAction(ToDoItem item){
+
+    /**
+     * Constructor taking the ToDoItem to edit.
+     *
+     * @param item The ToDoItem to edit.
+     */
+    public EditItemAction(ToDoItem item) {
         this.todoItem = item;
     }
-    
-    public EditItemAction(ToDoItem item,String text){
+
+    /**
+     * Constructor taking the ToDoItem to edit and a sname of the action.
+     *
+     * @param item The ToDoItem to edit.
+     * @param text THe name of the action.
+     */
+    public EditItemAction(ToDoItem item, String text) {
         super(text);
         this.todoItem = item;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

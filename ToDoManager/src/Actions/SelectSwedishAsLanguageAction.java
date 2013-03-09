@@ -6,9 +6,6 @@ package Actions;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import todomanager.TODOManager;
 
 /**

@@ -4,16 +4,21 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 /**
+ * Class to edit a category. NOT YET IMPLEMENTED:
  *
  * @author Kristian
  */
-public class EditCategoryAction extends AbstractAction{
-    
-    public EditCategoryAction(){
-    
+public class EditCategoryAction extends AbstractAction {
+
+    public EditCategoryAction() {
     }
-    
-    public EditCategoryAction(String text){
+
+    /**
+     * Constructor taking the name of the action.
+     *
+     * @param text The name of the action.
+     */
+    public EditCategoryAction(String text) {
         super(text);
     }
 
@@ -21,6 +26,4 @@ public class EditCategoryAction extends AbstractAction{
     public void actionPerformed(ActionEvent ae) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
 }

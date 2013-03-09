@@ -11,19 +11,24 @@ import todomanager.NewItemPopup;
 import todomanager.TODOManager;
 
 /**
+ * Action to open the new Item popup window.
  *
  * @author Daniel
  */
 public class AddItemPopupAction extends AbstractAction {
 
-
     public AddItemPopupAction() {
     }
-    
+
+    /**
+     * Constructor taking a String which is the name oif the action.
+     *
+     * @param text THe name of the action.
+     */
     public AddItemPopupAction(String text) {
         super(text);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = new JFrame();
