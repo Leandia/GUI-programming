@@ -43,7 +43,7 @@ public class EditItemAction extends AbstractAction {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         System.out.print(this.todoItem.getPrio());
         NewItemPopup opt = new NewItemPopup(frame, true, this.todoItem.getTitle(), this.todoItem.getCategory(),
-                this.todoItem.getDate(), this.todoItem.getPrio());
+                this.todoItem.getDate(), this.todoItem.getPrio(),"edit");
         if (opt.getItem() != null) {
             TODOManager.backend.deleteItem(this.todoItem);
             TODOManager.backend.addItem(opt.getItem());

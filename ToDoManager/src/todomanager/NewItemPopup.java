@@ -1,5 +1,6 @@
 package todomanager;
 
+import Enum.Priority;
 import backend.ToDoItem;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
-import Enum.Priority;
 
 /**
  *
@@ -46,8 +46,17 @@ public class NewItemPopup extends JDialog {
     private JList list;
     public String test;
     
-    
-    public NewItemPopup(JFrame frame, boolean modal, String tit, String cat, GregorianCalendar cal , Priority p){
+    /**
+     * Constructor called when editing an already existing item
+     * @param frame
+     * @param modal
+     * @param tit Title of current item
+     * @param cat Category of current item
+     * @param cal Date of current item
+     * @param p Priority of current item
+     * @param buttonText Text for confirm button (either "Edit" or "Add")
+     */
+    public NewItemPopup(JFrame frame, boolean modal, String tit, String cat, GregorianCalendar cal , Priority p,String buttonText){
          //JFrame frame = new JFrame();
         super(frame, modal);
         this.setLocationByPlatform(true);
@@ -152,7 +161,7 @@ public class NewItemPopup extends JDialog {
         constraints.gridx = 1;
         myPanel.add(priorityMenu, constraints);
         //7,1
-        yesButton = new JButton(new yesButton(this));
+        yesButton = new JButton(new yesButton(this,buttonText));
         constraints.gridx = 0;
         constraints.gridy = 6;
         myPanel.add(yesButton, constraints);
@@ -166,111 +175,13 @@ public class NewItemPopup extends JDialog {
         setVisible(true);
     }
     
-    
+    /**
+     * Constructor called when a new item is to be added
+     * @param frame
+     * @param modal 
+     */
     public NewItemPopup(JFrame frame, boolean modal) {
-        //JFrame frame = new JFrame();
-        super(frame, modal);
-        this.setLocationByPlatform(true);
-        myPanel = new JPanel();
-        myPanel.setLayout(new GridBagLayout());
-        getContentPane().add(myPanel);
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        constraints.fill = GridBagConstraints.BOTH;
-
-        //1,1
-        titleLabel = new JLabel(TODOManager.manager.getBundle().getString("title"));
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        myPanel.add(titleLabel, constraints);
-        //2,1
-        titleTextField = new JTextField(10); 
-        //titleTextField = new JTextField(title, 10);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        myPanel.add(titleTextField, constraints);
-        constraints.gridwidth = 1;
-        //3,1
-        categoryLabel = new JLabel(TODOManager.manager.getBundle().getString("category"));
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        myPanel.add(categoryLabel, constraints);
-        //3,2
-        list = new JList(TODOManager.backend.getCategoryListModel());
-        constraints.gridx = 1;
-        myPanel.add(list, constraints);
-        
-        //4,1
-        dateLabel = new JLabel(TODOManager.manager.getBundle().getString("date"));
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        myPanel.add(dateLabel, constraints);
-        //4,2
-        JPanel dates = new JPanel(new GridBagLayout());
-        GridBagConstraints datesConstraints = new GridBagConstraints();
-        datesConstraints.weightx = 1;
-        datesConstraints.weighty = 1;
-        datesConstraints.gridx = 0;
-        datesConstraints.gridy = 0;
-        GregorianCalendar d = new GregorianCalendar();
-        yearTextField = new JTextField("" + d.get(Calendar.YEAR), 4);
-        dates.add(yearTextField, datesConstraints);
-        datesConstraints.gridx = 1;
-        monthTextField = new JTextField("" + (d.get(Calendar.MONTH) + 1), 2);
-        dates.add(monthTextField, datesConstraints);
-        datesConstraints.gridx = 2;
-        dayTextField = new JTextField("" + d.get(Calendar.DATE), 2);
-        dates.add(dayTextField, datesConstraints);
-        constraints.gridx = 1;
-        myPanel.add(dates, constraints);
-
-        //5.1
-        timeLabel = new JLabel(TODOManager.manager.getBundle().getString("time"));
-        constraints.gridx = 0;
-        constraints.gridy = 4;
-        myPanel.add(timeLabel, constraints);
-
-        //5.2
-        JPanel time = new JPanel(new GridBagLayout());
-        GridBagConstraints timeConstraints = new GridBagConstraints();
-        timeConstraints.weightx = 1;
-        timeConstraints.weighty = 1;
-        timeConstraints.gridx = 0;
-        timeConstraints.gridy = 0;
-        hourTextField = new JTextField("12");
-        time.add(hourTextField, timeConstraints);
-        timeConstraints.gridx = 1;
-        minutesTextField = new JTextField("00");
-        time.add(minutesTextField, timeConstraints);
-        timeConstraints.gridx = 2;
-        constraints.gridx = 1;
-        myPanel.add(time, constraints);
-
-        //6,1
-        priorityLabel = new JLabel(TODOManager.manager.getBundle().getString("priority"));
-        constraints.gridx = 0;
-        constraints.gridy = 5;
-        myPanel.add(priorityLabel, constraints);
-        //6,2
-        priorityMenu = new JComboBox(prioList);
-        priorityMenu.setSelectedIndex(0);
-        constraints.gridx = 1;
-        myPanel.add(priorityMenu, constraints);
-        //7,1
-        yesButton = new JButton(new yesButton(this));
-        constraints.gridx = 0;
-        constraints.gridy = 6;
-        myPanel.add(yesButton, constraints);
-        //7,2
-        noButton = new JButton(new noButton());
-        constraints.gridx = 1;
-        myPanel.add(noButton, constraints);
-
-        //Display the window.
-        pack();
-        setVisible(true);
+        this(frame,modal,"","All",new GregorianCalendar(),Priority.MEDIUM,"add");
     }
 
     
@@ -282,8 +193,8 @@ public class NewItemPopup extends JDialog {
         private NewItemPopup window;
         private Color errorColor = Color.RED;
 
-        public yesButton(NewItemPopup window) {
-            super(TODOManager.manager.getBundle().getString("add"));
+        public yesButton(NewItemPopup window,String buttontext) {
+            super(TODOManager.manager.getBundle().getString(buttontext));
             
             this.window = window;
         }
