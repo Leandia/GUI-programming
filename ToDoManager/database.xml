@@ -7,15 +7,8 @@
     <_3 name="Other" />
   </category>
   <data>
-    <_2 title="aweg" description="not implemented" category="Other" priority="LOW" year="2013" month="2" day="6" hour="12" minute="0" />
-    <_19 title="nära" description="not implemented" category="Home" priority="MEDIUM" year="2013" month="2" day="8" hour="11" minute="18" />
-    <_20 title="också nära" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="11" minute="19" />
-    <_21 title="kl 12" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
-    <_22 title="andra ALL" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="12" minute="11" />
-    <_23 title="work" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
-    <_24 title="third ALL" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="11" minute="0" />
-    <_25 title="fourth ALL" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
-    <_26 title="supertest" description="not implemented" category="Work" priority="LOW" year="2013" month="2" day="8" hour="12" minute="0" />
-    <_15 title="test nr.3" description="not implemented" category="Home" priority="HIGH" year="2013" month="2" day="9" hour="15" minute="0" />
+    <_18 title="New item2" description="not implemented" category="All" priority="LOW" year="2013" month="2" day="15" hour="11" minute="12" done="false" />
+    <_19 title="New item3" description="not implemented" category="All" priority="HIGH" year="2013" month="2" day="15" hour="11" minute="12" done="false" />
+    <_20 title="New item1" description="not implemented" category="Home" priority="MEDIUM" year="2013" month="2" day="15" hour="11" minute="12" done="false" />
   </data>
 </todoManager>

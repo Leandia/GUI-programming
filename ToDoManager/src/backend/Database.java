@@ -93,6 +93,7 @@ public class Database {
         addItem.setAttribute("day", Integer.toString(cal.get(Calendar.DATE)));
         addItem.setAttribute("hour", Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
         addItem.setAttribute("minute", Integer.toString(cal.get(Calendar.MINUTE)));
+        addItem.setAttribute("done", "" + item.getDone());
         this.data.addContent(addItem);
         writeDB();
     }
@@ -204,6 +205,11 @@ public class Database {
                 ToDoItem item = new ToDoItem(number, e.getAttributeValue("title"),
                         e.getAttributeValue("description"),
                         e.getAttributeValue("category"), prio, cal);
+                if (e.getAttributeValue("done").equals("true")) {
+                    item.setDone(true);
+                } else {
+                    item.setDone(false);
+                }
                 listOfItems.add(item);
             }
         }
