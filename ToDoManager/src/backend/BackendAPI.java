@@ -179,7 +179,7 @@ public class BackendAPI {
                 break;
             case OLD:
                 for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i).getDate().before(new GregorianCalendar())) {
+                    if (list.get(i).getDate().before(new GregorianCalendar()) || list.get(i).getDone()) {
                         temp.add(list.get(i));
                     }
                 }
@@ -188,7 +188,7 @@ public class BackendAPI {
             case TODAY:
                 for (int i = 0; i < list.size(); i++) {
 
-                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 0)) {
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 0) && !list.get(i).getDone()) {
                         temp.add(list.get(i));
                     }
                 }
@@ -196,7 +196,7 @@ public class BackendAPI {
                 break;
             case TOMORROW:
                 for (int i = 0; i < list.size(); i++) {
-                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 1)) {
+                    if (CompareDateAndTime.isSpecficDay(list.get(i).getDate(), 1) && !list.get(i).getDone()) {
                         temp.add(list.get(i));
                     }
                 }
@@ -204,7 +204,7 @@ public class BackendAPI {
                 break;
             case THIS_WEEK:
                 for (int i = 0; i < list.size(); i++) {
-                    if (CompareDateAndTime.isThisWeek(list.get(i).getDate())) {
+                    if (CompareDateAndTime.isThisWeek(list.get(i).getDate()) && !list.get(i).getDone()) {
                         temp.add(list.get(i));
                     }
                 }
@@ -225,6 +225,12 @@ public class BackendAPI {
         sortToDoItems();
     }
 
+    
+    public void updateItem(ToDoItem item){
+        this.deleteItem(item);
+        this.addItem(item);
+    }
+    
     /**
      * Initializes categories on startup
      */

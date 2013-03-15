@@ -148,10 +148,10 @@ public class ToDoItemDesign extends JPanel {
         // Edit Button.
         editBtn.setAction(new EditItemAction(this.item));
         editBtn.setImage("./Resources/edit-gif.gif");
-        // Done button.
+        // Done button.        
         doneButton.setSelected(this.item.getDone());
         doneButton.setAction(new DoneAction(this.item, doneButton));
-
+        
         // Set the priority text according to language.
         switch (this.item.getPrio()) {
             case LOW:
@@ -217,12 +217,5 @@ public class ToDoItemDesign extends JPanel {
                 this.setBackground(Color.GRAY);
                 break;
         }
-    }
-
-    public void updateLabels() {
-        this.doneButton.setText(TODOManager.manager.getBundle().getString("done"));
-        //this.editBtn.setText(TODOManager.manager.getBundle().getString("edit"));
-        //deleteBtn.removeAll();
-        //deleteBtn.setAction(new DeleteItemAction(this.item));
     }
 }

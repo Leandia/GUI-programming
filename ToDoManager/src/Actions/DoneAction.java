@@ -36,6 +36,7 @@ public class DoneAction extends AbstractAction {
         } else {
             this.item.setDone(false);
         }
+        TODOManager.backend.updateItem(this.item);
         TODOManager.backend.viewChange();
     }
 }

@@ -88,6 +88,7 @@ public class ButtonsPanel extends JPanel {
                 TODOManager.backend.viewChange();
             }
         });
+        
         //Sets the initial selected tab, default will be "all"
         pane.setSelectedIndex(setTab(TODOManager.savedSettings.getFilter()));
         TODOManager.backend.viewChange();
@@ -131,6 +132,5 @@ public class ButtonsPanel extends JPanel {
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("tomorrow"));        
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("this_week"));
         pane.add(new TaskPanel(),TODOManager.manager.getBundle().getString("old"));
-        //this.addButton.setAction(new AddItemPopupAction());
     }
 }

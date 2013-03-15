@@ -111,8 +111,8 @@ public class TaskReminder extends TimerTask{
         }
 
         try {
-            //Polls every 5 seconds
-            Thread.currentThread().sleep(5000);
+            //Polls every 10 seconds
+            Thread.currentThread().sleep(10000);
         }
         catch (InterruptedException e) {
             System.err.print(e);
