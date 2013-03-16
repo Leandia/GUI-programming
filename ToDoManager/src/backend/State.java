@@ -1,17 +1,16 @@
 package backend;
 
+import Enum.Sorting;
+import Enum.TimeFilter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import Enum.Sorting;
-import Enum.TimeFilter;
 
 /**
  * State class that holds all settings for the interface
- *
  * @author Kristian
  */
 public class State {
@@ -101,7 +100,8 @@ public class State {
                     this.xPos = Integer.parseInt(pro.getProperty("xpos"));
                     this.yPos = Integer.parseInt(pro.getProperty("ypos"));
                     this.itemIndex = Integer.parseInt(pro.getProperty("itemIndex"));
-                } //If no states is yet saved x and y are set to 0 which
+                } 
+                //If no states is yet saved x and y are set to 0 which
                 //would render the return function returning the default
                 //values instead
                 catch (NumberFormatException e) {

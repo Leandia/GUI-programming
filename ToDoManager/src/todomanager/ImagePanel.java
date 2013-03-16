@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 /**
  * Panel for displaying an image. It draws the image straight on the panel, 
  * below any items added to the panel.
+ * 
  * @author Daniel
  */
 public class ImagePanel extends JPanel {

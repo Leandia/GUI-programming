@@ -1,5 +1,4 @@
 package backend;
-
 import Enum.Priority;
 import java.util.GregorianCalendar;
 
@@ -14,9 +13,6 @@ public class ToDoItem {
      * a ToDoItem's title *
      */
     private String title;
-    /**
-     * a ToDoItem's description *
-     */
     private String description;
     private String category;
     private GregorianCalendar date;
@@ -57,6 +53,10 @@ public class ToDoItem {
         this.reminded = false;
     }
 
+    //*******************************************************
+    // ***Getters and setters below
+    //*******************************************************
+    
     /**
      * Returns the title of a ToDoItem
      *

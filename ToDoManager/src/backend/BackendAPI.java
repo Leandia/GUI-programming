@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package backend;
 
-import java.util.*;
-import todomanager.TODOManager;
 import Enum.Sorting;
 import Enum.TimeFilter;
+import java.util.*;
+import todomanager.TODOManager;
 
 /**
  * @author Daniel
@@ -18,7 +14,6 @@ public class BackendAPI {
 
     private Database database;
     private DisplayList displayList = new DisplayList();
-    //final DisplayList list;
     private int index = 0;
     private String selectedCategory;
     private TimeFilter filter;
@@ -32,7 +27,6 @@ public class BackendAPI {
         this.filter = TODOManager.savedSettings.getFilter();
         this.sorting = TODOManager.savedSettings.getSelectedSorting();
 
-        //setDisplayItems();
         initCategories();
         viewChange();
     }
@@ -99,13 +93,6 @@ public class BackendAPI {
     }
 
     /**
-     * Method to close the database.
-     */
-    public void closeDB() {
-        //this.database.closeDB();
-    }
-
-    /**
      * Method to get the index of the item to add.
      *
      * @return The index of the next item.
@@ -152,10 +139,7 @@ public class BackendAPI {
 
     private void sortToDoItems() {
         switch (sorting) {
-            case TIME:
-                Collections.sort(this.displayList.getList(), new DateComparator());
-                break;
-            case TITLE:
+           case TITLE:
                 Collections.sort(this.displayList.getList(), new TitleComparator());
                 break;
             case CATEGORY:
@@ -163,6 +147,8 @@ public class BackendAPI {
             case PRIO:
                 Collections.sort(this.displayList.getList(), new PrioComparator());
             default:
+                Collections.sort(this.displayList.getList(), new DateComparator());
+                break;
         }
     }
 
@@ -236,6 +222,8 @@ public class BackendAPI {
      */
     private void initCategories() {
 
+        //If there are no categories in the database already, initialize
+        //the default ones
         if (this.database.getCategories().isEmpty()) {
             addCategory(new Category(0, "All", new ArrayList()));
             addCategory(new Category(1, "Home", new ArrayList()));

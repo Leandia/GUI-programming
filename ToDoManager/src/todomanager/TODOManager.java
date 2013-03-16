@@ -12,7 +12,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;

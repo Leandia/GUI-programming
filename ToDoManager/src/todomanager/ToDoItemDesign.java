@@ -148,7 +148,7 @@ public class ToDoItemDesign extends JPanel {
         // Edit Button.
         editBtn.setAction(new EditItemAction(this.item));
         editBtn.setImage("./Resources/edit-gif.gif");
-        // Done button.        
+        // Done button.       
         doneButton.setSelected(this.item.getDone());
         doneButton.setAction(new DoneAction(this.item, doneButton));
         

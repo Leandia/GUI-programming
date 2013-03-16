@@ -52,7 +52,7 @@ public class IconButton extends JButton {
      * Sets the icon if not set previously.
      * @param path Path to the image file
      */
-    public void setImage(String path) {
+    public final void setImage(String path) {
         //Create a new file to retrieve the pic from
         picture = new File(path);
 

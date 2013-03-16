@@ -6,7 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 /**
- * Simple temPanel class that is the visual representation of a todoitem.
+ * Simple itemPanel class that is the visual representation of a todoitem.
  *
  * @author Kristoffer Wass
  * @author Daniel

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 
 /**
- *
+ * Listmodel for the category list that is to be displayed. 
  * @author Kristian
  */
 public class CategoryListModel extends AbstractListModel {

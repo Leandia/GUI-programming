@@ -3,9 +3,12 @@ package todomanager;
 import java.awt.*;
 import java.util.Date;
 import javax.swing.*;
-//set a digital clock, background from theme, font metrics the same as in category 
-//list
-
+/**
+ * set a digital clock, background from theme, font metrics the same as in category 
+ *   list
+ * @author Vita
+ * @author Emil
+ */
 public class Clock extends JPanel implements Runnable {
 
     int currentHour;
@@ -13,9 +16,7 @@ public class Clock extends JPanel implements Runnable {
     int currentSecond;
     String minuteCorrection = "";
     String secondCorrection = "";
-    Font myFont = new Font ("",Font.HANGING_BASELINE,19);
-    
-    
+    Font myFont = new Font ("",Font.HANGING_BASELINE,19);   
     FontMetrics fm;
 
     public void paint(Graphics g) {

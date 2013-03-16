@@ -14,6 +14,7 @@ import javax.swing.*;
  *
  * @author Emil
  * @author Daniel
+ * @author Kristian
  */
 public class NewItemPopup extends JDialog {
 
@@ -44,7 +45,6 @@ public class NewItemPopup extends JDialog {
     private Priority prio;
     private ToDoItem item;
     private JList list;
-    public String test;
     
     /**
      * Constructor called when editing an already existing item
@@ -290,16 +290,6 @@ public class NewItemPopup extends JDialog {
      */
     public String getTitle() {
         return title;
-    }
-
-    /**
-     * Getter method to get the text from the description textfield
-     *
-     * @return title a string containing the description from the title text
-     * field
-     */
-    public String getDescription() {
-        return description;
     }
 
     public String getCategory() {

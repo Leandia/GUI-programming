@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions;
 
 import java.awt.Dimension;
@@ -18,7 +14,6 @@ import todomanager.NewCategoryPopup;
 public class AddCategoryAction extends AbstractAction {
 
     private JFrame frame;
-    private NewCategoryPopup popup;
     
     public AddCategoryAction(){
     }
@@ -35,9 +30,8 @@ public class AddCategoryAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent ae) {
         frame = new JFrame();
-        frame.setPreferredSize(new Dimension(200,200));
         
-        popup = new NewCategoryPopup(frame);
+        new NewCategoryPopup(frame);
     }
     
 }

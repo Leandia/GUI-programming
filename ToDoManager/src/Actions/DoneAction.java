@@ -24,7 +24,7 @@ public class DoneAction extends AbstractAction {
      * @param box A JCheckBox.
      */
     public DoneAction(ToDoItem item, JCheckBox box) {
-        super();
+        super(TODOManager.manager.getBundle().getString("done"));
         this.item = item;
         this.box = box;
     }

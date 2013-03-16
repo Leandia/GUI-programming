@@ -1,6 +1,5 @@
 package todomanager;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
+ * Popup thats created for adding new categories. Provides one input field only
  * @author Kristian
  */
 public class NewCategoryPopup extends JDialog {
@@ -26,7 +25,6 @@ public class NewCategoryPopup extends JDialog {
     
     public NewCategoryPopup(JFrame frame){
         super(frame,TODOManager.manager.getBundle().getString("add_new_category"));
-        super.setPreferredSize(new Dimension(200,200));
         mainPanel = new JPanel(new GridBagLayout());
         this.getContentPane().add(mainPanel);
         
@@ -58,6 +56,9 @@ public class NewCategoryPopup extends JDialog {
     }
 
 
+    /**
+     * Inner class, provides action for the add category button
+     */
     private class AddButton extends AbstractAction{
         
         private NewCategoryPopup window;
@@ -84,6 +85,9 @@ public class NewCategoryPopup extends JDialog {
     
     }
     
+    /**
+     * Inner class that provides action for the cancel button. 
+     */
     private class CancelButton extends AbstractAction{
         
         private NewCategoryPopup window;

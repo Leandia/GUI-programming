@@ -3,7 +3,6 @@ package todomanager;
 
 import Actions.AddCategoryAction;
 import backend.CategoryListModel;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -64,10 +63,19 @@ public class CategoryPanel extends JPanel {
             public void keyPressed(KeyEvent ke) {                
                 //You can delete categories using the delete key, a confirm dialog
                 //will popup for the user to answer to
-                if(ke.getKeyCode() == KeyEvent.VK_DELETE && list.getSelectedValue().equals(TODOManager.backend.getCategoryListModel().getElementAt(0))){
-                    int result = JOptionPane.showConfirmDialog(null, TODOManager.manager.getBundle().getString("catequestion"));
-                    if(result == JOptionPane.YES_OPTION && !model.getList().get(list.getSelectedIndex()).getCategoryTitle().equals(TODOManager.manager.getBundle().getString("all"))){
-                        TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
+                if(ke.getKeyCode() == KeyEvent.VK_DELETE){
+                    
+                    //You shouldnt be able to delete the category All, appropriate dialog
+                    //is shown if you try
+                    if(!list.getSelectedValue().equals(TODOManager.backend.getCategoryListModel().getElementAt(0)))
+                    {
+                        int result = JOptionPane.showConfirmDialog(null, TODOManager.manager.getBundle().getString("catequestion"));
+                        if(result == JOptionPane.YES_OPTION && !model.getList().get(list.getSelectedIndex()).getCategoryTitle().equals(TODOManager.manager.getBundle().getString("all"))){
+                            TODOManager.backend.deleteCategory((model.getList().get(list.getSelectedIndex())));
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, TODOManager.manager.getBundle().getString("cantDelete"));
                     }
                 }
                 
@@ -109,6 +117,7 @@ public class CategoryPanel extends JPanel {
     private void addClock() {
         
         Clock clock = new Clock();
+        //Put the clock in its own thread.
         Thread thread = new Thread(clock,"thread1");
         thread.start();
         
@@ -122,7 +131,11 @@ public class CategoryPanel extends JPanel {
         
         this.add(clock, c);
     }
-
+    
+    /**
+     * Adds a add category button to the panel. 
+     * @throws IOException 
+     */
     private void addAddCategoryButton() throws IOException {
         IconButton addCategory = new IconButton(new AddCategoryAction(),"./Resources/test.gif");
         

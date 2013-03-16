@@ -1,6 +1,7 @@
 package todomanager;
 
 import Actions.AddItemPopupAction;
+import Enum.TimeFilter;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,10 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import Enum.TimeFilter;
 
-/**
- *
+/** *
  * @author Emil
  * @author Kristian
  */
@@ -32,6 +31,9 @@ public class ButtonsPanel extends JPanel {
         createAndShowGUI();
     }
 
+    /**
+     * Creates the panel with correct settings and displays it. 
+     */
     private void createAndShowGUI() {
         addButton = new IconButton(new AddItemPopupAction(),"./Resources/test.gif");
         setLayout(new GridBagLayout());
