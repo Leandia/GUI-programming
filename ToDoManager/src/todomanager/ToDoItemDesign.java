@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package todomanager;
 
 import Actions.DeleteItemAction;
@@ -151,7 +147,7 @@ public class ToDoItemDesign extends JPanel {
         // Done button.       
         doneButton.setSelected(this.item.getDone());
         doneButton.setAction(new DoneAction(this.item, doneButton));
-        
+
         // Set the priority text according to language.
         switch (this.item.getPrio()) {
             case LOW:
@@ -173,27 +169,31 @@ public class ToDoItemDesign extends JPanel {
         category.setText(this.item.getCategory());
         //Month start by 0 in gregoriancalendar so need to add 1 to
         //display the correct value
-        String month = Integer.toString(this.item.getDate().get(Calendar.MONTH) + 1);
-        if (month.length() < 2) {
-            month = "0" + month;
-        }
-        String day = Integer.toString(this.item.getDate().get(Calendar.DATE));
-        if (day.length() < 2) {
-            day = "0" + day;
-        }
+        date.setText(this.item.getDate().get(Calendar.YEAR) + "-"
+                + correctNumber(this.item.getDate().get(Calendar.MONTH) + 1) + "-"
+                + correctNumber(this.item.getDate().get(Calendar.DATE)));
 
-        date.setText(this.item.getDate().get(Calendar.YEAR) + "-" + month + "-" + day);
-
-        //Set time, minute is always atleast 2 characters long, for example
-        //12:08 is displayed as 12:08 not 12:8.
-        String minute = Integer.toString(this.item.getDate().get(Calendar.MINUTE));
-        if (minute.length() < 2) {
-            minute = "0" + minute;
-        }
-        time.setText(this.item.getDate().get(Calendar.HOUR_OF_DAY) + ":"
-                + minute);
+        time.setText(correctNumber(this.item.getDate().get(Calendar.HOUR_OF_DAY)) + ":"
+                + correctNumber(this.item.getDate().get(Calendar.MINUTE)));
 
         setBackgroundColor();
+    }
+
+    /**
+     * Method to correct a number to always have atleast 2 characters. 
+     * For example 09:01 is displayed as 09:01 instead of 9:1.
+     *
+     * @param number The number to change into a string.
+     * @return The String with the number, always has atleast 2 characters.
+     */
+    private String correctNumber(int number) {
+        String result = "";
+        if (number < 10) {
+            result = "0" + Integer.toString(number);
+        } else {
+            result = Integer.toString(number);
+        }
+        return result;
     }
 
     /**
