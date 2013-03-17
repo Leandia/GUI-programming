@@ -1,6 +1,5 @@
 package todomanager;
 
-
 import Actions.AddCategoryAction;
 import backend.CategoryListModel;
 import java.awt.Dimension;
@@ -30,19 +29,21 @@ public class CategoryPanel extends JPanel {
      * the bottom.
      */
     public CategoryPanel() throws IOException {
-        this.setMinimumSize(new Dimension(200, 200));
-        this.setLayout(new GridBagLayout());
-        this.setBackground(TODOManager.theme.getWindowBackground());
+        setMinimumSize(new Dimension(200, 200));
+        setLayout(new GridBagLayout());
+        setBackground(TODOManager.theme.getWindowBackground());
         addNewCategoryList();
         addClock();
         addAddCategoryButton();
     }
 
     /**
-     * Adds list of categories to the interface
+     * Adds list of categories to the interface in a form of a jlist
      */
     private void addNewCategoryList() {
         list = new JList(model);
+        
+        //Add a selectionlistener that listens for change in row 
         list.addListSelectionListener(new ListSelectionListener() {
         
             @Override
@@ -52,6 +53,8 @@ public class CategoryPanel extends JPanel {
             }
         });
         
+        //Adds a keylistener as we are deleting items with the delete
+        //key
         list.addKeyListener(new KeyListener() {
 
             @Override
@@ -117,6 +120,7 @@ public class CategoryPanel extends JPanel {
     private void addClock() {
         
         Clock clock = new Clock();
+        
         //Put the clock in its own thread.
         Thread thread = new Thread(clock,"thread1");
         thread.start();
