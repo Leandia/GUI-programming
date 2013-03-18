@@ -144,9 +144,11 @@ public class BackendAPI {
                 break;
             case CATEGORY:
                 Collections.sort(this.displayList.getList(), new CategoryComparator());
+                break;
             case PRIO:
                 Collections.sort(this.displayList.getList(), new PrioComparator());
-            default:
+                break;
+            case TIME:
                 Collections.sort(this.displayList.getList(), new DateComparator());
                 break;
         }

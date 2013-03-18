@@ -40,9 +40,12 @@ public class TaskReminder extends TimerTask{
      */
     @Override
     public void run() {
+       
        while(true)
        {    
-           //Saves a local list of items by getting it from the listmodel
+        System.out.println("start");
+        
+        //Saves a local list of items by getting it from the listmodel
         ArrayList<Category> categories = TODOManager.backend.getCategoryListModel().getList();
         Iterator iterator = categories.iterator();
 
@@ -70,9 +73,10 @@ public class TaskReminder extends TimerTask{
                 //If the item is old we dont need a reminder for that, also
                 //previously reminded items dont need to be reminded for again
                 //except on a new session
-                    if(item.getDate().after(new GregorianCalendar()) && !item.getReminded() && !items.contains(item)){
-                        items.add(item);
-                    }
+                System.out.println(item.getTitle()+item.getDone()); 
+                if(item.getDate().after(new GregorianCalendar()) && !item.getReminded() && !items.contains(item) && !item.getDone()){
+                    items.add(item);
+                }
                     
         }
         
@@ -87,20 +91,20 @@ public class TaskReminder extends TimerTask{
         if(!items.isEmpty()){
             //The pending item is the nearest in time
             pending = items.get(0);
-        }       
+        }      
+        System.out.println(items.size());
+        System.out.println(pending.getTitle()+pending.getDone());
         
         try{
-                
-                        
-                        
                 //Hardcoded value, reminds about any item that expires within an hour
                 //also a already reminded message wont be reminded about again
-                if(getTimeLeftInMilliSeconds(pending)<=anHour && !pending.getReminded())
+                if(getTimeLeftInMilliSeconds(pending)<=anHour && !pending.getReminded() && !pending.getDone())
                 {
-                    //beep sounds
+                    System.out.println("remind");
+                    //beep sounds                        
                     toolkit.beep();
                     JOptionPane.showMessageDialog(null, pending.getTitle()+" "+message);
-
+                    
                     //Remove the item from the list so that it wont be used again
                     items.remove(pending);
                     pending.setReminded(true);
@@ -111,12 +115,14 @@ public class TaskReminder extends TimerTask{
         }
 
         try {
-            //Polls every 10 seconds
-            Thread.currentThread().sleep(10000);
+            //Polls every 5 seconds
+            Thread.currentThread().sleep(3000);
         }
         catch (InterruptedException e) {
             System.err.print(e);
         }
+        
+        System.out.println("Stop");
        }
     }
     
