@@ -5,5 +5,5 @@ package Enum;
  * @author Daniel
  */
 public enum Priority {
-    LOW, MEDIUM, HIGH
+    LOW, MEDIUM, HIGH, VERY_HIGH
 }
